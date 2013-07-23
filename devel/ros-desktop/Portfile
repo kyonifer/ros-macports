@@ -1,0 +1,76 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                ros-desktop
+version             1.0.0
+categories          devel
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         Robotic Operating System
+long_description    ROS is a collection of tools and libraries for robotics applications
+homepage            http://www.ros.org/
+
+depends_build       port:py27-catkin-pkg \
+                    port:py27-rosdep \
+                    port:py27-rosdistro \
+                    port:py27-rosinstall \
+                    port:py27-rospkg \
+                    port:py27-vcstools \
+                    port:py27-wstool \
+                    port:libyaml \
+                    port:yaml-cpp \
+                    port:tinyxml \
+                    port:pkgconfig \
+                    port:log4cxx \
+                    port:eigen \
+                    port:subversion \
+                    port:git-core \
+                    port:mercurial \
+                    port:google-test \
+                    port:qt4-mac \
+                    port:py27-yaml \
+                    port:py27-empy \
+                    port:py27-setuptools \
+                    port:py27-dateutil \
+                    port:boost
+fetch {
+     exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+}
+
+checksum {}
+
+extract {
+     ln -s ${worksrcpath}/catkin/cmake/toplevel.cmake ${worksrcpath}/CMakeLists.txt
+}
+
+post-destroot {
+     # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
+     set prefix /opt/local
+     set files [list bin/rospack bin/rosstack lib/libmessage_filters.dylib lib/librosbag.dylib lib/librosconsole.dylib lib/libroscpp.dylib lib/libroslib.dylib lib/libtopic_tools.dylib lib/rosbag/play lib/rosbag/record lib/rosout/rosout lib/topic_tools/drop lib/topic_tools/mux lib/topic_tools/relay lib/topic_tools/switch_mux lib/topic_tools/throttle]
+
+     foreach f $files {
+          exec install_name_tool -change librospack.dylib $prefix/lib/librospack.dylib -change librospack.dylib $prefix/lib/librospack.dylib -change libxmlrpcpp.dylib $prefix/lib/libxmlrpcpp.dylib -change librosconsole.dylib $prefix/lib/librosconsole.dylib -change librostime.dylib $prefix/lib/librostime.dylib -change libroscpp_serialization.dylib $prefix/lib/libroscpp_serialization.dylib -change libcpp_common.dylib $prefix/lib/libcpp_common.dylib -change libroscpp.dylib $prefix/lib/libroscpp.dylib -change libtopic_tools.dylib $prefix/lib/libtopic_tools.dylib -change librosbag.dylib $prefix/lib/librosbag.dylib ${destroot}${prefix}/${f}
+     }
+
+     set scripts [list _setup_util.py env.sh setup.sh setup.bash setup.zsh]
+
+     foreach f $scripts {
+          reinplace "s|${prefix}/setup.sh|${prefix}/bin/setup.sh|g" ${destroot}${prefix}/${f}
+          reinplace "s|${prefix}/_setup_util.py|${prefix}/bin/_setup_util.py|g" ${destroot}${prefix}/${f}
+          move ${destroot}${prefix}/${f} ${destroot}${prefix}/bin/${f}
+     }
+     delete ${destroot}${prefix}/.rosinstall
+}
+
+# ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
+destroot.violate_mtree yes
+
+configure.cmd       cmake
+configure.pre_args
+
+configure.args      -DCMAKE_INSTALL_PREFIX=${prefix} \
+                    -DSETUPTOOLS_DEB_LAYOUT=OFF \
+                    -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7
