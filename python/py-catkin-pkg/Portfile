@@ -1,0 +1,24 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-catkin-pkg
+version             0.1.18
+categories          python
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         Catkin build system
+long_description    Python library for the catkin build system
+homepage            http://www.ros.org/wiki/catkin_pkg
+master_sites        http://pr.willowgarage.com/downloads/catkin_pkg/
+distname            catkin_pkg-${version}
+
+checksums           rmd160  9d650f3512207db9ce8b133bdd99f0b926420a9f \
+                    sha256  ba5ec72a5fe734e54a6c2fdbadaa4e64f3e4113395a768918e80945dfbfb3bea
+
+python.versions 27
+python.default_version 27
+python.link_binaries_suffix

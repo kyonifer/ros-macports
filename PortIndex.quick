@@ -1,0 +1,15 @@
+ros-core 0
+py-catkin-pkg 722
+py27-catkin-pkg 1102
+py-rosdep 1473
+py27-rosdep 1967
+py-rosdistro 2460
+py27-rosdistro 2913
+py-rosinstall 3359
+py27-rosinstall 3855
+py-rospkg 4342
+py27-rospkg 4731
+py-vcstools 5119
+py27-vcstools 5576
+py-wstool 6028
+py27-wstool 6536

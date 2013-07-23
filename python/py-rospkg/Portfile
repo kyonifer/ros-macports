@@ -1,0 +1,27 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-rospkg
+version             1.0.21
+categories          python
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         ROS package system
+long_description    Python library for the ROS package system
+homepage            http://www.ros.org/wiki/rospkg
+master_sites        http://pr.willowgarage.com/downloads/rospkg/
+
+distname            rospkg-${version}
+
+checksums           rmd160  8401fc10bbc02c99be62e72d515401af583b93e7 \
+                    sha256  d2364ba7248739a6ebaaaebfc903d70fc07d86785683ea947a6e8a9f7c4e0b57
+
+depends_build		port:py${python.version}-setuptools
+
+python.versions 27
+python.default_version 27
+python.link_binaries_suffix

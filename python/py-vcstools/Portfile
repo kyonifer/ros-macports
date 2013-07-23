@@ -1,0 +1,29 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-vcstools
+version             0.1.31
+categories          python
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         ROS VCS tool
+long_description    Python API for interacting with version control systems
+homepage            http://www.ros.org/wiki/vcstools
+master_sites        http://pr.willowgarage.com/downloads/vcstools/
+
+distname            vcstools-${version}
+
+checksums           rmd160  59af5f4c4b0be17a2b11e94cae0c62d8b3bfb131 \
+                    sha256  68b5bfd00c35f0f2667c6cb1013d790b20378ec8cc447a0e851815329cb16938
+
+depends_build		port:py${python.version}-setuptools
+depends_run			port:py${python.version}-dateutil \
+					port:py${python.version}-yaml
+
+python.versions 27
+python.default_version 27
+python.link_binaries_suffix

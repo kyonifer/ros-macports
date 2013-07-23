@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-rosdistro
+version             0.2.11
+categories          python
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         ROS format manager
+long_description    A tool to allow exploration of ROS packages and repositories
+homepage            http://www.ros.org/wiki/rosdistro
+master_sites        http://pr.willowgarage.com/downloads/rosdistro/
+
+distname            rosdistro-${version}
+
+checksums           rmd160  d54c289237ccd0a13255015aba493ff43056e9b4 \
+                    sha256  ce1e84d4162a62083b20194aea25ec8bd66f205980e6a94d1bd83d28f412014e
+
+depends_build		port:py${python.version}-setuptools
+depends_run			port:py${python.version}-yaml
+
+python.versions 27
+python.default_version 27
+python.link_binaries_suffix
