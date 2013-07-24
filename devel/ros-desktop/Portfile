@@ -35,7 +35,11 @@ depends_build       port:py27-catkin-pkg \
                     port:py27-empy \
                     port:py27-setuptools \
                     port:py27-dateutil \
-                    port:boost
+                    port:boost \
+                    port:poco \
+                    port:eigen3 \
+                    port:py27-nose \
+                    port:tinyxml
 fetch {
      exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
 }
@@ -44,6 +48,12 @@ checksum {}
 
 extract {
      ln -s ${worksrcpath}/catkin/cmake/toplevel.cmake ${worksrcpath}/CMakeLists.txt
+}
+
+configure {}
+
+build {
+     exec catkin/bin/catkin_make_isolated --source .
 }
 
 post-destroot {
