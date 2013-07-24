@@ -40,22 +40,28 @@ depends_build       port:py27-catkin-pkg \
                     port:eigen3 \
                     port:py27-nose \
                     port:tinyxml
+
+distfiles rosws.tar.gz
+worksrcdir rosws
+
 fetch {
-     exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+     # Will fetch remotely once port is working. TODO: remove.
+     #exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+}
+
+post-extract {
+     file delete -force ${worksrcpath}/src/bfl
 }
 
 checksum {}
-
-extract {
-     ln -s ${worksrcpath}/catkin/cmake/toplevel.cmake ${worksrcpath}/CMakeLists.txt
-}
-
 configure {}
 
 build {
-     exec catkin/bin/catkin_make_isolated --source .
+     file mkdir ${worksrcpath}/install_isolated
+     file mkdir ${worksrcpath}/build_isolated
+     file mkdir ${worksrcpath}/devel_isolated
+     exec ${worksrcpath}/catkin/bin/catkin_make_isolated --source ${worksrcpath} --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated --force-cmake
 }
-
 post-destroot {
      # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
      set prefix /opt/local
