@@ -37,6 +37,12 @@ depends_build       port:py27-catkin-pkg \
                     port:py27-dateutil \
                     port:boost
 fetch {
+     # fix error when rosinstall fails and another install is attempted before "port clean"
+     file delete -force ${worksrcpath}
+     file mkdir ${worksrcpath}
+
+     # fix AF_UNIX too long error with wstool ($worksrcpath is too long for bind)     
+     set env(TMPDIR) "/tmp/ros_macports_tmp"
      exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/ros_comm     
 }
 
