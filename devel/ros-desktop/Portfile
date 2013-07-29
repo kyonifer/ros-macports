@@ -20,6 +20,7 @@ depends_build       port:py27-catkin-pkg \
                     port:py27-rospkg \
                     port:py27-vcstools \
                     port:py27-wstool \
+                    port:ros-collada-dom \
                     port:libyaml \
                     port:yaml-cpp \
                     port:tinyxml \
@@ -31,6 +32,7 @@ depends_build       port:py27-catkin-pkg \
                     port:mercurial \
                     port:google-test \
                     port:qt4-mac \
+                    port:py27-pyqt4 \
                     port:py27-yaml \
                     port:py27-empy \
                     port:py27-setuptools \
@@ -39,29 +41,72 @@ depends_build       port:py27-catkin-pkg \
                     port:poco \
                     port:eigen3 \
                     port:py27-nose \
-                    port:tinyxml
+                    port:tinyxml \
+                    port:ossp-uuid \
+                    port:gtk2 \
+                    port:libtheora \
+                    port:assimp \
+                    port:py27-pil \
+                    port:py27-cairo
 
-distfiles rosws.tar.gz
-worksrcdir rosws
+# Uncomment this and comment the wstool line to build from a local tarball instead of downloading
+distfiles ros-desktop-1.0.0.tar.gz
 
 fetch {
-     # Will fetch remotely once port is working. TODO: remove.
-     #exec wstool init -j8 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+     # fix error when rosinstall fails and another install is attempted before "port clean"
+     file delete -force ${worksrcpath}
+     file mkdir ${worksrcpath}
+
+     # fix AF_UNIX too long error with wstool ($worksrcpath is too long for bind)     
+     set env(TMPDIR) "/tmp/ros_macports_tmp"
+
+     # exec wstool init -j8 ${worksrcpath}/src http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+
 }
 
 post-extract {
-     file delete -force ${worksrcpath}/src/bfl
+     file delete -force ${worksrcpath}/src/tf2
+     file delete -force ${worksrcpath}/src/tf2_geometry_msgs
+     file delete -force ${worksrcpath}/src/tf2_kdl
+     file delete -force ${worksrcpath}/src/tf2_msgs
+     file delete -force ${worksrcpath}/src/tf2_ros
+     file delete -force ${worksrcpath}/src/tf2_tools
+     file delete -force ${worksrcpath}/src/pcl
+     file delete -force ${worksrcpath}/src/pcl_msgs
+     file delete -force ${worksrcpath}/src/pcl_ros
+     file delete -force ${worksrcpath}/src/depth_image_proc # needs pcl
+     file delete -force ${worksrcpath}/src/rviz # macports ogre broken atm
+     file delete -force ${worksrcpath}/src/rqt_rviz # macports ogre broken atm
 }
 
 checksum {}
 configure {}
 
+# needed for non-install catkin_make runs
+build.asroot yes
+
 build {
-     file mkdir ${worksrcpath}/install_isolated
-     file mkdir ${worksrcpath}/build_isolated
-     file mkdir ${worksrcpath}/devel_isolated
-     exec ${worksrcpath}/catkin/bin/catkin_make_isolated --source ${worksrcpath} --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated --force-cmake
+     set env(LIBRARY_PATH) "${prefix}/lib"
+     set env(CPATH) "/opt/local/include/collada-dom2.4:/opt/local/include/collada-dom2.4/1.5"
+
+     puts $::env(LIBRARY_PATH)
+     puts $::env(CPATH)
+     puts [pwd]
+     puts [exec whoami]
+
+#     file mkdir ${worksrcpath}/install_isolated
+#     file mkdir ${worksrcpath}/build_isolated
+#     file mkdir ${worksrcpath}/devel_isolated
+
+     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/src/install_isolated  --build ${worksrcpath}/src/build_isolated --devel ${worksrcpath}/src/devel_isolated
+#     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated  --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated
+     #--install 
+     puts "DONE BUILDING"
 }
+pre-destroot {
+     asdf
+}
+
 post-destroot {
      # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
      set prefix /opt/local
@@ -86,7 +131,6 @@ destroot.violate_mtree yes
 
 configure.cmd       cmake
 configure.pre_args
-
 configure.args      -DCMAKE_INSTALL_PREFIX=${prefix} \
                     -DSETUPTOOLS_DEB_LAYOUT=OFF \
                     -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7
