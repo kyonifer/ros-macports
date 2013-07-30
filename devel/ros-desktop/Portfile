@@ -88,20 +88,21 @@ build.asroot yes
 
 build {
      set env(LIBRARY_PATH) "${prefix}/lib"
-     set env(CPATH) "/opt/local/include/collada-dom2.4:/opt/local/include/collada-dom2.4/1.5"
+     set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
 
      puts $::env(LIBRARY_PATH)
      puts $::env(CPATH)
      puts [pwd]
      puts [exec whoami]
+     puts "START BUILDING"
 
 #     file mkdir ${worksrcpath}/install_isolated
 #     file mkdir ${worksrcpath}/build_isolated
 #     file mkdir ${worksrcpath}/devel_isolated
 
-#     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/src/install_isolated  --build ${worksrcpath}/src/build_isolated --devel ${worksrcpath}/src/devel_isolated
-     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated  --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated | tee /Users/kyon/out.txt
-     #--install 
+     #exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated | tee /Users/kyon/out.txt
+     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 | tee /Users/kyon/out.txt
+
      puts "DONE BUILDING"
 }
 pre-destroot {
