@@ -83,9 +83,6 @@ post-extract {
 checksum {}
 configure {}
 
-# needed for non-install catkin_make runs
-build.asroot yes
-
 build {
      file delete -force ${worksrcpath}/build_isolated
      file delete -force ${worksrcpath}/devel_isolated
@@ -94,20 +91,7 @@ build {
      set env(LIBRARY_PATH) "${prefix}/lib"
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
 
-     puts $::env(LIBRARY_PATH)
-     puts $::env(CPATH)
-     puts [pwd]
-     puts [exec whoami]
-     puts "START BUILDING"
-
-#     file mkdir ${worksrcpath}/install_isolated
-#     file mkdir ${worksrcpath}/build_isolated
-#     file mkdir ${worksrcpath}/devel_isolated
-
-     #exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated | tee /Users/kyon/out.txt
-     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 | tee /Users/kyon/out.txt
-
-     puts "DONE BUILDING"
+     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated 2>@1
 }
 pre-destroot {
      asdf
@@ -115,7 +99,6 @@ pre-destroot {
 
 post-destroot {
      # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
-     set prefix /opt/local
      set files [list bin/rospack bin/rosstack lib/libmessage_filters.dylib lib/librosbag.dylib lib/librosconsole.dylib lib/libroscpp.dylib lib/libroslib.dylib lib/libtopic_tools.dylib lib/rosbag/play lib/rosbag/record lib/rosout/rosout lib/topic_tools/drop lib/topic_tools/mux lib/topic_tools/relay lib/topic_tools/switch_mux lib/topic_tools/throttle]
 
      foreach f $files {
