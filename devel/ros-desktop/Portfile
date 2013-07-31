@@ -93,8 +93,10 @@ build {
 
      exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated 2>@1
 }
-pre-destroot {
-     asdf
+
+destroot {
+     file delete -force ${destroot}${prefix}
+     file rename ${worksrcpath}/install_isolated ${destroot}${prefix}
 }
 
 post-destroot {
