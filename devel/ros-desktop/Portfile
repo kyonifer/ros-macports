@@ -91,7 +91,18 @@ build {
      set env(LIBRARY_PATH) "${prefix}/lib"
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
 
-     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated --source ${worksrcpath}/src --install-space ${worksrcpath}/install_isolated --install --build ${worksrcpath}/build_isolated --devel ${worksrcpath}/devel_isolated 2>@1
+     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
+          --source ${worksrcpath}/src \
+          --install-space ${worksrcpath}/install_isolated \
+          --install \
+          --build ${worksrcpath}/build_isolated \
+          --devel ${worksrcpath}/devel_isolated \
+          --cmake-args \
+          -DCMAKE_SKIP_RPATH:BOOL=OFF \
+          -DCMAKE_INSTALL_NAME_DIR:STRING=${prefix}/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON \
+          -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
+          2>@1
 }
 
 destroot {
@@ -99,29 +110,6 @@ destroot {
      file rename ${worksrcpath}/install_isolated ${destroot}${prefix}
 }
 
-post-destroot {
-     # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
-     set files [list bin/rospack bin/rosstack lib/libmessage_filters.dylib lib/librosbag.dylib lib/librosconsole.dylib lib/libroscpp.dylib lib/libroslib.dylib lib/libtopic_tools.dylib lib/rosbag/play lib/rosbag/record lib/rosout/rosout lib/topic_tools/drop lib/topic_tools/mux lib/topic_tools/relay lib/topic_tools/switch_mux lib/topic_tools/throttle]
-
-     foreach f $files {
-          exec install_name_tool -change librospack.dylib $prefix/lib/librospack.dylib -change librospack.dylib $prefix/lib/librospack.dylib -change libxmlrpcpp.dylib $prefix/lib/libxmlrpcpp.dylib -change librosconsole.dylib $prefix/lib/librosconsole.dylib -change librostime.dylib $prefix/lib/librostime.dylib -change libroscpp_serialization.dylib $prefix/lib/libroscpp_serialization.dylib -change libcpp_common.dylib $prefix/lib/libcpp_common.dylib -change libroscpp.dylib $prefix/lib/libroscpp.dylib -change libtopic_tools.dylib $prefix/lib/libtopic_tools.dylib -change librosbag.dylib $prefix/lib/librosbag.dylib ${destroot}${prefix}/${f}
-     }
-
-     set scripts [list _setup_util.py env.sh setup.sh setup.bash setup.zsh]
-
-     foreach f $scripts {
-          reinplace "s|${prefix}/setup.sh|${prefix}/bin/setup.sh|g" ${destroot}${prefix}/${f}
-          reinplace "s|${prefix}/_setup_util.py|${prefix}/bin/_setup_util.py|g" ${destroot}${prefix}/${f}
-          move ${destroot}${prefix}/${f} ${destroot}${prefix}/bin/${f}
-     }
-     delete ${destroot}${prefix}/.rosinstall
-}
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
 destroot.violate_mtree yes
-
-configure.cmd       cmake
-configure.pre_args
-configure.args      -DCMAKE_INSTALL_PREFIX=${prefix} \
-                    -DSETUPTOOLS_DEB_LAYOUT=OFF \
-                    -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7
