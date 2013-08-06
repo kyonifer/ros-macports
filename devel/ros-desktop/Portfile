@@ -47,7 +47,8 @@ depends_build       port:py27-catkin-pkg \
                     port:libtheora \
                     port:assimp \
                     port:py27-pil \
-                    port:py27-cairo
+                    port:py27-cairo \
+                    port:opencv
 
 # Uncomment this and comment the wstool line to build from a local tarball instead of downloading
 distfiles ros-desktop-1.0.0.tar.gz
@@ -78,6 +79,7 @@ post-extract {
      file delete -force ${worksrcpath}/src/depth_image_proc # needs pcl
      file delete -force ${worksrcpath}/src/rviz # macports ogre broken atm
      file delete -force ${worksrcpath}/src/rqt_rviz # macports ogre broken atm
+     file delete -force ${worksrcpath}/src/opencv2 # use macports opencv
 }
 
 checksum {}
@@ -90,6 +92,7 @@ build {
 
      set env(LIBRARY_PATH) "${prefix}/lib"
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
+     set env(OpenCV_DIR) "/opt/local/lib/cmake/"
 
      exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
           --source ${worksrcpath}/src \
