@@ -21,7 +21,7 @@ The following steps will allow you to use the portfiles in this repository with 
 
 3. At this point, you should be good to install the ros-core port:
 
-	$ sudo port install ros-core
+	$ sudo port install ros-desktop
 
 4. If all went well, source the ros environment and start using ROS:
 
