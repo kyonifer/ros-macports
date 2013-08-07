@@ -96,6 +96,7 @@ build {
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
      set env(OpenCV_DIR) "/opt/local/lib/cmake/"
 
+     ## TODO: Convert these into a destroot patch.
      # Catkin_make_isolated doesnt support DESTDIR. Point make install to ${destroot} and install_prefix to ${prefix}
      reinplace "s|'make', 'install'|'make', 'install', 'DESTDIR=${destroot}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
      reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + install_target|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
@@ -121,6 +122,13 @@ build {
 }
 
 destroot {}
+
+post-destroot {
+     # Fix some broken install names that didnt pick up CMAKE_INSTALL_NAME_DIR
+     foreach f [list lib/collada_urdf/urdf_to_collada lib/libcollada_parser.dylib lib/libcollada_urdf.dylib] {
+          exec install_name_tool -change libcollada-dom2.4-dp.0.dylib $prefix/lib/libcollada-dom2.4-dp.0.dylib ${destroot}${prefix}/${f}
+     }
+}
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
 destroot.violate_mtree yes
