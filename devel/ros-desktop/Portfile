@@ -85,6 +85,8 @@ post-extract {
 checksum {}
 configure {}
 
+build.asroot yes
+
 build {
      file delete -force ${worksrcpath}/build_isolated
      file delete -force ${worksrcpath}/devel_isolated
@@ -94,25 +96,31 @@ build {
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
      set env(OpenCV_DIR) "/opt/local/lib/cmake/"
 
+     # Catkin_make_isolated doesnt support DESTDIR. Point make install to ${destroot} and install_prefix to ${prefix}
+     reinplace "s|'make', 'install'|'make', 'install', 'DESTDIR=${destroot}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + install_target|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + installspace|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|cprint(blue_arrow + \" Generating an env.sh\")|os.mkdir(develspace)|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+
+     # Force install even though there's no --install flag passed.
+     reinplace "s|if install:|if True:|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+
+     # We can't pass --install because catkin_make_isolated --install puts env.sh into the prefix (instead of destrooting it).
+     # Instead we patched above to enable make install without --install flagged.
      exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
           --source ${worksrcpath}/src \
-          --install-space ${worksrcpath}/install_isolated \
-          --install \
           --build ${worksrcpath}/build_isolated \
           --devel ${worksrcpath}/devel_isolated \
-          --cmake-args \
           -DCMAKE_SKIP_RPATH:BOOL=OFF \
           -DCMAKE_INSTALL_NAME_DIR:STRING=${prefix}/lib \
           -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON \
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
+          -DSETUPTOOLS_DEB_LAYOUT=OFF \
+          -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
           2>@1
 }
 
-destroot {
-     file delete -force ${destroot}${prefix}
-     file rename ${worksrcpath}/install_isolated ${destroot}${prefix}
-}
-
+destroot {}
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
 destroot.violate_mtree yes
