@@ -3,14 +3,14 @@
 
 PortSystem          1.0
 
-name                ros-desktop
+name                ros-groovy
 version             1.0.0
 categories          devel
 platforms           darwin
 license             bsd
 maintainers         afit.edu:kyle.kauffman
 description         Robotic Operating System
-long_description    ROS is a collection of tools and libraries for robotics applications
+long_description    ROS is a collection of tools and libraries for robotics applications. This installs the groovy desktop-full distribution.
 homepage            http://www.ros.org/
 
 depends_build       port:py27-catkin-pkg \
@@ -51,7 +51,7 @@ depends_build       port:py27-catkin-pkg \
                     port:opencv
 
 # Uncomment this and comment the wstool line to build from a local tarball instead of downloading
-# distfiles ros-desktop-1.0.0.tar.gz
+# distfiles ros-groovy-1.0.0.tar.gz
 patchfiles patch-mixtureParticleFilter.cpp.diff
 
 fetch {
