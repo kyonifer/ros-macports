@@ -96,6 +96,9 @@ build {
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
      set env(OpenCV_DIR) "/opt/local/lib/cmake/"
 
+     # Point catkin_make_isolated at the python that installed catkin_pkg
+     reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|g" ${worksrcpath}/src/catkin/bin/catkin_make_isolated
+
      ## TODO: Convert these into a destroot patch.
      # Catkin_make_isolated doesnt support DESTDIR. Point make install to ${destroot} and install_prefix to ${prefix}
      reinplace "s|'make', 'install'|'make', 'install', 'DESTDIR=${destroot}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
