@@ -25,7 +25,7 @@ The following steps will allow you to use the portfiles in this repository with 
 
 4. If all went well, source the ros environment and start using ROS:
 
-	$ source /opt/local/bin/setup.bash
+	$ source /opt/local/setup.bash
 	
 	$ roscore &
 
