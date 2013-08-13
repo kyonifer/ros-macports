@@ -40,4 +40,5 @@ configure.args      -DCMAKE_INSTALL_PREFIX=${prefix}
 depends_lib \
     port:boost \
     port:libxml2 \
-    port:pcre
+    port:pcre \
+    port:cmake
