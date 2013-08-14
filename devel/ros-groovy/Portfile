@@ -96,10 +96,13 @@ build {
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5"
      set env(OpenCV_DIR) "/opt/local/lib/cmake/"
 
-     # Point catkin_make_isolated at the python that installed catkin_pkg
-     reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|g" ${worksrcpath}/src/catkin/bin/catkin_make_isolated
+     # Point scripts to the python that installed the ros python modules
+     set files [list catkin/bin/catkin_make_isolated roslib/src/roslib/launcher.py compressed_depth_image_transport/cfg/CompressedDepthPublisher.cfg compressed_image_transport/cfg/CompressedPublisher.cfg dynamic_reconfigure/cfg/Test.cfg image_proc/cfg/CropDecimate.cfg image_proc/cfg/Debayer.cfg image_proc/cfg/Rectify.cfg image_rotate/cfg/ImageRotate.cfg nodelet_topic_tools/cfg/NodeletThrottle.cfg stereo_image_proc/cfg/Disparity.cfg theora_image_transport/cfg/TheoraPublisher.cfg theora_image_transport/cfg/TheoraSubscriber.cfg]
 
-     ## TODO: Convert these into a destroot patch.
+     foreach f $files {
+          reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|g" ${worksrcpath}/src/$f
+     }
+
      # Catkin_make_isolated doesnt support DESTDIR. Point make install to ${destroot} and install_prefix to ${prefix}
      reinplace "s|'make', 'install'|'make', 'install', 'DESTDIR=${destroot}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
      reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + install_target|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
