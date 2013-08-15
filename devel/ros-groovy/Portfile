@@ -137,6 +137,9 @@ post-destroot {
      foreach f [list lib/collada_urdf/urdf_to_collada lib/libcollada_parser.dylib lib/libcollada_urdf.dylib] {
           exec install_name_tool -change libcollada-dom2.4-dp.0.dylib $prefix/lib/libcollada-dom2.4-dp.0.dylib ${destroot}${prefix}/${f}
      }
+
+     # Fix setup.bash env vars to point to prefix instead of devel space
+     reinplace "s|${worksrcpath}/devel_isolated|${prefix}/share|g" ${destroot}${prefix}/_setup_util.py
 }
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
