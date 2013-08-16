@@ -145,7 +145,9 @@ post-destroot {
      }
 
      # Fix setup.bash env vars to point to prefix instead of devel space
-     reinplace "s|${worksrcpath}/devel_isolated|${prefix}/share|g" ${destroot}${prefix}/_setup_util.py
+     reinplace "s|CMAKE_PREFIX_PATH = '.*')|CMAKE_PREFIX_PATH = '/opt/local'.split(';')|" ${destroot}${prefix}/_setup_util.py
+     #reinplace "s|${worksrcpath}/devel_isolated|${prefix}/share|g" ${destroot}${prefix}/_setup_util.py
+     #reinplace "s|'CMAKE_PREFIX_PATH_AS_IS': ';'.join(os.environ['CMAKE_PREFIX_PATH'].split(os.pathsep))|'CMAKE_PREFIX_PATH_AS_IS': '${prefix}'"
 }
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
