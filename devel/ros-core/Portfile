@@ -24,7 +24,7 @@ depends_build       port:py27-catkin-pkg \
                     port:yaml-cpp \
                     port:tinyxml \
                     port:pkgconfig \
-                    port:log4cxx \
+                    port:ros-log4cxx \
                     port:eigen \
                     port:subversion \
                     port:git-core \
