@@ -43,40 +43,71 @@ fetch {
 
      # fix AF_UNIX too long error with wstool ($worksrcpath is too long for bind)     
      set env(TMPDIR) "/tmp/ros_macports_tmp"
-     exec wstool init -j1 ${worksrcpath} http://packages.ros.org/web/rosinstall/generate/raw/groovy/ros_comm     
+     exec wstool init -j1 ${worksrcpath}/src http://packages.ros.org/web/rosinstall/generate/raw/groovy/ros_comm     
 }
+
+#extract {
+#     ln -s ${worksrcpath}/catkin/cmake/toplevel.cmake ${worksrcpath}/CMakeLists.txt
+#}
 
 checksum {}
+configure {}
+configure.compiler clang
 
-extract {
-     ln -s ${worksrcpath}/catkin/cmake/toplevel.cmake ${worksrcpath}/CMakeLists.txt
-}
+build.asroot yes
 
-post-destroot {
-     # Fix install names so rev-upgrade doesn't complain (ROS executes in a special shell environment)
-     set prefix /opt/local
-     set files [list bin/rospack bin/rosstack lib/libmessage_filters.dylib lib/librosbag.dylib lib/librosconsole.dylib lib/libroscpp.dylib lib/libroslib.dylib lib/libtopic_tools.dylib lib/rosbag/play lib/rosbag/record lib/rosout/rosout lib/topic_tools/drop lib/topic_tools/mux lib/topic_tools/relay lib/topic_tools/switch_mux lib/topic_tools/throttle]
+build {
+    file delete -force ${worksrcpath}/build_isolated
+    file delete -force ${worksrcpath}/devel_isolated
+    file delete -force ${worksrcpath}/install_isolated
+
+     set env(LIBRARY_PATH) "${prefix}/lib"
+
+     # Force catkin to use chosen compiler
+     set env(CC) "${configure.cc}"
+     set env(CXX) "${configure.cxx}"
+     set env(CPP) "${configure.cpp}"
+
+     # Point scripts to the python that installed the ros python modules
+    set files [list catkin/bin/catkin_make_isolated roslib/src/roslib/launcher.py]
 
      foreach f $files {
-          exec install_name_tool -change librospack.dylib $prefix/lib/librospack.dylib -change librospack.dylib $prefix/lib/librospack.dylib -change libxmlrpcpp.dylib $prefix/lib/libxmlrpcpp.dylib -change librosconsole.dylib $prefix/lib/librosconsole.dylib -change librostime.dylib $prefix/lib/librostime.dylib -change libroscpp_serialization.dylib $prefix/lib/libroscpp_serialization.dylib -change libcpp_common.dylib $prefix/lib/libcpp_common.dylib -change libroscpp.dylib $prefix/lib/libroscpp.dylib -change libtopic_tools.dylib $prefix/lib/libtopic_tools.dylib -change librosbag.dylib $prefix/lib/librosbag.dylib ${destroot}${prefix}/${f}
+          reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|g" ${worksrcpath}/src/$f
      }
 
-     set scripts [list _setup_util.py env.sh setup.sh setup.bash setup.zsh]
+     # Catkin_make_isolated doesnt support DESTDIR. Point make install to ${destroot} and install_prefix to ${prefix}
+     reinplace "s|'make', 'install'|'make', 'install', 'DESTDIR=${destroot}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + install_target|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|'-DCMAKE_INSTALL_PREFIX=' + installspace|'-DCMAKE_INSTALL_PREFIX=' + '${prefix}'|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+     reinplace "s|cprint(blue_arrow + \" Generating an env.sh\")|os.mkdir(develspace)|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
 
-     foreach f $scripts {
-          reinplace "s|${prefix}/setup.sh|${prefix}/bin/setup.sh|g" ${destroot}${prefix}/${f}
-          reinplace "s|${prefix}/_setup_util.py|${prefix}/bin/_setup_util.py|g" ${destroot}${prefix}/${f}
-          move ${destroot}${prefix}/${f} ${destroot}${prefix}/bin/${f}
-     }
-     delete ${destroot}${prefix}/.rosinstall
+     # Fix DYLD_LIBRARY_PATH overriding system libs
+     reinplace "s|DYLD_LIBRARY_PATH|DYLD_FALLBACK_LIBRARY_PATH|g" ${worksrcpath}/src/catkin/cmake/templates/_setup_util.py.in
+
+     # Force install even though there's no --install flag passed.
+     reinplace "s|if install:|if True:|g" ${worksrcpath}/src/catkin/python/catkin/builder.py
+
+     # We can't pass --install because catkin_make_isolated --install puts env.sh into the prefix (instead of destrooting it).
+     # Instead we patched above to enable make install without --install flagged.
+     exec ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
+          --source ${worksrcpath}/src \
+          --build ${worksrcpath}/build_isolated \
+          --devel ${worksrcpath}/devel_isolated \
+          -DCMAKE_SKIP_RPATH:BOOL=OFF \
+          -DCMAKE_INSTALL_NAME_DIR:STRING=${prefix}/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON \
+          -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
+          -DSETUPTOOLS_DEB_LAYOUT=OFF \
+          -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+          2>@1
+
+}
+
+destroot {}
+
+post-destroot {
+     reinplace "s|CMAKE_PREFIX_PATH = '.*')|CMAKE_PREFIX_PATH = '/opt/local'.split(';')|" ${destroot}${prefix}/_setup_util.py
 }
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
 destroot.violate_mtree yes
-
-configure.cmd       cmake
-configure.pre_args
-
-configure.args      -DCMAKE_INSTALL_PREFIX=${prefix} \
-                    -DSETUPTOOLS_DEB_LAYOUT=OFF \
-                    -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7
