@@ -52,7 +52,8 @@ depends_lib         port:py27-catkin-pkg \
 
 # Uncomment this and comment the wstool line to build from a local tarball instead of downloading
 # distfiles ros-groovy-1.0.0.tar.gz
-patchfiles patch-mixtureParticleFilter.cpp.diff
+patchfiles patch-mixtureParticleFilter.cpp.diff \
+           patch-ros_pluginlib_plugin_provider.diff
 
 fetch {
      # fix error when rosinstall fails and another install is attempted before "port clean"
