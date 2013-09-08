@@ -63,7 +63,7 @@ fetch {
      # fix AF_UNIX too long error with wstool ($worksrcpath is too long for bind)     
      set env(TMPDIR) "/tmp/ros_macports_tmp"
 
-     exec wstool init -j8 ${worksrcpath}/src http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
+     exec wstool init -j1 ${worksrcpath}/src http://packages.ros.org/web/rosinstall/generate/raw/groovy/desktop-full
 
 }
 
