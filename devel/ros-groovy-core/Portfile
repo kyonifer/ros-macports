@@ -97,7 +97,7 @@ destroot {
 }
 
 post-destroot {
-     reinplace "s|CMAKE_PREFIX_PATH = '.*')|CMAKE_PREFIX_PATH = '/opt/local/ros/groovy'.split(';')|" ${destroot}${prefix}/ros/groovy/_setup_util.py
+     reinplace "s|CMAKE_PREFIX_PATH = '.*')|CMAKE_PREFIX_PATH = '${prefix}/ros/groovy'.split(';')|" ${destroot}${prefix}/ros/groovy/_setup_util.py
 }
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
