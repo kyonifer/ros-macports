@@ -19,9 +19,9 @@ The following steps will allow you to use the portfiles in this repository with 
 
 	Be sure that this line is above the rsync:// line.
 
-3. At this point, you should be good to install the ros-core port:
+3. At this point, you should be good to install the ros-groovy-desktop-full port:
 
-	$ sudo port install ros-groovy
+	$ sudo port install ros-groovy-desktop-full
 
 4. If all went well, source the ros environment and start using ROS:
 
