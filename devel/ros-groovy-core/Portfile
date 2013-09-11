@@ -4,7 +4,6 @@
 PortSystem          1.0
 
 name                ros-groovy-core
-conflicts           ros-core ros-desktop ros-groovy-desktop
 version             1.0.0
 categories          devel
 platforms           darwin
@@ -38,6 +37,9 @@ depends_build       port:py27-catkin-pkg \
                     port:py27-dateutil \
                     port:py27-nose \
                     port:boost
+
+conflicts           ros-core ros-desktop ros-groovy-desktop
+
 fetch {
      # fix error when rosinstall fails and another install is attempted before "port clean"
      file delete -force ${worksrcpath}
