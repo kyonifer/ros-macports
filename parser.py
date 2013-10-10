@@ -25,7 +25,7 @@ if __name__ == "__main__":
     pkgs = [pkg for pkg in os.listdir(".") if
             not pkg.startswith(".") and os.path.isdir(pkg)]
     prefix = "ros-hydro-"
-    portdir = sys.argv[1] if len(sys.argv) > 1 else "../ports"
+    portdir = sys.argv[1] if len(sys.argv) > 1 else ".."
     try:
         os.mkdir(portdir)
     except OSError:
@@ -52,8 +52,18 @@ if __name__ == "__main__":
         template = template.replace("$$name$$", pkgname)
         template = template.replace("$$run_depends$$", run_deps_str)
         template = template.replace("$$build_depends$$", build_deps_str)
-        try:
-            os.mkdir(portdir + "/" + pkgname)
-        except OSError:
-            pass
-        writefile(portdir + "/" + pkgname + "/Portfile", template)
+
+        # Make ports
+        if not os.path.exists(portdir + "/ports"):
+            os.mkdir(portdir + "/ports")
+        if not os.path.exists(portdir + "/ports/" + pkgname):
+            os.mkdir(portdir + "/ports/" + pkgname)
+        writefile(portdir + "/ports/" + pkgname + "/Portfile", template)
+
+        # Make tarballs
+        if not os.path.exists(portdir + "/tarballs"):
+            os.mkdir(portdir + "/tarballs")
+        os.system(
+            "tar -zcvf {0}.tar.gz {1}".format(portdir + "/tarballs/" + pkgname,
+                                              pkg))
+
