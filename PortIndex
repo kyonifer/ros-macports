@@ -1,0 +1,4 @@
+py-rosinstall_generator 472
+subports py27-rosinstall_generator portdir python/py-rosinstall_generator description {The rosinstall_generator generates rosinstall files containing information about repositories with ROS packages/stacks.} depends_fetch bin:git:git-core homepage http://wiki.ros.org/rosinstall_generator epoch 0 platforms darwin depends_lib port:py27-rosinstall_generator name py-rosinstall_generator license bsd maintainers gmail.com:venabled version 0.1.3 categories python revision 0
+py27-rosinstall_generator 441
+variants universal portdir python/py-rosinstall_generator description {The rosinstall_generator generates rosinstall files containing information about repositories with ROS packages/stacks.} depends_fetch bin:git:git-core homepage http://wiki.ros.org/rosinstall_generator epoch 0 platforms darwin name py27-rosinstall_generator depends_lib port:python27 maintainers gmail.com:venabled license bsd version 0.1.3 categories python revision 0
