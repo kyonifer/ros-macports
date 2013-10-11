@@ -5,22 +5,18 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rospkg
-version             1.0.21
+version             1.0.23
 categories          python
 platforms           darwin
 license             bsd
-maintainers         afit.edu:kyle.kauffman
-description         ROS package system
-long_description    Python library for the ROS package system
-homepage            http://www.ros.org/wiki/rospkg
-master_sites        http://pr.willowgarage.com/downloads/rospkg/
+maintainers         gmail.com:venabled
+description         Standalone Python library for the ROS package system.
+homepage            https://github.com/ros-infrastructure/rospkg
 
-distname            rospkg-${version}
-
-checksums           rmd160  8401fc10bbc02c99be62e72d515401af583b93e7 \
-                    sha256  d2364ba7248739a6ebaaaebfc903d70fc07d86785683ea947a6e8a9f7c4e0b57
-
-depends_build		port:py${python.version}-setuptools
+fetch.type          git
+git.url             https://github.com/ros-infrastructure/rospkg.git
+git.branch          6c30945bea786ded1ff94a239eab0ce82180da42
+checksum {}
 
 python.versions 27
 python.default_version 27
