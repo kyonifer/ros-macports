@@ -18,7 +18,7 @@ git.url             https://github.com/ros-infrastructure/rosinstall_generator.g
 git.branch          1e0851b73cd0be62487654c5daa029b33d63533e
 checksum {}
 
-depends_run         port:py-rosdep
+depends_run         port:py${python.version}-rosdep
 
 python.versions 27
 python.default_version 27
