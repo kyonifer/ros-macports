@@ -18,6 +18,8 @@ git.url             https://github.com/ros-infrastructure/rosdep.git
 git.branch          2a260b7639c5f14d0192c59cfd6e2b9b3e7f77e3
 checksum {}
 
+depends_run         port:py${python.version}-rospkg
+
 python.versions 27
 python.default_version 27
 python.link_binaries_suffix
