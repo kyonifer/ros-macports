@@ -5,26 +5,23 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rosdep
-version             0.10.21
+version             0.10.22
 categories          python
 platforms           darwin
 license             bsd
-maintainers         afit.edu:kyle.kauffman
-description         ROS dependency manager
-long_description    A command-line tool for installing system dependencies
-homepage            http://www.ros.org/wiki/rosdep
-master_sites        http://pr.willowgarage.com/downloads/rosdep/
+maintainers         gmail.com:venabled
+description         rosdep is a command-line tool for installing system dependencies.
+homepage            https://github.com/ros-infrastructure/rosdep
 
-checksums           rmd160  ade8f1301452a6e180ecf5c269b4146031e726de \
-                    sha256  f5cd11cab7767b70ba393a123c9defb956f45a3fb4dd0f6269421cd006a16f03
+fetch.type          git
+git.url             https://github.com/ros-infrastructure/rosdep.git
+git.branch          2a260b7639c5f14d0192c59cfd6e2b9b3e7f77e3
+checksum {}
 
-distname            rosdep-${version}
-
-depends_build		port:py${python.version}-setuptools
-depends_run			port:py${python.version}-rospkg \
-					port:py${python.version}-yaml \
-					port:py${python.version}-catkin-pkg \
-					port:py${python.version}-rosdistro
+depends_run         port:py${python.version}-rospkg \
+                    port:py${python.version}-yaml \
+                    port:py${python.version}-catkin-pkg \
+                    port:py${python.version}-rosdistro
 
 python.versions 27
 python.default_version 27
