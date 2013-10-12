@@ -18,7 +18,10 @@ git.url             https://github.com/ros-infrastructure/rosdep.git
 git.branch          2a260b7639c5f14d0192c59cfd6e2b9b3e7f77e3
 checksum {}
 
-depends_run         port:py${python.version}-rospkg
+depends_run         port:py${python.version}-rospkg \
+                    port:py${python.version}-yaml \
+                    port:py${python.version}-catkin-pkg \
+                    port:py${python.version}-rosdistro
 
 python.versions 27
 python.default_version 27

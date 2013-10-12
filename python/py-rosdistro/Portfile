@@ -1,0 +1,28 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+PortGroup           python 1.0
+
+name                py-rosdistro
+version             0.2.14
+categories          python
+platforms           darwin
+license             bsd
+maintainers         gmail.com:venabled
+description         This repo maintains the lists of repositories defining ROS distributions.
+
+homepage            https://github.com/ros/rosdistro
+
+fetch.type          git
+git.url             https://github.com/ros-infrastructure/rosdistro.git
+git.branch          e14f3bcf383008daf00c716883f1f08510b797be
+checksum {}
+
+
+depends_build       port:py${python.version}-setuptools
+depends_run         port:py${python.version}-yaml
+
+python.versions 27
+python.default_version 27
+python.link_binaries_suffix

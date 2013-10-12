@@ -4,21 +4,22 @@
 PortSystem          1.0
 PortGroup           python 1.0
 
-name                py-rosinstall-generator
-version             0.1.3
+name                py-catkin-pkg
+version             0.1.20
 categories          python
 platforms           darwin
 license             bsd
 maintainers         gmail.com:venabled
-description         The rosinstall_generator generates rosinstall files containing information about repositories with ROS packages/stacks.
+description         Standalone Python library for the catkin package system. Contains support for finding and introspecting catkin packages in the file system.
 homepage            http://wiki.ros.org/rosinstall_generator
 
 fetch.type          git
-git.url             https://github.com/ros-infrastructure/rosinstall_generator.git
-git.branch          1e0851b73cd0be62487654c5daa029b33d63533e
+git.url             https://github.com/ros-infrastructure/catkin_pkg.git
+git.branch          1aaa45fc5ea9794b53db53eaaa793864c2025293
 checksum {}
 
-depends_run         port:py${python.version}-rosdep
+depends_build       port:py${python.version}-setuptools
+depends_run         port:py${python.version}-yaml
 
 python.versions 27
 python.default_version 27

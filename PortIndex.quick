@@ -1,4 +1,10 @@
-py-rosdep 0
-py27-rosdep 382
-py-rosinstall_generator 763
-py27-rosinstall_generator 1292
+py-catkin-pkg 0
+py27-catkin-pkg 533
+py-rosdep 1057
+py27-rosdep 1526
+py-rosdistro 1994
+py27-rosdistro 2459
+py-rosinstall-generator 2917
+py27-rosinstall-generator 3446
+py-rospkg 3946
+py27-rospkg 4315
