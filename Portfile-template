@@ -3,7 +3,7 @@
 
 PortSystem          1.0
 
-name                $$name$$
+name                $$fullname$$
 version             1.0.0
 categories          devel
 platforms           darwin
@@ -52,18 +52,7 @@ depends_lib         port:py27-catkin-pkg \
 
 conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full ros-hydro-core
 
-# Uncomment this and comment the wstool line to build from a local tarball instead of downloading
-distfiles ros-hydro-desktop-full-1.0.0.tar.gz
-# patchfiles patch-ros_pluginlib_plugin_provider.diff
-
-fetch {
-     # fix error when rosinstall fails and another install is attempted before "port clean"
-     file delete -force ${worksrcpath}
-     file mkdir ${worksrcpath}
-
-     # fix AF_UNIX too long error with wstool ($worksrcpath is too long for bind)     
-     set env(TMPDIR) "/tmp/ros_macports_tmp"
-}
+master_sites        https://raw.github.com/kyonifer/ros-macports-source-snapshots/10062013/10062013/
 
 post-extract {
      file delete -force ${worksrcpath}/src/qt_gui_cpp # needs pluginlib
