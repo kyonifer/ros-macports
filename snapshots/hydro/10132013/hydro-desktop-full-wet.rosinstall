@@ -399,10 +399,6 @@
     uri: https://github.com/ros-gbp/octomap-release.git
     version: release/hydro/octomap/1.6.1-0
 - git:
-    local-name: opencv2
-    uri: https://github.com/ros-gbp/opencv2-release.git
-    version: release/hydro/opencv2/2.4.6-1
-- git:
     local-name: openslam_gmapping
     uri: https://github.com/ros-gbp/openslam_gmapping-release.git
     version: release/hydro/openslam_gmapping/0.1.0-1
