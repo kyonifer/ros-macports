@@ -9,18 +9,16 @@ version             0.1.3
 categories          python
 platforms           darwin
 license             bsd
-maintainers         afit.edu:kyle.kauffman
-description         ROS package system
-long_description    Python library for the ROS package system
-homepage            http://www.ros.org/wiki/rospkg
-master_sites        https://pypi.python.org/packages/source/r/rosinstall_generator/
+maintainers         gmail.com:venabled
+description         The rosinstall_generator generates rosinstall files containing information about repositories with ROS packages/stacks.
+homepage            http://wiki.ros.org/rosinstall_generator
 
-distname            rosinstall_generator-${version}
+fetch.type          git
+git.url             https://github.com/ros-infrastructure/rosinstall_generator.git
+git.branch          1e0851b73cd0be62487654c5daa029b33d63533e
+checksum {}
 
-checksums           rmd160  d5248176e598a6f9b6aa8199668ae557d282a260 \
-                    sha256  4a6c84effeb611218010f545102e64207e00b149a71fbbc2d9488e7dc6cacbce
-
-depends_build		port:py${python.version}-setuptools
+depends_run         port:py${python.version}-rosdep
 
 python.versions 27
 python.default_version 27
