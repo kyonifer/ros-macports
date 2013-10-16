@@ -15,7 +15,7 @@ import yaml
 def parseargs():
     parser = argparse.ArgumentParser()
     parser.add_argument("--rosinstall",
-                        help="The .rosinstall file listing the ros packages" \
+                        help="The .rosinstall file listing the ros packages " \
                         "that you wish to download",
                         required=True)
 
