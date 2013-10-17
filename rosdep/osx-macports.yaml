@@ -1,0 +1,712 @@
+apr:
+  osx:
+    macports:
+      packages: [apr, apr-util, apr-util0, apr0, apr_memcache, haproxy, metaproxy,
+        p5-libapreq, p5-libapreq2, xorg-xf86dgaproto, xorg-xineramaproto]
+assimp:
+  osx:
+    macports:
+      packages: [assimp]
+atlas:
+  osx:
+    macports:
+      packages: [atlas]
+autoconf:
+  osx:
+    macports:
+      packages: [autoconf, autoconf-archive, autoconf213, autoconf263, autoconf264,
+        ocaml-autoconf, p5-config-autoconf]
+automake:
+  osx:
+    macports:
+      packages: [automake, automake17]
+bazaar:
+  osx:
+    macports:
+      packages: [bazaar]
+bison:
+  osx:
+    macports:
+      packages: [bison]
+boost:
+  osx:
+    macports:
+      packages: [boost, boost-build, boost-gil-numeric, boost-jam]
+bullet:
+  osx:
+    macports:
+      packages: [bullet]
+bzip2:
+  osx:
+    macports:
+      packages: [bzip2, pbzip2, p5-compress-bzip2, p5-compress-raw-bzip2, p5-perlio-via-bzip2]
+checkinstall:
+  osx:
+    macports:
+      packages: []
+cmake:
+  osx:
+    macports:
+      packages: [cmake, gccmakedep]
+collada-dom:
+  osx:
+    macports:
+      packages: [collada-dom]
+cppunit:
+  osx:
+    macports:
+      packages: [cppunit]
+curl:
+  osx:
+    macports:
+      packages: [curlhandle, flickcurl, tclcurl, curlftpfs, curl, p5-www-curl, php5-curl,
+        curlish_select, py-curl, py-curlish]
+doxygen:
+  osx:
+    macports:
+      packages: [doxygen]
+eigen:
+  osx:
+    macports:
+      packages: [eigen, eigen3]
+epydoc:
+  osx:
+    macports:
+      packages: [py-epydoc]
+ffmpeg:
+  osx:
+    macports:
+      packages: [gst-ffmpeg, gstreamer010-gst-ffmpeg, ffmpegthumbs, ffmpeg, ffmpeg-devel]
+flex:
+  osx:
+    macports:
+      packages: [flex, jflex, reflex, rb-flexmock, rb-flexo]
+fltk:
+  osx:
+    macports:
+      packages: [fltk, fltk-devel]
+freeimage:
+  osx:
+    macports:
+      packages: [freeimage]
+freetype:
+  osx:
+    macports:
+      packages: [freetype]
+gazebo:
+  osx:
+    macports:
+      packages: []
+gfortran:
+  osx:
+    macports:
+      packages: []
+git:
+  osx:
+    macports:
+      packages: [bzr-git, git-core, git-extras, git-flow, git-ftp, giter8, legit,
+        libgit2, magit, qgit, stgit, git-sweep_select, py-bzr-git, py-git-sweep, py-gitdb,
+        py-gitpython, py-hggit, cgit]
+glut:
+  osx:
+    macports:
+      packages: [hs-platform-glut, lua-glut, qore-glut-module, freeglut]
+graphviz:
+  osx:
+    macports:
+      packages: [graphviz, graphviz-devel, graphviz-oldgui, p5-graphviz, py-pygraphviz]
+gtest:
+  osx:
+    macports:
+      packages: []
+gtk2:
+  osx:
+    macports:
+      packages: [gtk2hs, gtk2, gtk2-aurora, gtk2-murrine, p5-gtk2, p5-gtk2-gladexml,
+        p5-gtk2-sourceview, rb-gtk2, gtk2-extra, gtk2-industrial, gtk2-murrine-configurator,
+        lablgtk2]
+hddtemp:
+  osx:
+    macports:
+      packages: []
+hdf5:
+  osx:
+    macports:
+      packages: [hdf5, hdf5-18, yorick-hdf5]
+jasper:
+  osx:
+    macports:
+      packages: [jasper]
+libflann:
+  osx:
+    macports:
+      packages: [flann]
+libflann-dev:
+  osx:
+    macports:
+      packages: [flann]
+libgsl:
+  osx:
+    macports:
+      packages: [caml-gsl, fgsl, gsl, gsl-devel, ocaml-gsl, octave-gsl, pure-gsl,
+        py-gsl, py27-gslib, rb-gsl]
+libjpeg:
+  osx:
+    macports:
+      packages: [jpeg, jpeg2ps, jpeg6b, jpegoptim, jpegpixi, libjpeg-turbo, openjpeg,
+        openjpeg15, mjpegtools, p5-image-metadata-jpeg]
+liblapack-dev:
+  osx:
+    macports:
+      packages: []
+libmysqlclient-dev:
+  osx:
+    macports:
+      packages: []
+libogg:
+  osx:
+    macports:
+      packages: [oggsplit, telepathy-logger, hs-hslogger, ocaml-ogg, commons-logging,
+        libogg, daemonlogger, p5-ogg-vorbis-header-pureperl, pear-Services_Blogging,
+        py-ogg, tetex-frogg, blazeblogger, loggerhead]
+libogre-dev:
+  osx:
+    macports:
+      packages: [ogre, p5-sub-exporter-progressive, p5-term-progressbar, p5-time-progress,
+        pear-Console_ProgressBar, pear-HTML_Progress, pear-HTML_Progress2, php-uploadprogress,
+        php5-uploadprogress, py-nose-progressive, py-progressbar]
+libpcap:
+  osx:
+    macports:
+      packages: [libpcap, libpcapnav, p5-net-pcap, py-pcapy, py-pylibpcap, rb-pcap]
+libpcl-all:
+  osx:
+    macports:
+      packages: []
+libpcl-all-dev:
+  osx:
+    macports:
+      packages: []
+libpgm:
+  osx:
+    macports:
+      packages: [gpgme, gpgme-objc, py-pygpgme, rb-gpgme]
+libpng12-dev:
+  osx:
+    macports:
+      packages: []
+libpoco-dev:
+  osx:
+    macports:
+      packages: [poco]
+libqglviewer-qt4-dev:
+  osx:
+    macports:
+      packages: []
+libqhull:
+  osx:
+    macports:
+      packages: [qhull]
+libqt4:
+  osx:
+    macports:
+      packages: [qt4-mac, qt4-mac-devel, qt4-mac-mysql55-plugin, qt4-mac-postgresql91-plugin,
+        qt4-mac-sqlite2-plugin, cutecom-qt4-mac, qt4-creator-mac, qore-qt4-module,
+        py-pyqt4, qt4_select, qt4-x11]
+libqt4-dev:
+  osx:
+    macports:
+      packages: [qt4-mac, qt4-mac-devel, qt4-mac-mysql55-plugin, qt4-mac-postgresql91-plugin,
+        qt4-mac-sqlite2-plugin, cutecom-qt4-mac, qt4-creator-mac, qore-qt4-module,
+        py-pyqt4, qt4_select, qt4-x11]
+libqt4-opengl-dev:
+  osx:
+    macports:
+      packages: []
+libtbb:
+  osx:
+    macports:
+      packages: [tbb]
+libtheora:
+  osx:
+    macports:
+      packages: [libtheora]
+libtiff-dev:
+  osx:
+    macports:
+      packages: [libgeotiff, tiff, py-tiff, stiff]
+libtiff4-dev:
+  osx:
+    macports:
+      packages: []
+libtool:
+  osx:
+    macports:
+      packages: [atool, id3tool, opus-tools, rtptools, shntool, tagtool, vorbis-tools,
+        dbtool, mdbtools, percona-toolkit, spatialite-tools, bzrtools, cctools, cctools-headers,
+        elftoolchain, google-perftools, grid-packaging-tools, libtool, libtool-devel,
+        ocaml-dtools, odcctools, svndumptool, nwntools, orfeotoolbox, gcalctool, gnome-developer-tools,
+        system-tools-backends, blinkentools, cg-toolkit, ipe-tools, ivtools, swftools,
+        xpdf-tools, webtoolkit-java-sdk, dmd-tools, mjpegtools, mkvtoolnix, ogmtools,
+        flow-tools, gupnp-tools, irrtoolset, ldns-tools, rrdtool, palm-db-tools, prc-tools,
+        p5-image-exiftool, p5-mailtools, p5-mime-tools, p5-panotools-script, p5-pathtools,
+        p5-pmtools, p5-template-toolkit, php5-rrdtool, epstool, fonttools, lcdf-typetools,
+        py-apptools, py-codetools, py-decoratortools, py-django-debug-toolbar, py-etsdevtools,
+        py-graph-tool, py-mdp-toolkit, py-pyside-tools, py-pytools, py-rbtools, py-scitools,
+        py-setuptools, py-testtools, py26-pyphant-tools, py27-pathtools, rb-rdtool,
+        rb-rttool, rb-uuidtools, chemtool, funtools, h4h5tools, ldas-tools, magic-exttools,
+        ncbi_tools, samtools, uclatools, wcstools, ctool, oath-toolkit, xmltooling,
+        afsctool, cdrtools, cuetools, daemontools, dvdrtools, dvdrw-tools, ipmitool,
+        mtools, proctools, quotatool, smartmontools, xserve-raid-tools, ebook-tools,
+        intltool, itstool, linuxdoc-tools, lttoolbox, pxsl-tools, duckytool, xdotool,
+        xorg-sgml-doctools, xfce4-dev-tools, zope-cmfquickinstallertool, zope-cmfusertracktool]
+libusb-1.0-dev:
+  osx:
+    macports:
+      packages: []
+libv4l-dev:
+  osx:
+    macports:
+      packages: []
+libvtk:
+  osx:
+    macports:
+      packages: [vtk, vtk-devel, vtk44, vtk5]
+libx11:
+  osx:
+    macports:
+      packages: [abiword-x11, thunderbird-x11, transmission-x11, p5-x11-protocol,
+        firefox-x11, firefox-x11-devel, qt4-x11, x11perf]
+libxaw:
+  osx:
+    macports:
+      packages: []
+libxext:
+  osx:
+    macports:
+      packages: [xorg-xextproto]
+libxml2:
+  osx:
+    macports:
+      packages: [py-libxml2, rb-libxml2, libxml2, wbxml2, xml2, xml2rfc]
+libxrandr:
+  osx:
+    macports:
+      packages: [xrandr]
+libxxf86vm:
+  osx:
+    macports:
+      packages: []
+log4cxx:
+  osx:
+    macports:
+      packages: [log4cxx]
+mercurial:
+  osx:
+    macports:
+      packages: [mercurial, py-mercurial_keyring]
+mongodb-dev:
+  osx:
+    macports:
+      packages: []
+netpbm:
+  osx:
+    macports:
+      packages: [netpbm]
+nvidia-cg:
+  osx:
+    macports:
+      packages: []
+opencv2:
+  osx:
+    macports:
+      packages: []
+opencv2.3:
+  osx:
+    macports:
+      packages: []
+opengl:
+  osx:
+    macports:
+      packages: [hs-platform-opengl, qore-opengl-module, p5-opengl, py-opengl, py-opengl-accelerate,
+        rb-opengl]
+openmpi:
+  osx:
+    macports:
+      packages: [openmpi]
+pcre:
+  osx:
+    macports:
+      packages: [caml-pcre, cl-ppcre, hs-pcre-light, ocaml-pcre, pcre, pcrexx]
+pkg-config:
+  osx:
+    macports:
+      packages: [rb-pkg-config, rb19-pkg-config]
+protobuf-dev:
+  osx:
+    macports:
+      packages: []
+python:
+  osx:
+    macports:
+      packages: [ArpSpyX, snappy, rgm3800py, dbus-python24, dbus-python25, dbus-python26,
+        dbus-python27, gnome-bindings-python, hs-entropy, hs-platform-happy, ice-python25,
+        ice-python26, ice-python27, ice33-python25, ice33-python26, ocaml-duppy, protobuf-python,
+        protobuf-python24, protobuf-python25, protobuf-python26, protobuf-python27,
+        subversion-python24bindings, subversion-python25bindings, subversion-python26bindings,
+        subversion-python27bindings, fuse-bindings-python25, py-fuse, pyfa, snoopy,
+        gnome-python-desktop, gnome-python-extras, gnome-python26-extras, gnome-python27-extras,
+        py-gtkspell, py26-eggtrayicon, py26-gda, py26-gdl, py26-gtkhtml2, py27-eggtrayicon,
+        py27-gda, py27-gdl, py27-gtkhtml2, wxWidgets-python, supybot, spyjar, spymemcached,
+        kfloppy, py-htmldocs, pyobfuscate, pypy, python-mode.el, python24, python24-doc,
+        python25, python25-doc, python26, python26-doc, python27, python27-doc, python31,
+        python32, python33, python34, entropy, vobcopy, py26-scapy, scapy, p5-file-copy-recursive,
+        p5-inline-python, p5-www-mechanize-sleepy, bpython_select, ipython_select,
+        py-abjad, py-acor, py-altgraph, py-amqp, py-amqplib, py-antlr3, py-anyjson,
+        py-aplpy, py-appscript, py-apptools, py-apsw, py-apycot, py-argh, py-argparse,
+        py-asciitable, py-asn1, py-aspects, py-astlib, py-astroid, py-astrolibcoords,
+        py-astropy, py-async-task, py-atpy, py-authkit, py-autopep8, py-axiom, py-babel,
+        py-baker, py-baz, py-bdist_mpkg, py-beaker, py-beautifulsoup, py-beautifulsoup4,
+        py-biggles, py-billiard, py-biopython, py-bitarray, py-bitstring, py-blaze,
+        py-blessings, py-blinker, py-blist, py-blockcanvas, py-blosc, py-boto, py-bottle,
+        py-bottle-sqlalchemy, py-bottleneck, py-bpython, py-bsddb, py-buzhug, py-bzr-git,
+        py-cairo, py-cairosvg, py-cairosvg_select, py-carray, py-carrot, py-cdb, py-celementtree,
+        py-celery, py-certifi, py-cffi, py-chaco, py-chardet, py-chart, py-checker,
+        py-cheetah, py-cherrypy, py-cherrypy3, py-chm, py-chm2pdf, py-cidrize, py-cjson,
+        py-clientcookie, py-clientform, py-clint, py-clonedigger, py-codetools, py-cog,
+        py-cogen, py-colander, py-colorama, py-colormath, py-config, py-configobj,
+        py-construct, py-couchdb, py-couchdbkit, py-country, py-coverage, py-crcmod,
+        py-creoleparser, py-crypto, py-cssselect, py-cssutils, py-csvkit, py-ctags,
+        py-ctypes, py-curl, py-curlish, py-cvxopt, py-cx_Freeze, py-cython, py-daemon,
+        py-dap, py-dateutil, py-datrie, py-DAWG, py-deap, py-decorator, py-decoratortools,
+        py-demjson, py-des, py-dice3ds, py-dispatcher, py-distribute, py-distutils-extra,
+        py-django, py-django-debug-toolbar, py-django-extensions, py-django-htmlmin,
+        py-django-nose, py-djvubind, py-dns, py-dnspython, py-do, py-docutils, py-docx,
+        py-dot, py-dpkt, py-dsv, py-dulwich, py-dynd, py-ebay, py-elementtree, py-elixir,
+        py-emcee, py-empy, py-enable, py-enchant, py-enthoughtbase, py-enum, py-envisage,
+        py-envisagecore, py-envisageplugins, py-envoy, py-epc, py-ephem, py-epsilon,
+        py-epydoc, py-errorhandler, py-etsdevtools, py-etsproxy, py-eventlet, py-exif,
+        py-eyed3, py-ez_setup, py-ezpycrypto, py-f2py, py-fabric, py-fancycompleter,
+        py-fastimport, py-fchksum, py-fcrypt, py-feedparser, py-figleaf, py-fipy,
+        py-fixture, py-fixtures, py-flask, py-flask-auth, py-flask-babel, py-flask-frozen,
+        py-flask-mail, py-flask-mongoalchemy, py-flask-restful, py-flask-sqlalchemy,
+        py-flask-uploads, py-flask-wtf, py-flup, py-fnorb, py-formbuild, py-formencode,
+        py-fpconst, py-freebase, py-freeling, py-ftputil, py-futures, py-gadfly, py-game,
+        py-gchartwrapper, py-gd, py-gdal, py-gdata, py-gdbm, py-generator, py-genshi,
+        py-geoalchemy, py-geohash, py-geoip, py-geopy, py-getargs, py-gevent, py-gflags,
+        py-ggy, py-git-sweep, py-gitdb, py-gitpython, py-glewpy, py-gmpy, py-gmpy2,
+        py-gnupg, py-gnuplot, py-gobject, py-gobject3, py-goocanvas, py-google, py-google-api,
+        py-googleappengine, py-graph-tool, py-graphpath, py-graphy, py-greenlet, py-growl,
+        py-gsl, py-gtfs, py-gtkmvc, py-gviz_api, py-h5py, py-harstorage, py-harvestman,
+        py-hcluster, py-healpy, py-hgcrecord, py-hgevolve, py-hggit, py-hgsubversion,
+        py-hgsvn, py-honcho, py-html2text, py-html2text_select, py-html5lib, py-htmlcalendar,
+        py-htmlgen, py-htmloo, py-htmltemplate, py-htmltmpl, py-httplib2, py-hyperestraier,
+        py-hypy, py-icalendar, py-id3lib, py-idlsave, py-igraph, py-imdb, py-importchecker,
+        py-importlib, py-impressive, py-imread, py-iniparse, py-ipaddr, py-ipdb, py-iplib,
+        py-ipy, py-ipython, py-irclib, py-iso8601, py-itsdangerous, py-jabber, py-jcc,
+        py-jedi, py-jinja, py-jinja2, py-joblib, py-jsbeautifier, py-jubatus-client,
+        py-kapteyn, py-keyczar, py-keyring, py-kid, py-kivy, py-kjbuckets, py-kombu,
+        py-kqueue, py-kyotocabinet, py-LabJackPython, py-ldap, py-lepl, py-lepton,
+        py-levenshtein, py-libdnet, py-libgmail, py-liblzma, py-libmemcached, py-libnamebench,
+        py-librabbitmq, py-libxml2, py-libxslt, py-lightblue, py-linda, py-lint, py-llvmmath,
+        py-llvmpy, py-log4py, py-logbook, py-logilab-astng, py-logilab-common, py-logilab-constraint,
+        py-lrucache, py-lupy, py-lxml, py-lz4, py-lzma, py-m2crypto, py-macfsevents,
+        py-macholib, py-magic, py-mahotas, py-mailbox-reader, py-make, py-mako, py-managesieve,
+        py-marisa-trie, py-markdown, py-markdown2, py-markupsafe, py-matplotlib, py-matplotlib-basemap,
+        py-mayavi, py-mcrypt, py-mdp-toolkit, py-mecab, py-mechanize, py-mechanoid,
+        py-medusa, py-meld3, py-memcached, py-memprof, py-mercurial_keyring, py-meta,
+        py-meta-devel, py-metar, py-mhash, py-migrate, py-milk, py-mimeparse, py-minfx,
+        py-mingus, py-misaka, py-mitmproxy, py-mlpy, py-MMTK, py-mock, py-mock-devel,
+        py-modulegraph, py-moin, py-mongoalchemy, py-mongoengine, py-mongoose, py-montage,
+        py-morbid, py-mox, py-mpdclient2, py-mpi4py, py-mpmath, py-msgpack, py-msnp,
+        py-mssql, py-multiprocessing, py-mustache, py-mutagen, py-mx, py-mx-base,
+        py-mx-experimental, py-myghty, py-myghtyutils, py-mygpoclient, py-mysql, py-netaddr,
+        py-netcdf4, py-netdevicelib, py-netifaces, py-networkx, py-nevow, py-nibabel,
+        py-nltk, py-nmrglue, py-nose, py-nose-exclude, py-nose-gae, py-nose-progressive,
+        py-nose-skipreq, py-nose-testconfig, py-nosexcover, py-notify-python, py-novas,
+        py-novas_de405, py-novas_py, py-ntplib, py-nuitka, py-numarray, py-numba,
+        py-numeric, py-numexpr, py-numpy, py-oauth, py-oauth2, py-oauth2client, py-obspy,
+        py-obspy-core, py-ode, py-ogg, py-omniORBpy, py-openbabel, py-opengl, py-opengl-accelerate,
+        py-openid, py-openopt, py-openpyxl, py-openssl, py-optik, py-orbit, py-orbited,
+        py-orq, py-otp, py-oursql, py-pandas, py-par, py-paramiko, py-parsedatetime,
+        py-parsing, py-passlib, py-paste, py-pastedeploy, py-pastescript, py-pastewebkit,
+        py-patsy, py-paver, py-pcapy, py-pdfminer, py-pdfrw, py-peak, py-pedal, py-pep8,
+        py-pexpect, py-pgsql, py-piddle, py-pika, py-pil, py-Pillow, py-pinocchio,
+        py-pip, py-pipedream, py-plex, py-plistservices, py-ply, py-pmock, py-pmw,
+        py-poly, py-polygon, py-poppler, py-posixtimezone, py-postgresql, py-pow,
+        py-pp, py-probstat, py-processing, py-progressbar, py-protobuf, py-pss, py-pss_select,
+        py-psutil, py-psychopy, py-psyco, py-psycopg2, py-pudb, py-pullparser, py-py,
+        py-py2app, py-pyaudio, py-pyavm, py-pyb, py-pybonjour, py-pybox2d, py-pybtex,
+        py-pycg, py-pychecker, py-pycluster, py-pycparser, py-pydicom, py-pydot, py-pyds9,
+        py-pyepl, py-pyface, py-pyfftw, py-pyfftw3, py-pyfits, py-pyflakes, py-pygccxml-devel,
+        py-pygeocoder, py-pyglet, py-pygments, py-pygpgme, py-pygraph-core, py-pygraph-dot,
+        py-pygraphviz, py-pygresql, py-pygrib, py-pygtk, py-pyhyphen, py-pyicu, py-pykerberos,
+        py-pylibelf, py-pylibmc, py-pylibpcap, py-pylint, py-pylons, py-pylzma, py-pymacs,
+        py-pymc, py-pyml, py-pymodels, py-pymongo, py-pymorph, py-pympler, py-pymtp,
+        py-pymunk, py-pynds, py-pynifti, py-pyobjc, py-pyobjc-cocoa, py-pyobjc-fsevents,
+        py-pyobjc-qtkit, py-pyobjc-quartz, py-pyobjc2, py-pyobjc2-cocoa, py-pyodbc,
+        py-pyopencl, py-pypdf, py-pypdf2, py-pyplusplus-devel, py-pyproj, py-pyprotocols,
+        py-pyqt4, py-pyquery, py-pyqwt, py-pyrant, py-pyregion, py-pyrex, py-pyrexdoc,
+        py-pyro, py-pyrxp, py-pysam, py-pyside, py-pyside-tools, py-pysparse, py-pysvn,
+        py-pytest, py-python-daemon, py-pythonutils, py-pytidylib, py-pytools, py-pyttsx,
+        py-pyusb, py-pyusb-devel, py-pyvttbl, py-pywavelets, py-pywcs, py-pyx, py-pyxg,
+        py-pyxmpp, py-qscintilla, py-quadtree, py-quantities, py-quixote, py-qutip,
+        py-rabbyt, py-rad, py-radix, py-rbtools, py-rdflib, py-re2, py-readline, py-recaptcha,
+        py-redis, py-regex, py-repl, py-reportlab, py-repoze.who, py-requests, py-reverend,
+        py-rfc3339, py-rfoo, py-rijndael, py-ro, py-robotframework, py-robotframework-ride,
+        py-robotframework-selenium2library, py-robotframework-seleniumlibrary, py-robotframework-sshlibrary,
+        py-roman, py-rope, py-ropemacs, py-ropemode, py-roundup, py-routes, py-rpy2,
+        py-rt, py-rtm, py-rtree, py-rudolf, py-ruledispatch, py-saga, py-scanf, py-scientific,
+        py-scientific-devel, py-scikit-image, py-scikit-learn, py-scikits-bootstrap,
+        py-scikits-bvp_solver, py-scikits-image, py-scikits-learn, py-scikits-module,
+        py-scikits-statsmodels, py-scikits-umfpack, py-scimath, py-scipy, py-scitools,
+        py-sclapp, py-scrapy, py-scss, py-SDL2, py-selenium, py-serial, py-setupdocs,
+        py-setuptools, py-sexpdata, py-sfepy, py-sgmlop, py-sh, py-shapely, py-shellwords,
+        py-shiboken, py-shove, py-simplejson, py-simpletal, py-simpy, py-sip, py-sisynala,
+        py-sisyphus, py-six, py-smb, py-smisk, py-smmap, py-snmp, py-soaplib, py-soappy,
+        py-socketpool, py-socksipy-branch, py-sogl, py-south, py-spark, py-spatialite,
+        py-speaklater, py-spf, py-sphinx, py-spreadmodule, py-spyder, py-spyder-beta,
+        py-spyder-devel, py-sql, py-sqlalchemy, py-sqlalchemy-migrate, py-sqlite,
+        py-sqlobject, py-sqlparse, py-SRPAstro, py-srs, py-ssh, py-ssh2, py-ssl, py-statsmodels,
+        py-stemmer, py-stevedore, py-stfio, py-stomper, py-storm, py-subvertpy, py-suds,
+        py-suds-jurko, py-sunpy, py-supervisor, py-svipc, py-svnreporter, py-swap,
+        py-swishe, py-symeig, py-sympy, py-sympy_select, py-tables, py-tahchee, py-tail,
+        py-tarfile, py-taskplan, py-tastypie, py-tc, py-tclink, py-tempita, py-tesser,
+        py-testtools, py-textile, py-texttable, py-thrift, py-tiff, py-timeformat,
+        py-tkinter, py-tlslite, py-toc, py-tornado, py-torndb, py-tpg, py-traits,
+        py-traitsbackendqt, py-traitsbackendwx, py-traitsgui, py-traitsui, py-transaction,
+        py-translationstring, py-trep, py-turbocheetah, py-turbogears, py-turbojson,
+        py-turbokid, py-tweepy, py-twforms, py-twilio, py-twisted, py-twisted-web2,
+        py-twitter, py-tz, py-tz-gae, py-umlgraph, py-unit, py-unittest2, py-unum,
+        py-uritemplate, py-url, py-urlgrabber, py-urlwatch, py-urwid, py-usadel1,
+        py-utidylib, py-virtualenv, py-virtualenv-clone, py-virtualenvwrapper, py-visa,
+        py-vo, py-vobject, py-voeventlib, py-vorbis, py-w3lib, py-watchdog, py-weberror,
+        py-webhelpers, py-weblib, py-webob, py-webpy, py-webstack, py-webtest, py-werkzeug,
+        py-whoosh, py-winpdb, py-wordaxe, py-wordnet, py-work, py-workerpool, py-wtforms,
+        py-wxpython, py-wxpython-2.8, py-wxpython-3.0, py-wxpython30, py-x2go, py-xar,
+        py-xattr, py-xdg, py-xhtml2pdf, py-xlib, py-xlrd, py-xlutils, py-xlwt, py-xmldiff,
+        py-xmlsec, py-xmltramp, py-xmpppy, py-yaml, py-yenc, py-yolk, py-yt, py-yum-metadata-parser,
+        py-zc-buildout, py-zc-lockfile, py-zconfig, py-zdaemon, py-zen, py-zeroc-ice,
+        py-zeroc-ice33, py-zeroc-ice34, py-zeroc-ice35, py-zmq, py-zodb, py-zope-app-module,
+        py-zope-event, py-zope-keyreference, py-zopeinterface, py-zsi, py25-gnome,
+        py25-gobject, py25-gst-python, py25-gtk, py25-gtkglext, py25-libdnet, py25-lint,
+        py25-orbit, py25-py2app-devel, py25-pydb, py25-pygtksourceview, py25-webkitgtk,
+        py26-atspi, py26-clnum, py26-cvxmod, py26-ete2, py26-exiv2, py26-FlexGet,
+        py26-formalchemy, py26-gnome, py26-gobject, py26-gst-python, py26-gtk, py26-libdnet,
+        py26-lint, py26-logilab-hmm, py26-mapnik, py26-ngl, py26-nio, py26-odbc, py26-orbit,
+        py26-osmgpsmap, py26-pebl, py26-pycallgraph, py26-pyclutter, py26-pydb, py26-pyfsevents,
+        py26-pygccxml, py26-pygooglechart, py26-pygtksourceview, py26-pyke, py26-pymca,
+        py26-pymvpa, py26-pynzb, py26-pyphant, py26-pyphant-fmf, py26-pyphant-imageprocessing,
+        py26-pyphant-osc, py26-pyphant-statistics, py26-pyphant-tools, py26-pyplusplus,
+        py26-pyqt3, py26-PyRSS2Gen, py26-pyxb, py26-recaptcha-client, py26-repoze.what,
+        py26-repoze.what-pylons, py26-repoze.what-quickstart, py26-repoze.what.plugins.sql,
+        py26-repoze.who-friendlyform, py26-repoze.who-testutil, py26-repoze.who.plugins.sa,
+        py26-rpncalc, py26-scgi, py26-scikits-ann, py26-scikits-audiolab, py26-scikits-talkbox,
+        py26-scikits-timeseries, py26-sip-qt3, py26-svn, py26-tre, py26-tvdb, py26-tvnamer,
+        py26-twill, py26-wbxml, py26-webkitgtk, py27-atspi, py27-brownie, py27-daemon,
+        py27-euca2ools, py27-exiv2, py27-gnome, py27-gobject, py27-gslib, py27-gst-python,
+        py27-gtk, py27-instapaperlib, py27-libdnet, py27-lint, py27-lockfile, py27-novaclient,
+        py27-odbc, py27-orbit, py27-osmgpsmap, py27-pathtools, py27-prettytable, py27-pygtksourceview,
+        py27-svn, py27-termcolor, py27-tre, py27-webkitgtk, py27-wxpython-devel, pyflakes_select,
+        pylint_select, python-musicbrainz2, rb19-capybara, pylal, pymol, pymol-devel,
+        pynmr, pythia, yorick-spydr, python_select, pylize, mod_python, mod_python25,
+        mod_python26, sitecopy, xdpyinfo]
+python-argparse:
+  osx:
+    macports:
+      packages: [py-argparse]
+python-empy:
+  osx:
+    macports:
+      packages: [py-empy]
+python-gtk2:
+  osx:
+    macports:
+      packages: []
+python-imaging:
+  osx:
+    macports:
+      packages: []
+python-kitchen:
+  osx:
+    macports:
+      packages: []
+python-matplotlib:
+  osx:
+    macports:
+      packages: [py-matplotlib, py-matplotlib-basemap]
+python-netifaces:
+  osx:
+    macports:
+      packages: [py-netifaces]
+python-nose:
+  osx:
+    macports:
+      packages: [py-nose, py-nose-exclude, py-nose-gae, py-nose-progressive, py-nose-skipreq,
+        py-nose-testconfig, py-nosexcover]
+python-numpy:
+  osx:
+    macports:
+      packages: [py-numpy]
+python-opengl:
+  osx:
+    macports:
+      packages: [py-opengl, py-opengl-accelerate]
+python-paramiko:
+  osx:
+    macports:
+      packages: [py-paramiko]
+python-psutil:
+  osx:
+    macports:
+      packages: [py-psutil]
+python-qt-bindings:
+  osx:
+    macports:
+      packages: []
+python-qt-bindings-gl:
+  osx:
+    macports:
+      packages: []
+python-qt-bindings-qwt5:
+  osx:
+    macports:
+      packages: []
+python-rospkg:
+  osx:
+    macports:
+      packages: []
+python-scipy:
+  osx:
+    macports:
+      packages: [py-scipy]
+python-setuptools:
+  osx:
+    macports:
+      packages: [py-setuptools]
+python-sip:
+  osx:
+    macports:
+      packages: [py-sip]
+python-sip4:
+  osx:
+    macports:
+      packages: []
+python-sphinx:
+  osx:
+    macports:
+      packages: [py-sphinx]
+python-support:
+  osx:
+    macports:
+      packages: []
+python-yaml:
+  osx:
+    macports:
+      packages: [py-yaml]
+qt4-qmake:
+  osx:
+    macports:
+      packages: []
+sbcl:
+  osx:
+    macports:
+      packages: [sbcl]
+scons:
+  osx:
+    macports:
+      packages: [scons]
+sdl-image:
+  osx:
+    macports:
+      packages: []
+subversion:
+  osx:
+    macports:
+      packages: [subversion, subversion-javahlbindings, subversion-perlbindings, subversion-python24bindings,
+        subversion-python25bindings, subversion-python26bindings, subversion-python27bindings,
+        subversion-rubybindings, py-hgsubversion]
+suitesparse:
+  osx:
+    macports:
+      packages: []
+swig-wx:
+  osx:
+    macports:
+      packages: []
+tango-icon-theme:
+  osx:
+    macports:
+      packages: [tango-icon-theme, tango-icon-theme-extras]
+tar:
+  osx:
+    macports:
+      packages: [deb2targz, gnutar, hfstar, star, hs-tar, libtar, atari800, hatari,
+        starfighter, startup-notification, javatar, kstars, p5-archive-tar, p5-module-starter,
+        p5-moosex-multiinitarg, pear-Console_Getargs, py-bitarray, py-getargs, py-metar,
+        py-tarfile, py26-repoze.what-quickstart, rb-archive-tar-minitar, rb19-archive-tar-minitar,
+        metar, tardiff, tarsnap, stardict, stardict-xmlittre, sword-commentary-dtn,
+        sword-commentary-jfb, sword-commentary-tsk, xmlstarlet]
+tbb:
+  osx:
+    macports:
+      packages: [tbb]
+texlive-fonts-extra:
+  osx:
+    macports:
+      packages: [texlive-fonts-extra]
+texlive-fonts-recommended:
+  osx:
+    macports:
+      packages: [texlive-fonts-recommended]
+texlive-latex-base:
+  osx:
+    macports:
+      packages: []
+texlive-latex-extra:
+  osx:
+    macports:
+      packages: [texlive-latex-extra]
+texlive-latex-recommended:
+  osx:
+    macports:
+      packages: [texlive-latex-recommended]
+tinyxml:
+  osx:
+    macports:
+      packages: [tinyxml]
+unzip:
+  osx:
+    macports:
+      packages: [unzip]
+uuid:
+  osx:
+    macports:
+      packages: [caml-uuidm, ocaml-uuidm, ossp-uuid, qore-uuid-module, p5-class-dbi-uuid,
+        p5-data-uuid, p5-uuid, php-uuid, php5-uuid, rb-uuidtools]
+wxpython:
+  osx:
+    macports:
+      packages: [py-wxpython, py-wxpython-2.8, py-wxpython-3.0, py-wxpython30, py27-wxpython-devel]
+wxwidgets:
+  osx:
+    macports:
+      packages: [p5-alien-wxwidgets]
+yaml:
+  osx:
+    macports:
+      packages: [libyaml, yaml-cpp, yaml-mode.el, qore-yaml-module, p5-cpan-meta-yaml,
+        p5-data-phrasebook-loader-yaml, p5-test-yaml-meta, p5-test-yaml-valid, p5-yaml,
+        p5-yaml-libyaml, p5-yaml-syck, p5-yaml-tiny, php-yaml, php5-yaml, py-yaml]
+yaml-cpp:
+  osx:
+    macports:
+      packages: [yaml-cpp]
+zlib:
+  osx:
+    macports:
+      packages: [zlib, hs-platform-zlib, p5-compress-raw-zlib, p5-io-zlib]
+zziplib:
+  osx:
+    macports:
+      packages: []
