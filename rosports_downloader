@@ -22,7 +22,7 @@ def parseargs():
 
     parser.add_argument("--workspace",
                         "-w",
-                        help="the directory for the downlaoded ros packages",
+                        help="the directory for the downloaded ros packages",
                         nargs="?",
                         default="../ports")
     return parser.parse_args()
@@ -46,6 +46,9 @@ if __name__ == "__main__":
 
     args = parseargs()
     dl_path = os.path.abspath(args.workspace)
+
+    if not os.path.exists(dl_path):
+        os.mkdir(dl_path)
 
     #Get Rosports file
     ros_pkgs = yaml.load(file(args.rosinstall, 'r'))
