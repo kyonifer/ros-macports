@@ -11,7 +11,7 @@ platforms           darwin
 license             bsd
 maintainers         gmail.com:venabled
 description         Standalone Python library for the catkin package system. Contains support for finding and introspecting catkin packages in the file system.
-homepage            http://wiki.ros.org/rosinstall_generator
+homepage            https://github.com/ros-infrastructure/catkin_pkg
 
 fetch.type          git
 git.url             https://github.com/ros-infrastructure/catkin_pkg.git
