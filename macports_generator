@@ -49,10 +49,22 @@ def download_workspace(rosinstalldir, cachedir):
     os.system("./rosports_downloader --rosinstall " + rosinstalldir +
               " --workspace " + cachedir)
 
+
 def extract_workspace(cachedir):
+    pkgdirs = [pkgdir for pkgdir in os.listdir(cachedir) if
+               not pkgdir.startswith(".") and os.path.isdir(
+                   cachedir + "/" + pkgdir)]
+    for pkgdir in pkgdirs:
+        if os.path.exists(cachedir + "/" + pkgdir):
+            shutil.rmtree(cachedir + "/" + pkgdir)
+
     pkgs = [pkg for pkg in os.listdir(cachedir) if
             not pkg.startswith(".") and not os.path.isdir(pkg)]
-    os.system("tar -zxvf {0} -C cachedir", pkg)
+    for pkg in pkgs:
+        print "Extracting ", pkg
+        os.system("tar -zxvf {0} -C {1}".format(cachedir + "/" +
+                                                pkg, cachedir))
+
 
 if __name__ == "__main__":
 
