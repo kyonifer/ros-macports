@@ -113,7 +113,7 @@ graphviz:
 gtest:
   osx:
     macports:
-      packages: []
+      packages: [google-test]
 gtk2:
   osx:
     macports:
@@ -305,7 +305,7 @@ pcre:
 pkg-config:
   osx:
     macports:
-      packages: []
+      packages: [pkgconfig]
 protobuf-dev:
   osx:
     macports:
@@ -457,7 +457,7 @@ texlive-fonts-recommended:
 texlive-latex-base:
   osx:
     macports:
-      packages: []
+      packages: [texlive]
 texlive-latex-extra:
   osx:
     macports:
