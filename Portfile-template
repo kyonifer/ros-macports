@@ -54,27 +54,7 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 
 master_sites        https://raw.github.com/kyonifer/ros-macports-source-snapshots/10062013/10062013/
 
-post-extract {
-     file delete -force ${worksrcpath}/src/qt_gui_cpp # needs pluginlib
-     file delete -force ${worksrcpath}/src/pluginlib # needs class_loader
-     file delete -force ${worksrcpath}/src/class_loader # needs console_bridge, which cant find itself when destrooted (console_bridge-config.cmake:15)
-     file delete -force ${worksrcpath}/src/tf2
-     file delete -force ${worksrcpath}/src/tf2_geometry_msgs
-     file delete -force ${worksrcpath}/src/tf2_kdl
-     file delete -force ${worksrcpath}/src/tf2_msgs
-     file delete -force ${worksrcpath}/src/tf2_ros
-     file delete -force ${worksrcpath}/src/tf2_tools
-     file delete -force ${worksrcpath}/src/pcl
-     file delete -force ${worksrcpath}/src/pcl_msgs
-     file delete -force ${worksrcpath}/src/pcl_ros
-     file delete -force ${worksrcpath}/src/depth_image_proc # needs pcl
-     file delete -force ${worksrcpath}/src/rviz # macports ogre broken atm
-     file delete -force ${worksrcpath}/src/rqt_rviz # macports ogre broken atm
-     file delete -force ${worksrcpath}/src/opencv2 # use macports opencv
-
-}
-
-checksum {}
+checksum {} # todo: calculate checksum
 configure {}
 configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"

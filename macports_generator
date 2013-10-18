@@ -91,10 +91,12 @@ if __name__ == "__main__":
 
     for pkg in pkgs:
         manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
-        pkgname = prefix + pkg #todo: fix pkg here to be the parsed one from xml
+        pkgname = prefix + \
+            manifest.getElementsByTagName("name")[0].lastChild.nodeValue
+        print pkgname,"pkgname"
         build_deps = [prefix + ele.lastChild.nodeValue for ele in
                       manifest.getElementsByTagName("build_depend")]
-        if pkg != "catkin":
+        if pkgname != "catkin":
             build_deps.append(prefix + "catkin")
         build_deps_str = " \\\n                    port:".join(build_deps)
         if build_deps_str is not "":
