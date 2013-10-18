@@ -87,10 +87,10 @@ if __name__ == "__main__":
     extract_workspace(cachedir)
 
     pkgs = [pkg for pkg in os.listdir(cachedir) if
-            not pkg.startswith(".") and os.path.isdir(pkg)]
+            not pkg.startswith(".") and os.path.isdir(cachedir + "/" + pkg)]
 
     for pkg in pkgs:
-        manifest = xml.parse(cachedir + pkg + "/package.xml")
+        manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
         pkgname = prefix + pkg #todo: fix pkg here to be the parsed one from xml
         build_deps = [prefix + ele.lastChild.nodeValue for ele in
                       manifest.getElementsByTagName("build_depend")]
