@@ -92,8 +92,8 @@ if __name__ == "__main__":
     for pkg in pkgs:
         manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
         pkgname = prefix + \
-            manifest.getElementsByTagName("name")[0].lastChild.nodeValue
-        print pkgname,"pkgname"
+                  manifest.getElementsByTagName("name")[0].lastChild.nodeValue
+        print pkgname, "pkgname"
         build_deps = [prefix + ele.lastChild.nodeValue for ele in
                       manifest.getElementsByTagName("build_depend")]
         if pkgname != "catkin":
