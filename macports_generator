@@ -97,7 +97,7 @@ if __name__ == "__main__":
         manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
         pkgname = prefix + \
                   manifest.getElementsByTagName("name")[0].lastChild.nodeValue
-        print pkgname, "pkgname"
+        print("==Processing package: {0}==".format(pkgname))
         build_deps = [ele.lastChild.nodeValue for ele in
                       manifest.getElementsByTagName("build_depend")]
         run_deps = [ele.lastChild.nodeValue for ele in
@@ -106,21 +106,33 @@ if __name__ == "__main__":
             build_deps.append(prefix + "catkin")
 
         for i in range(len(build_deps)):
-            try:
-                print "Trying to map: {0}".format(build_deps[i])
-                build_deps[i] = deps_map[build_deps[i]]["osx"]["macports"]["packages"][0]
-                print "Mapped dependency to: {0}".format(build_deps[i])
-            except KeyError:
-                #add prefix
-                pass
+            if build_deps[i] in deps_map:
+                try:
+                    print("Trying to map: {0}".format(build_deps[i]))
+                    build_deps[i] = \
+                        deps_map[build_deps[i]]["osx"]["macports"]["packages"][
+                            0]
+                    print("Mapped dependency to: {0}".format(build_deps[i]))
+                except IndexError:
+                    print("Error: needed port mapping not found in " \
+                          "system-deps file. Please fix yaml mapping.")
+            else:
+                print ("Adding ros dependency: {0}".format(build_deps[i]))
+                # add prefix
         for i in range(len(run_deps)):
-            try:
-                print "Trying to map: {0}".format(run_deps[i])
-                run_deps[i] = deps_map[run_deps[i]]["osx"]["macports"]["packages"][0]
-                print "Mapped dependency to: {0}".format(run_deps[i])
-            except KeyError:
-                #add prefix
-                pass
+            if run_deps[i] in deps_map:
+                try:
+                    print("Trying to map: {0}".format(run_deps[i]))
+                    run_deps[i] = \
+                        deps_map[run_deps[i]]["osx"]["macports"]["packages"][
+                            0]
+                    print("Mapped dependency to: {0}".format(run_deps[i]))
+                except IndexError:
+                    print("Error: needed port mapping not found in " \
+                          "system-deps file. Please fix yaml mapping.")
+            else:
+                print ("Adding ros dependency: {0}".format(run_deps[i]))
+                # add prefix
 
         build_deps_str = " \\\n                    port:".join(build_deps)
         if build_deps_str is not "":
