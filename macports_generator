@@ -51,7 +51,7 @@ def download_workspace(rosinstalldir, cachedir):
 
 def extract_workspace(cachedir):
     pkgs = [pkg for pkg in os.listdir(cachedir) if
-            not pkg.startswith(".")]
+            not pkg.startswith(".") and not os.path.isdir(pkg)]
     os.system("tar -zxvf {0} -C cachedir", pkg)
 
 if __name__ == "__main__":
@@ -73,7 +73,6 @@ if __name__ == "__main__":
         download_workspace(rosinstalldir, cachedir)
 
     extract_workspace(cachedir)
-    exit(1)
 
     pkgs = [pkg for pkg in os.listdir(cachedir) if
             not pkg.startswith(".") and os.path.isdir(pkg)]
