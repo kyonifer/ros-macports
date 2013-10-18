@@ -1,0 +1,36 @@
+---
+Readme on generating the osx-macports.yaml file. 
+---
+Abstract: ros/rosdep in an effort to be 'cross-platform' has some interesting
+therories on how to resolve package names for platform specific package mangers
+vs. what's called out in ROS packages' package.xml files. This describes how 
+we developed a procedure for creating a rosdep ruleset for the macports platform
+---
+Implementation:
+1) We needed somewhere to start from, so we pulled the rules that are defaulted
+by rosdep. These are on gitHub, but they're listed in: 
+
+    /etc/ros/rosdep/sources.list.d/20-default.list
+
+If you have rosdep installed. Otherwise you can pull this directory from gitHub:
+
+    https://github.com/ros/rosdistro/tree/master/rosdep
+
+2) Since we're working with mac, I started using the osx-homebrew.yaml as a 
+starting point for which packages to look for 
+
+3) I wrote a quick python script (system_depenency_generator) that looks through
+all the port files installed on the system, and compares them to the packages
+listed in osx-homebrew.yaml to find potential matches. It then generates a .yaml
+file that lists all those dependencies, in the rosdep ruleset format for 
+macports
+
+4) After that I opened the osx-macports.yaml file in sublime, fired up the 
+terminal and also used the website (macports.org) to resolve package names
+--If a package had no potential matches in the package[] field, I did a search
+    for similar names on macports.org. 
+--If there were multiple ones, I used macports.org and the list of packages
+    that were already installed from the old ros macports dep list to figure
+    out what they shoudl nominally be called
+
+5) Submitted that to the git repo and then thorougly confused Kyle Kauffman
