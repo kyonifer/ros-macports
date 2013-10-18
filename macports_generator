@@ -9,6 +9,7 @@ into a set of macports ports with a fully working dependency tree.
 import os
 import argparse
 import shutil
+import yaml
 from xml.dom import minidom as xml
 
 
@@ -43,10 +44,10 @@ def parseargs():
     return parser.parse_args()
 
 
-def download_workspace(rosinstalldir, cachedir):
+def download_workspace(rosinstallfile, cachedir):
     if not os.path.exists(cachedir):
         os.mkdir(cachedir)
-    os.system("./rosports_downloader --rosinstall " + rosinstalldir +
+    os.system("./rosports_downloader --rosinstall " + rosinstallfile +
               " --workspace " + cachedir)
 
 
@@ -73,8 +74,8 @@ if __name__ == "__main__":
     prefix = "ros-hydro-"
     portdir = args.port_dir
     force_download = args.force_download
-    sysdepsdir = args.system_deps
-    rosinstalldir = args.rosinstall
+    sysdepsfile = args.system_deps
+    rosinstallfile = args.rosinstall
     cachedir = "cache"
 
     if os.path.exists(cachedir) and not force_download:
@@ -82,27 +83,48 @@ if __name__ == "__main__":
     if os.path.exists(cachedir) and force_download:
         shutil.rmtree(cachedir)
     if not os.path.exists(cachedir):
-        download_workspace(rosinstalldir, cachedir)
+        download_workspace(rosinstallfile, cachedir)
 
     extract_workspace(cachedir)
 
     pkgs = [pkg for pkg in os.listdir(cachedir) if
             not pkg.startswith(".") and os.path.isdir(cachedir + "/" + pkg)]
 
+    deps_map = yaml.load(open(sysdepsfile))
+    print deps_map
+
     for pkg in pkgs:
         manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
         pkgname = prefix + \
                   manifest.getElementsByTagName("name")[0].lastChild.nodeValue
         print pkgname, "pkgname"
-        build_deps = [prefix + ele.lastChild.nodeValue for ele in
+        build_deps = [ele.lastChild.nodeValue for ele in
                       manifest.getElementsByTagName("build_depend")]
+        run_deps = [ele.lastChild.nodeValue for ele in
+                    manifest.getElementsByTagName("run_depend")]
         if pkgname != "catkin":
             build_deps.append(prefix + "catkin")
+
+        for i in range(len(build_deps)):
+            try:
+                print "Trying to map: {0}".format(build_deps[i])
+                build_deps[i] = deps_map[build_deps[i]]["osx"]["macports"]["packages"][0]
+                print "Mapped dependency to: {0}".format(build_deps[i])
+            except KeyError:
+                #add prefix
+                pass
+        for i in range(len(run_deps)):
+            try:
+                print "Trying to map: {0}".format(run_deps[i])
+                run_deps[i] = deps_map[run_deps[i]]["osx"]["macports"]["packages"][0]
+                print "Mapped dependency to: {0}".format(run_deps[i])
+            except KeyError:
+                #add prefix
+                pass
+
         build_deps_str = " \\\n                    port:".join(build_deps)
         if build_deps_str is not "":
             build_deps_str = "\\\n                    port:" + build_deps_str
-        run_deps = [prefix + ele.lastChild.nodeValue for ele in
-                    manifest.getElementsByTagName("run_depend")]
         run_deps_str = " \\\n                    port:".join(run_deps)
         if run_deps_str is not "":
             run_deps_str = "\\\n                    port:" + run_deps_str
