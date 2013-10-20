@@ -24,7 +24,7 @@ def parseargs():
                         "-w",
                         help="the directory for the downloaded ros packages",
                         nargs="?",
-                        default="../ports")
+                        default="../workspace")
     return parser.parse_args()
 
 
@@ -39,6 +39,11 @@ def download_file(url, dl_path):
             if chunk: # filter out keep-alive new chunks
                 f.write(chunk)
                 f.flush()
+
+    # Record download URL for each tarball
+    with open(local_filename + "-url", "w") as f:
+        f.write(url)
+
     return local_filename
 
 
