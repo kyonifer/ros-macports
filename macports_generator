@@ -62,13 +62,78 @@ def extract_workspace(cachedir):
     pkgs = [pkg for pkg in os.listdir(cachedir) if
             not pkg.startswith(".") and not os.path.isdir(pkg)]
     for pkg in pkgs:
-        print "Extracting ", pkg
+        print("Extracting {0}".format(pkg))
         os.system("tar -zxvf {0} -C {1}".format(cachedir + "/" +
                                                 pkg, cachedir))
 
 
-if __name__ == "__main__":
+def process_package(cachedir, deps_map, pkg, portdir, prefix):
+    """
+    For the passed in package, generates a port in pordir using the supplied
+    (already generated) cachedir, deps_map, and a prefix for package naming.
+    """
+    manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
+    pkgname = prefix + \
+              manifest.getElementsByTagName("name")[0].lastChild.nodeValue
+    print("==Processing package: {0}==".format(pkgname))
+    build_deps = [ele.lastChild.nodeValue for ele in
+                  manifest.getElementsByTagName("build_depend")]
+    run_deps = [ele.lastChild.nodeValue for ele in
+                manifest.getElementsByTagName("run_depend")]
+    if pkgname != "catkin":
+        build_deps.append(prefix + "catkin")
+    for i in range(len(build_deps)):
+        if build_deps[i] in deps_map:
+            try:
+                print("Trying to map: {0}".format(build_deps[i]))
+                build_deps[i] = \
+                    deps_map[build_deps[i]]["osx"]["macports"]["packages"][0]
+                print("Mapped dependency to: {0}".format(build_deps[i]))
+            except IndexError:
+                print("Error: needed port mapping not found in " \
+                      "system-deps file. Please fix yaml mapping.")
+        else:
+            print ("Adding ros dependency: {0}".format(build_deps[i]))
+            # add prefix
+    for i in range(len(run_deps)):
+        if run_deps[i] in deps_map:
+            try:
+                print("Trying to map: {0}".format(run_deps[i]))
+                run_deps[i] = \
+                    deps_map[run_deps[i]]["osx"]["macports"]["packages"][0]
+                print("Mapped dependency to: {0}".format(run_deps[i]))
+            except IndexError:
+                print("Error: needed port mapping not found in " \
+                      "system-deps file. Please fix yaml mapping.")
+        else:
+            print ("Adding ros dependency: {0}".format(run_deps[i]))
+            # add prefix
+    build_deps_str = " \\\n                    port:".join(build_deps)
+    if build_deps_str is not "":
+        build_deps_str = "\\\n                    port:" + build_deps_str
+    run_deps_str = " \\\n                    port:".join(run_deps)
+    if run_deps_str is not "":
+        run_deps_str = "\\\n                    port:" + run_deps_str
+    print (pkgname + " run_depends: " + run_deps_str)
+    print (pkgname + " build_depends: " + build_deps_str)
+    template = readfile("Portfile-template")
+    template = template.replace("$$fullname$$", pkgname)
+    template = template.replace("$$name$$", pkg)
+    template = template.replace("$$run_depends$$", run_deps_str)
+    template = template.replace("$$build_depends$$", build_deps_str)
+    template = template.replace("$$url$$", "1")
+    # Make ports
+    if not os.path.exists(portdir):
+        os.mkdir(portdir)
+    if not os.path.exists(portdir + "/" + pkgname):
+        os.mkdir(portdir + "/" + pkgname)
+    writefile(portdir + "/" + pkgname + "/Portfile", template)
 
+
+def generate_ports():
+    """
+    Processes command line options and accordingly generates portfiles.
+    """
     args = parseargs()
 
     prefix = "ros-hydro-"
@@ -94,64 +159,7 @@ if __name__ == "__main__":
     print deps_map
 
     for pkg in pkgs:
-        manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
-        pkgname = prefix + \
-                  manifest.getElementsByTagName("name")[0].lastChild.nodeValue
-        print("==Processing package: {0}==".format(pkgname))
-        build_deps = [ele.lastChild.nodeValue for ele in
-                      manifest.getElementsByTagName("build_depend")]
-        run_deps = [ele.lastChild.nodeValue for ele in
-                    manifest.getElementsByTagName("run_depend")]
-        if pkgname != "catkin":
-            build_deps.append(prefix + "catkin")
+        process_package(cachedir, deps_map, pkg, portdir, prefix)
 
-        for i in range(len(build_deps)):
-            if build_deps[i] in deps_map:
-                try:
-                    print("Trying to map: {0}".format(build_deps[i]))
-                    build_deps[i] = \
-                        deps_map[build_deps[i]]["osx"]["macports"]["packages"][
-                            0]
-                    print("Mapped dependency to: {0}".format(build_deps[i]))
-                except IndexError:
-                    print("Error: needed port mapping not found in " \
-                          "system-deps file. Please fix yaml mapping.")
-            else:
-                print ("Adding ros dependency: {0}".format(build_deps[i]))
-                # add prefix
-        for i in range(len(run_deps)):
-            if run_deps[i] in deps_map:
-                try:
-                    print("Trying to map: {0}".format(run_deps[i]))
-                    run_deps[i] = \
-                        deps_map[run_deps[i]]["osx"]["macports"]["packages"][
-                            0]
-                    print("Mapped dependency to: {0}".format(run_deps[i]))
-                except IndexError:
-                    print("Error: needed port mapping not found in " \
-                          "system-deps file. Please fix yaml mapping.")
-            else:
-                print ("Adding ros dependency: {0}".format(run_deps[i]))
-                # add prefix
-
-        build_deps_str = " \\\n                    port:".join(build_deps)
-        if build_deps_str is not "":
-            build_deps_str = "\\\n                    port:" + build_deps_str
-        run_deps_str = " \\\n                    port:".join(run_deps)
-        if run_deps_str is not "":
-            run_deps_str = "\\\n                    port:" + run_deps_str
-        print (pkgname + " run_depends: " + run_deps_str)
-        print (pkgname + " build_depends: " + build_deps_str)
-
-        template = readfile("Portfile-template")
-        template = template.replace("$$fullname$$", pkgname)
-        template = template.replace("$$name$$", pkg)
-        template = template.replace("$$run_depends$$", run_deps_str)
-        template = template.replace("$$build_depends$$", build_deps_str)
-
-        # Make ports
-        if not os.path.exists(portdir):
-            os.mkdir(portdir)
-        if not os.path.exists(portdir + "/" + pkgname):
-            os.mkdir(portdir + "/" + pkgname)
-        writefile(portdir + "/" + pkgname + "/Portfile", template)
+if __name__ == "__main__":
+    generate_ports()
