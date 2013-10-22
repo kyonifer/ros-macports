@@ -41,7 +41,7 @@ def download_file(url, dl_path):
                 f.flush()
 
     # Record download URL for each tarball
-    with open(local_filename + "-url", "w") as f:
+    with open(os.path.join(dl_path, url.split('/')[-2]) + "-url", "w") as f:
         f.write(url)
 
     return local_filename

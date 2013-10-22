@@ -67,6 +67,11 @@ def extract_workspace(cachedir):
                                                 pkg, cachedir))
 
 
+def find_download_url(cachedir, pkgname):
+    with open(os.path.join(cachedir, "diagnostic_msgs-url")) as f:
+        return f.readlines()[0]
+
+
 def process_package(cachedir, deps_map, pkg, portdir, prefix):
     """
     For the passed in package, generates a port in pordir using the supplied
@@ -90,7 +95,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                     deps_map[build_deps[i]]["osx"]["macports"]["packages"][0]
                 print("Mapped dependency to: {0}".format(build_deps[i]))
             except IndexError:
-                print("Error: needed port mapping not found in " \
+                print("Error: needed port mapping not found in "
                       "system-deps file. Please fix yaml mapping.")
         else:
             print ("Adding ros dependency: {0}".format(build_deps[i]))
@@ -107,7 +112,12 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                       "system-deps file. Please fix yaml mapping.")
         else:
             print ("Adding ros dependency: {0}".format(run_deps[i]))
-            # add prefix
+
+    url = find_download_url(cachedir, pkgname)
+    url_base = 1
+    url_file = 1
+
+    # add prefix
     build_deps_str = " \\\n                    port:".join(build_deps)
     if build_deps_str is not "":
         build_deps_str = "\\\n                    port:" + build_deps_str
@@ -121,7 +131,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     template = template.replace("$$name$$", pkg)
     template = template.replace("$$run_depends$$", run_deps_str)
     template = template.replace("$$build_depends$$", build_deps_str)
-    template = template.replace("$$url$$", "1")
+    template = template.replace("$$url$$", url)
     # Make ports
     if not os.path.exists(portdir):
         os.mkdir(portdir)
@@ -160,6 +170,7 @@ def generate_ports():
 
     for pkg in pkgs:
         process_package(cachedir, deps_map, pkg, portdir, prefix)
+
 
 if __name__ == "__main__":
     generate_ports()
