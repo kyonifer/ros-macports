@@ -54,6 +54,7 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 
 master_sites        $$url_base$$
 distfiles           $$url_file$$
+worksrcdir          $$extract_dir$$
 
 # todo: calculate checksum
 checksum {}
@@ -76,19 +77,6 @@ build {
      set env(CXX) "${configure.cxx}"
      set env(CPP) "${configure.cpp}"
 
-     # Point scripts to the python that installed the ros python modules
-     set files [list catkin/bin/catkin_make_isolated roslib/src/roslib/launcher.py compressed_depth_image_transport/cfg/CompressedDepthPublisher.cfg compressed_image_transport/cfg/CompressedPublisher.cfg dynamic_reconfigure/cfg/Test.cfg image_proc/cfg/CropDecimate.cfg image_proc/cfg/Debayer.cfg image_proc/cfg/Rectify.cfg image_rotate/cfg/ImageRotate.cfg nodelet_topic_tools/cfg/NodeletThrottle.cfg stereo_image_proc/cfg/Disparity.cfg theora_image_transport/cfg/TheoraPublisher.cfg theora_image_transport/cfg/TheoraSubscriber.cfg]
-
-     foreach f $files {
-          reinplace "s|/usr/bin/env python|${prefix}/bin/python2.7|g" ${worksrcpath}/src/$f
-     }
-
-     # Fix DYLD_LIBRARY_PATH overriding system libs
-     reinplace "s|DYLD_LIBRARY_PATH|DYLD_FALLBACK_LIBRARY_PATH|g" ${worksrcpath}/src/catkin/cmake/templates/_setup_util.py.in
-
-     # Fix hard-coded /usr/local path for eigen3
-     reinplace "s|/usr/local/include/eigen3|${prefix}/include/eigen3|g" ${worksrcpath}/src/orocos_kdl/config/FindEigen3.cmake
-
      system "DESTDIR=${destroot} ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
           --source ${worksrcpath}/src \
           --build ${worksrcpath}/build_isolated \
@@ -104,18 +92,6 @@ build {
 }
 
 destroot {}
-
-post-destroot {
-     # Fix some broken install names that didnt pick up CMAKE_INSTALL_NAME_DIR
-     foreach f [list lib/collada_urdf/urdf_to_collada lib/libcollada_parser.dylib lib/libcollada_urdf.dylib] {
-          exec install_name_tool -change libcollada-dom2.4-dp.0.dylib $prefix/lib/libcollada-dom2.4-dp.0.dylib ${destroot}${prefix}/${f}
-     }
-
-     # Fix setup.bash env vars to point to prefix instead of devel space
-     reinplace "s|CMAKE_PREFIX_PATH = '.*')|CMAKE_PREFIX_PATH = '${prefix}'.split(';')|" ${destroot}${prefix}/_setup_util.py
-     #reinplace "s|${worksrcpath}/devel_isolated|${prefix}/share|g" ${destroot}${prefix}/_setup_util.py
-     #reinplace "s|'CMAKE_PREFIX_PATH_AS_IS': ';'.join(os.environ['CMAKE_PREFIX_PATH'].split(os.pathsep))|'CMAKE_PREFIX_PATH_AS_IS': '${prefix}'"
-}
 
 # ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
 destroot.violate_mtree yes

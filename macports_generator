@@ -128,7 +128,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     print (pkgname + " build_depends: " + build_deps_str)
     template = readfile("Portfile-template")
     template = template.replace("$$fullname$$", pkgname)
-    template = template.replace("$$name$$", pkg)
+    template = template.replace("$$extract_dir$$", pkg)
     template = template.replace("$$run_depends$$", run_deps_str)
     template = template.replace("$$build_depends$$", build_deps_str)
     template = template.replace("$$url_base$$", url_base)
