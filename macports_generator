@@ -127,13 +127,19 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     print (pkgname + " run_depends: " + run_deps_str)
     print (pkgname + " build_depends: " + build_deps_str)
     template = readfile("Portfile-template")
-    template = template.replace("$$fullname$$", pkgname)
+    template = template.replace("$$fullname$$", prefix + pkgname)
     template = template.replace("$$extract_dir$$", pkg)
     template = template.replace("$$run_depends$$", run_deps_str)
     template = template.replace("$$build_depends$$", build_deps_str)
     template = template.replace("$$url_base$$", url_base)
     template = template.replace("$$url_file$$", url_file)
-    # Make ports
+    if pkgname == "catkin":
+        template = template.replace("$$catkin$$",
+                                    "${worksrcpath}/bin/catkin_make_isolated")
+    else:
+        template = template.replace("$$catkin$$",
+                                    "${prefix}/bin/catkin_make_isolated")
+        # Make ports
     if not os.path.exists(portdir):
         os.mkdir(portdir)
     if not os.path.exists(portdir + "/" + prefix + pkgname):
