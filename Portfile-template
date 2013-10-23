@@ -52,11 +52,11 @@ depends_lib         port:py27-catkin-pkg \
 
 conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full ros-hydro-core
 
-master_sites        $$url$$
+master_sites        $$url_base$$
+distfiles           $$url_file$$
 
-#https://raw.github.com/kyonifer/ros-macports-source-snapshots/10062013/10062013/
-
-checksum {} # todo: calculate checksum
+# todo: calculate checksum
+checksum {}
 configure {}
 configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"

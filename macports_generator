@@ -114,8 +114,10 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
             print ("Adding ros dependency: {0}".format(run_deps[i]))
 
     url = find_download_url(cachedir, pkgname)
-    url_base = 1
-    url_file = 1
+    #import IPython;IPython.embed()
+    # whats life without a little golf
+    url_base = "/".join(url.split("/")[:-1])+"/"
+    url_file = url.split("/")[-1]
 
     # add prefix
     build_deps_str = " \\\n                    port:".join(build_deps)
@@ -131,7 +133,8 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     template = template.replace("$$name$$", pkg)
     template = template.replace("$$run_depends$$", run_deps_str)
     template = template.replace("$$build_depends$$", build_deps_str)
-    template = template.replace("$$url$$", url)
+    template = template.replace("$$url_base$$", url_base)
+    template = template.replace("$$url_file$$", url_file)
     # Make ports
     if not os.path.exists(portdir):
         os.mkdir(portdir)
