@@ -68,7 +68,7 @@ def extract_workspace(cachedir):
 
 
 def find_download_url(cachedir, pkgname):
-    with open(os.path.join(cachedir, "diagnostic_msgs-url")) as f:
+    with open(os.path.join(cachedir, pkgname) + "-url") as f:
         return f.readlines()[0]
 
 
@@ -78,8 +78,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     (already generated) cachedir, deps_map, and a prefix for package naming.
     """
     manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
-    pkgname = prefix + \
-              manifest.getElementsByTagName("name")[0].lastChild.nodeValue
+    pkgname = manifest.getElementsByTagName("name")[0].lastChild.nodeValue
     print("==Processing package: {0}==".format(pkgname))
     build_deps = [ele.lastChild.nodeValue for ele in
                   manifest.getElementsByTagName("build_depend")]
@@ -108,14 +107,14 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                     deps_map[run_deps[i]]["osx"]["macports"]["packages"][0]
                 print("Mapped dependency to: {0}".format(run_deps[i]))
             except IndexError:
-                print("Error: needed port mapping not found in " \
+                print("Error: needed port mapping not found in "
                       "system-deps file. Please fix yaml mapping.")
         else:
             print ("Adding ros dependency: {0}".format(run_deps[i]))
 
     url = find_download_url(cachedir, pkgname)
     # Whats life without a little golf
-    url_base = "/".join(url.split("/")[:-1])+"/"
+    url_base = "/".join(url.split("/")[:-1]) + "/"
     url_file = url.split("/")[-1]
 
     # Add prefix
@@ -137,9 +136,9 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     # Make ports
     if not os.path.exists(portdir):
         os.mkdir(portdir)
-    if not os.path.exists(portdir + "/" + pkgname):
-        os.mkdir(portdir + "/" + pkgname)
-    writefile(portdir + "/" + pkgname + "/Portfile", template)
+    if not os.path.exists(portdir + "/" + prefix + pkgname):
+        os.mkdir(portdir + "/" + prefix + pkgname)
+    writefile(portdir + "/" + prefix + pkgname + "/Portfile", template)
 
 
 def generate_ports():
