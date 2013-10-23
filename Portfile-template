@@ -77,8 +77,8 @@ build {
      set env(CXX) "${configure.cxx}"
      set env(CPP) "${configure.cpp}"
 
-     system "DESTDIR=${destroot} ${worksrcpath}/src/catkin/bin/catkin_make_isolated \
-          --source ${worksrcpath}/src \
+     system "DESTDIR=${destroot} ${worksrcpath}/bin/catkin_make_isolated \
+          --source ${worksrcpath} \
           --build ${worksrcpath}/build_isolated \
           --devel ${worksrcpath}/devel_isolated \
           -DCMAKE_SKIP_RPATH:BOOL=OFF \
