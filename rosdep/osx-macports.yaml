@@ -374,10 +374,34 @@ python-qt-bindings-qwt5:
   osx:
     macports:
       packages: []
+python-catkin-pkg:
+  osx:
+    macports:
+      packages: [py27-catkin-pkg]
+python-rosdep:
+  osx:
+    macports:
+      packages: [py27-rosdep]
+python-rosdistro: 
+  osx:
+    macports:
+      packages: [py27-rosdistro]
+python-rosinstall:
+  osx:
+    macports:
+      packages: [py27-rosinstall]
 python-rospkg:
   osx:
     macports:
-      packages: [py-rospkg]
+      packages: [py27-rospkg]
+python-vcstool:
+  osx:
+    macports:
+      packages: [py27-vcstools]
+python-wstool:
+  osx:
+    macports:
+      packages: [py27-wstool]
 python-scipy:
   osx:
     macports:

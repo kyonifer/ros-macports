@@ -26,13 +26,10 @@ depends_lib         port:py27-catkin-pkg \
                     port:tinyxml \
                     port:pkgconfig \
                     port:ros-log4cxx \
-                    port:eigen \
                     port:subversion \
                     port:git-core \
                     port:mercurial \
                     port:google-test \
-                    port:qt4-mac \
-                    port:py27-pyqt4 \
                     port:py27-yaml \
                     port:py27-empy \
                     port:py27-setuptools \
