@@ -84,8 +84,6 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                   manifest.getElementsByTagName("build_depend")]
     run_deps = [ele.lastChild.nodeValue for ele in
                 manifest.getElementsByTagName("run_depend")]
-    if pkgname != "catkin":
-        build_deps.append(prefix + "catkin")
     for i in range(len(build_deps)):
         if build_deps[i] in deps_map:
             try:
@@ -98,7 +96,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                       "system-deps file. Please fix yaml mapping.")
         else:
             print ("Adding ros dependency: {0}".format(build_deps[i]))
-            # add prefix
+            build_deps[i] = prefix + build_deps[i]
     for i in range(len(run_deps)):
         if run_deps[i] in deps_map:
             try:
@@ -111,6 +109,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
                       "system-deps file. Please fix yaml mapping.")
         else:
             print ("Adding ros dependency: {0}".format(run_deps[i]))
+            run_deps[i] = prefix + run_deps[i]
 
     url = find_download_url(cachedir, pkgname)
     # Whats life without a little golf
@@ -136,20 +135,20 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",
                                     "${worksrcpath}/bin/catkin_make_isolated")
-        template = template.replace("$$non_catkin$$","")
+        template = template.replace("$$non_catkin$$", "")
     else:
         template = template.replace("$$catkin$$",
                                     "${prefix}/bin/catkin_make_isolated")
         template = template.replace("$$non_catkin$$",
-             "     file delete -force ${destroot}/opt/local/env.sh\n"
-             "     file delete -force ${destroot}/opt/local/_setup_util.py\n"
-             "     file delete -force ${destroot}/opt/local/.catkin\n"
-             "     file delete -force ${destroot}/opt/local/.rosinstall\n"
-             "     file delete -force ${destroot}/opt/local/setup.bash\n"
-             "     file delete -force ${destroot}/opt/local/setup.sh\n"
-             "     file delete -force ${destroot}/opt/local/setup.zsh\n"
-             "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make.bash\n"
-             "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make_isolated.bash\n"
+                                    "     file delete -force ${destroot}/opt/local/env.sh\n"
+                                    "     file delete -force ${destroot}/opt/local/_setup_util.py\n"
+                                    "     file delete -force ${destroot}/opt/local/.catkin\n"
+                                    "     file delete -force ${destroot}/opt/local/.rosinstall\n"
+                                    "     file delete -force ${destroot}/opt/local/setup.bash\n"
+                                    "     file delete -force ${destroot}/opt/local/setup.sh\n"
+                                    "     file delete -force ${destroot}/opt/local/setup.zsh\n"
+                                    "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make.bash\n"
+                                    "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make_isolated.bash\n"
         )
         # Make ports
     if not os.path.exists(portdir):
