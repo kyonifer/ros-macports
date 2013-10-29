@@ -378,6 +378,10 @@ python-catkin-pkg:
   osx:
     macports:
       packages: [py27-catkin-pkg]
+python-pydot:
+  osx:
+    macports:
+      packages: [py27-pydot]
 python-rosdep:
   osx:
     macports:
