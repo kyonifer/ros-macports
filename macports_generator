@@ -136,9 +136,21 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix):
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",
                                     "${worksrcpath}/bin/catkin_make_isolated")
+        template = template.replace("$$non_catkin$$","")
     else:
         template = template.replace("$$catkin$$",
                                     "${prefix}/bin/catkin_make_isolated")
+        template = template.replace("$$non_catkin$$",
+             "     file delete -force ${destroot}/opt/local/env.sh\n"
+             "     file delete -force ${destroot}/opt/local/_setup_util.py\n"
+             "     file delete -force ${destroot}/opt/local/.catkin\n"
+             "     file delete -force ${destroot}/opt/local/.rosinstall\n"
+             "     file delete -force ${destroot}/opt/local/setup.bash\n"
+             "     file delete -force ${destroot}/opt/local/setup.sh\n"
+             "     file delete -force ${destroot}/opt/local/setup.zsh\n"
+             "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make.bash\n"
+             "     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make_isolated.bash\n"
+        )
         # Make ports
     if not os.path.exists(portdir):
         os.mkdir(portdir)

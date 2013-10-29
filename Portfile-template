@@ -87,6 +87,11 @@ build {
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
           --install-space=${prefix} \
           --install"
+
+     # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
+     # this is catkin, as these files can only be installed once or macports
+     # will complain of conflicts
+$$non_catkin$$
 }
 
 destroot {}
