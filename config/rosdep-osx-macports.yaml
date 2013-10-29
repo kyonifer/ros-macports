@@ -69,7 +69,7 @@ eigen:
 epydoc:
   osx:
     macports:
-      packages: [py-epydoc]
+      packages: [py27-epydoc]
 ffmpeg:
   osx:
     macports:
@@ -317,15 +317,15 @@ python:
 python-argparse:
   osx:
     macports:
-      packages: [py-argparse]
+      packages: [python27]
 python-empy:
   osx:
     macports:
-      packages: [py-empy]
+      packages: [py27-empy]
 python-gtk2:
   osx:
     macports:
-      packages: [py-pygtk]
+      packages: [py27-pygtk]
 python-imaging:
   osx:
     macports:
@@ -337,15 +337,15 @@ python-kitchen:
 python-matplotlib:
   osx:
     macports:
-      packages: [py-matplotlib]
+      packages: [py27-matplotlib]
 python-netifaces:
   osx:
     macports:
-      packages: [py-netifaces]
+      packages: [py27-netifaces]
 python-nose:
   osx:
     macports:
-      packages: [py-nose]
+      packages: [py27-nose]
 python-numpy:
   osx:
     macports:
@@ -357,11 +357,11 @@ python-opengl:
 python-paramiko:
   osx:
     macports:
-      packages: [py-paramiko]
+      packages: [py27-paramiko]
 python-psutil:
   osx:
     macports:
-      packages: [py-psutil]
+      packages: [py27-psutil]
 python-qt-bindings:
   osx:
     macports:
@@ -405,23 +405,23 @@ python-wstool:
 python-scipy:
   osx:
     macports:
-      packages: [py-scipy]
+      packages: [py27-scipy]
 python-setuptools:
   osx:
     macports:
-      packages: [py-setuptools]
+      packages: [py27-setuptools]
 python-sip:
   osx:
     macports:
-      packages: [py-sip]
+      packages: [py27-sip]
 python-sip4:
   osx:
     macports:
-      packages: [py-sip]
+      packages: [py27-sip]
 python-sphinx:
   osx:
     macports:
-      packages: [py-sphinx]
+      packages: [py27-sphinx]
 python-support:
   osx:
     macports:
@@ -429,7 +429,7 @@ python-support:
 python-yaml:
   osx:
     macports:
-      packages: [py-yaml]
+      packages: [py27-yaml]
 qt4-qmake:
   osx:
     macports:
@@ -505,7 +505,7 @@ uuid:
 wxpython:
   osx:
     macports:
-      packages: [py-wxpython-3.0]
+      packages: [py27-wxpython-3.0]
 wxwidgets:
   osx:
     macports:
