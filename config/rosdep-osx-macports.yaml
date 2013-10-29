@@ -121,7 +121,7 @@ gtk2:
 hddtemp:
   osx:
     macports:
-      packages: []
+      packages: [python27]
 hdf5:
   osx:
     macports:
@@ -205,7 +205,7 @@ libqt4-dev:
 libqt4-opengl-dev:
   osx:
     macports:
-      packages: []
+      packages: [qt4-mac]
 libtbb:
   osx:
     macports:
@@ -373,7 +373,7 @@ python-qt-bindings-gl:
 python-qt-bindings-qwt5:
   osx:
     macports:
-      packages: []
+      packages: [qwt52]
 python-catkin-pkg:
   osx:
     macports:
