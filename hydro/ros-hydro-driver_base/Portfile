@@ -1,0 +1,90 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem          1.0
+
+name                ros-hydro-driver_base
+version             1.0.0
+categories          devel
+platforms           darwin
+license             bsd
+maintainers         afit.edu:kyle.kauffman
+description         Robotic Operating System
+long_description    ROS is a collection of tools and libraries for robotics applications. This installs the ros-hydro-driver_base package.
+homepage            http://www.ros.org/
+
+depends_lib         port:python27 \
+                    port:py27-setuptools \
+                    port:ros-hydro-message_generation \
+                    port:ros-hydro-roscpp \
+                    port:ros-hydro-self_test \
+                    port:ros-hydro-diagnostic_updater \
+                    port:ros-hydro-dynamic_reconfigure \
+                    port:ros-hydro-std_msgs \
+                    port:ros-hydro-catkin \
+                    port:ros-hydro-message_runtime \
+                    port:ros-hydro-roscpp \
+                    port:ros-hydro-self_test \
+                    port:ros-hydro-diagnostic_updater \
+                    port:ros-hydro-dynamic_reconfigure \
+                    port:ros-hydro-std_msgs
+
+conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full
+
+master_sites        https://github.com/ros-gbp/driver_common-release/archive/release/hydro/driver_base/
+distfiles           1.6.7-0.tar.gz
+worksrcdir          driver_common-release-release-hydro-driver_base-1.6.7-0
+
+# todo: calculate checksum
+checksum {}
+configure {}
+configure.compiler clang
+configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
+
+build {
+
+
+
+     set env(LIBRARY_PATH) "${prefix}/lib"
+     set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5:${prefix}/include/gtk-2.0:${prefix}/include/glib-2.0:${prefix}/lib/glib-2.0/include:${prefix}/include/cairo"
+     set env(OpenCV_DIR) "${prefix}/lib/cmake/"
+     set env(CMAKE_PREFIX_PATH) "${prefix}:${destroot}/opt/local/lib"
+     set env(PYTHONPATH) "${prefix}/lib/python2.7/site-packages"
+
+     # Force catkin to use chosen compiler
+     set env(CC) "${configure.cc}"
+     set env(CXX) "${configure.cxx}"
+     set env(CPP) "${configure.cpp}"
+
+     system "DESTDIR=${destroot} ${prefix}/bin/catkin_make_isolated \
+          --source ${worksrcpath} \
+          --build ${worksrcpath}/build_isolated \
+          --devel ${worksrcpath}/devel_isolated \
+          -DCMAKE_SKIP_RPATH:BOOL=OFF \
+          -DCMAKE_INSTALL_NAME_DIR:STRING=${prefix}/lib \
+          -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON \
+          -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
+          -DSETUPTOOLS_DEB_LAYOUT=OFF \
+          -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+          --install-space=${prefix} \
+          --install"
+
+     # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
+     # this is catkin, as these files can only be installed once or macports
+     # will complain of conflicts
+     file delete -force ${destroot}/opt/local/env.sh
+     file delete -force ${destroot}/opt/local/_setup_util.py
+     file delete -force ${destroot}/opt/local/.catkin
+     file delete -force ${destroot}/opt/local/.rosinstall
+     file delete -force ${destroot}/opt/local/setup.bash
+     file delete -force ${destroot}/opt/local/setup.sh
+     file delete -force ${destroot}/opt/local/setup.zsh
+     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make.bash
+     file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make_isolated.bash
+
+}
+
+destroot {}
+
+# ROS Master URI needs empty .catkin file in ${prefix} if ${prefix} is the ROS install dir
+destroot.violate_mtree yes
