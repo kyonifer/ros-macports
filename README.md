@@ -22,6 +22,7 @@ The following steps will allow you to use the portfiles in this repository with 
 3. Make sure that python is installed and set as the default system interpreter:
 
 	$ sudo port install python27
+	
 	$ sudo port select --set python python27
 
 4. At this point, you should be good to start installing ports. A good place to start might be ros-hydro-roslaunch, which brings roscore & friends:
