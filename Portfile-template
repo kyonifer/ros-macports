@@ -14,8 +14,7 @@ long_description    ROS is a collection of tools and libraries for robotics appl
 homepage            http://www.ros.org/
 
 depends_lib         port:python27 \
-                    port:py27-setuptools \
-                    $$build_depends$$ $$run_depends$$
+                    port:py27-setuptools $$build_depends$$ $$run_depends$$
 
 conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full
 
