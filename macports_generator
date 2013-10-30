@@ -93,7 +93,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     for i in range(len(build_deps)):
         if build_deps[i] in deps_map:
             try:
-                print("Trying to map: {0}".format(build_deps[i]))
+                print("Trying to map sys dep: {0}".format(build_deps[i]))
                 build_deps[i] = \
                     deps_map[build_deps[i]]["osx"]["macports"]["packages"][0]
                 print("Mapped dependency to: {0}".format(build_deps[i]))
@@ -106,7 +106,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     for i in range(len(run_deps)):
         if run_deps[i] in deps_map:
             try:
-                print("Trying to map: {0}".format(run_deps[i]))
+                print("Trying to map sys dep: {0}".format(run_deps[i]))
                 run_deps[i] = \
                     deps_map[run_deps[i]]["osx"]["macports"]["packages"][0]
                 print("Mapped dependency to: {0}".format(run_deps[i]))
@@ -116,6 +116,9 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
         else:
             print ("Adding ros dependency: {0}".format(run_deps[i]))
             run_deps[i] = prefix + run_deps[i]
+
+    if pkgname != "catkin":
+        build_deps.append("ros-hydro-catkin")
 
     url = find_download_url(cachedir, pkgname)
     # Whats life without a little golf
@@ -142,6 +145,8 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     if pkgname in pkginstructions:
         template = template.replace("$$pkg_specific_build_code$$",
                                     pkginstructions[pkgname]["build_code"])
+    else:
+        template = template.replace("$$pkg_specific_build_code$$", "")
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",
                                     "${worksrcpath}/bin/catkin_make_isolated")

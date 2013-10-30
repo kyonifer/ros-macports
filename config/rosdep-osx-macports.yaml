@@ -265,7 +265,7 @@ libxxf86vm:
 log4cxx:
   osx:
     macports:
-      packages: [log4cxx]
+      packages: [ros-log4cxx]
 mercurial:
   osx:
     macports:

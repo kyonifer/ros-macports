@@ -10,44 +10,14 @@ platforms           darwin
 license             bsd
 maintainers         afit.edu:kyle.kauffman
 description         Robotic Operating System
-long_description    ROS is a collection of tools and libraries for robotics applications. This installs the $$name$$ package.
+long_description    ROS is a collection of tools and libraries for robotics applications. This installs the $$fullname$$ package.
 homepage            http://www.ros.org/
 
-depends_lib         port:py27-catkin-pkg \
-                    port:py27-rosdep \
-                    port:py27-rosdistro \
-                    port:py27-rosinstall \
-                    port:py27-rospkg \
-                    port:py27-vcstools \
-                    port:py27-wstool \
-                    port:ros-collada-dom \
-                    port:libyaml \
-                    port:yaml-cpp \
-                    port:tinyxml \
-                    port:pkgconfig \
-                    port:ros-log4cxx \
-                    port:subversion \
-                    port:git-core \
-                    port:mercurial \
-                    port:google-test \
-                    port:py27-yaml \
-                    port:py27-empy \
+depends_lib         port:python27 \
                     port:py27-setuptools \
-                    port:py27-dateutil \
-                    port:boost \
-                    port:poco \
-                    port:eigen3 \
-                    port:py27-nose \
-                    port:tinyxml \
-                    port:ossp-uuid \
-                    port:gtk2 \
-                    port:libtheora \
-                    port:assimp \
-                    port:py27-pil \
-                    port:py27-cairo \
-                    port:opencv $$build_depends$$ $$run_depends$$
+                    $$build_depends$$ $$run_depends$$
 
-conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full ros-hydro-core
+conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full
 
 master_sites        $$url_base$$
 distfiles           $$url_file$$
