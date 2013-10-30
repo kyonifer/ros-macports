@@ -19,11 +19,18 @@ The following steps will allow you to use the portfiles in this repository with 
 
 	Be sure that this line is above the rsync:// line.
 
-3. At this point, you should be good to install the ros-groovy-desktop-full port:
+3. Make sure that python is installed and set as the default system interpreter:
 
-	$ sudo port install ros-groovy-desktop-full
+	$ sudo port install python27
+	$ sudo port select --set python python27
 
-4. If all went well, source the ros environment and start using ROS:
+4. At this point, you should be good to start installing ports. A good place to start might be ros-hydro-roslaunch, which brings roscore & friends:
+
+	$ sudo port install ros-hydro-roslaunch
+
+	Note: that ros-hydro-desktop doesnt build currently, due to issues with visualization packages (e.g. rqt-image-view). However, you can install any individual packages that you want and they will build dependencies as needed (so you don't have to manually install every package one by one). This will hopefully be fixed very shortly.
+
+5. If all went well, source the ros environment and start using ROS:
 
 	$ source /opt/local/setup.bash
 	
