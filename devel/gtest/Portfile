@@ -1,0 +1,26 @@
+# $Id$
+
+PortSystem 1.0
+PortGroup muniversal 1.0
+
+name                gtest
+version             1.7.0
+categories          devel
+maintainers         nomaintainer
+license             BSD
+
+description         Google's framework for writing C++ tests on a variety of platforms.
+long_description    Google's framework for writing C++ tests on a variety of platforms \
+    (Linux, Mac OS X, Windows, Cygwin, Windows CE, and Symbian). Based on the xUnit \
+    architecture. Supports automatic test discovery, a rich set of assertions, \
+    user-defined assertions, death tests, fatal and non-fatal failures, value- and \
+    type-parameterized tests, various options for running the tests, and XML test \
+    report generation.
+homepage            http://code.google.com/p/googletest/
+platforms           darwin
+master_sites        googlecode:googletest
+use_zip             yes
+
+checksums           sha1    f85f6d2481e2c6c4a18539e391aa4ea8ab0394af
+                    
+distname            gtest-${version}
