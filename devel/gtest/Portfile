@@ -1,10 +1,10 @@
-# $Id$
+# $Id: Portfile 96247 2012-08-06 07:11:56Z ryandesign@macports.org $
 
 PortSystem 1.0
 PortGroup muniversal 1.0
 
 name                gtest
-version             1.7.0
+version             1.5.0
 categories          devel
 maintainers         nomaintainer
 license             BSD
@@ -19,8 +19,12 @@ long_description    Google's framework for writing C++ tests on a variety of pla
 homepage            http://code.google.com/p/googletest/
 platforms           darwin
 master_sites        googlecode:googletest
-use_zip             yes
+use_bzip2           yes
 
-checksums           sha1    f85f6d2481e2c6c4a18539e391aa4ea8ab0394af
-                    
+checksums           md5     8b2c3c3f26cb53e64a3109d03a97200a \
+                    sha1    6d16bc182faef14a2101182563d44d31cb021401 \
+                    rmd160  d5cd69ac4fc0951263db96290637cc5372f5a7ed
+
 distname            gtest-${version}
+
+configure.compiler  macports-gcc-4.8
