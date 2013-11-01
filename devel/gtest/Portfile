@@ -28,3 +28,4 @@ checksums           md5     8b2c3c3f26cb53e64a3109d03a97200a \
 distname            gtest-${version}
 
 configure.compiler  macports-gcc-4.8
+conflicts           google-test
