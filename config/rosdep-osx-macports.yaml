@@ -113,7 +113,7 @@ graphviz:
 gtest:
   osx:
     macports:
-      packages: [google-test]
+      packages: [ros-gtest]
 gtk2:
   osx:
     macports:
