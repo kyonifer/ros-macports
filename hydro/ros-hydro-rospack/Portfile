@@ -16,13 +16,13 @@ homepage            http://www.ros.org/
 depends_lib         port:python27 \
                     port:py27-setuptools \
                     port:boost \
-                    port:google-test \
+                    port:ros-gtest \
                     port:pkgconfig \
                     port:python27 \
                     port:tinyxml \
                     port:ros-hydro-catkin \
                     port:boost \
-                    port:google-test \
+                    port:ros-gtest \
                     port:pkgconfig \
                     port:python27 \
                     port:py27-catkin-pkg \

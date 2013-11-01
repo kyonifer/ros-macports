@@ -15,13 +15,13 @@ homepage            http://www.ros.org/
 
 depends_lib         port:python27 \
                     port:py27-setuptools \
-                    port:google-test \
+                    port:ros-gtest \
                     port:python27 \
                     port:py27-catkin-pkg \
                     port:py27-empy \
                     port:py27-nose \
                     port:cmake \
-                    port:google-test \
+                    port:ros-gtest \
                     port:python27 \
                     port:py27-catkin-pkg \
                     port:py27-empy \
