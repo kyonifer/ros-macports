@@ -5,7 +5,7 @@ PortGroup muniversal 1.0
 
 name                ros-gtest
 version             1.5.0
-categories          devel
+categories          patched_macports
 maintainers         nomaintainer
 license             BSD
 

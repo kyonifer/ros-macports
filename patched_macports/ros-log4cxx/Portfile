@@ -5,7 +5,7 @@ PortSystem 1.0
 
 name               ros-log4cxx
 version            0.10.0
-categories         devel
+categories         patched_macports
 platforms          darwin
 
 maintainers        uwe-arzt.de:mail
