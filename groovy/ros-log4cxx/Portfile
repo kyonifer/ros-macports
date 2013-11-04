@@ -29,6 +29,8 @@ patchfiles         gcc43.patch \
 # override patch.pre_args since it defaults to -p0
 patch.pre_args     -p1
 
+configure.compiler macports-gcc-4.8
+
 depends_build      port:pkgconfig
 
 depends_lib	       port:apr-util
