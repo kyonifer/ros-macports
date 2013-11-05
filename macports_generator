@@ -143,10 +143,20 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     template = template.replace("$$url_file$$", url_file)
 
     if pkgname in pkginstructions:
-        template = template.replace("$$pkg_specific_build_code$$",
-                                    pkginstructions[pkgname]["build_code"])
+        if "build_code" in pkginstructions[pkgname]:
+            template = template.replace("$$pkg_specific_build_code$$",
+                                        pkginstructions[pkgname]["build_code"])
+        else:
+            template = template.replace("$$pkg_specific_build_code$$", "")
+        if "top_level" in pkginstructions[pkgname]:
+            template = template.replace("$$pkg_specific_top_level$$",
+                                        pkginstructions[pkgname]["top_level"])
+        else:
+            template = template.replace("$$pkg_specific_top_level$$", "")
     else:
+        template = template.replace("$$pkg_specific_top_level$$", "")
         template = template.replace("$$pkg_specific_build_code$$", "")
+
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",
                                     "${worksrcpath}/bin/catkin_make_isolated")

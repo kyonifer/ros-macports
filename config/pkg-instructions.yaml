@@ -2,3 +2,7 @@ orocos_kdl:
     build_code: |
         # Fix hard-coded /usr/local path for eigen3
         reinplace "s|/usr/local/include/eigen3|${prefix}/include/eigen3|g" ${worksrcpath}/config/FindEigen3.cmake
+xmlrpcpp:
+    top_level: |
+        # Doesnt compile with clang
+        configure.compiler macports-gcc-4.8

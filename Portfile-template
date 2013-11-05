@@ -27,7 +27,7 @@ checksum {}
 configure {}
 configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
-
+$$pkg_specific_top_level$$
 build {
 
 $$pkg_specific_build_code$$
