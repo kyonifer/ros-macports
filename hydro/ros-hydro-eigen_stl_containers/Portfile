@@ -27,7 +27,6 @@ worksrcdir          eigen_stl_containers-release-release-hydro-eigen_stl_contain
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

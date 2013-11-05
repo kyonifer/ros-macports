@@ -30,7 +30,6 @@ worksrcdir          bond_core-release-release-hydro-bond_core-1.7.13-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

@@ -30,7 +30,6 @@ worksrcdir          roscpp_core-release-release-hydro-rostime-0.3.16-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

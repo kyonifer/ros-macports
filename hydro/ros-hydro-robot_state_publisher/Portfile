@@ -43,7 +43,6 @@ worksrcdir          robot_state_publisher-release-release-hydro-robot_state_publ
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

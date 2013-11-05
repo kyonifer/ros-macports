@@ -35,7 +35,6 @@ worksrcdir          urdfdom-release-release-hydro-urdfdom-0.2.8-1
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

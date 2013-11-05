@@ -61,7 +61,6 @@ worksrcdir          navigation-release-release-hydro-costmap_2d-1.11.4-2
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

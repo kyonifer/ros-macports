@@ -34,7 +34,6 @@ worksrcdir          geometry_experimental-release-release-hydro-tf2_geometry_msg
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

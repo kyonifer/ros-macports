@@ -37,7 +37,6 @@ worksrcdir          image_common-release-release-hydro-polled_camera-1.11.0-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

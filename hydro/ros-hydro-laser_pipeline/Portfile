@@ -29,7 +29,6 @@ worksrcdir          laser_pipeline-release-release-hydro-laser_pipeline-1.6.1-1
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

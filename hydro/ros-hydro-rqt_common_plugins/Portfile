@@ -47,7 +47,6 @@ worksrcdir          rqt_common_plugins-release-release-hydro-rqt_common_plugins-
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

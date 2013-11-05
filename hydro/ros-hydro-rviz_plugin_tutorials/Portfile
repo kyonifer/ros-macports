@@ -28,7 +28,6 @@ worksrcdir          visualization_tutorials-release-release-hydro-rviz_plugin_tu
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

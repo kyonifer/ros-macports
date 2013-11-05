@@ -54,7 +54,6 @@ worksrcdir          gazebo_ros_pkgs-release-release-hydro-gazebo_ros-2.3.3-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

@@ -53,7 +53,6 @@ worksrcdir          perception_pcl-release-release-hydro-pcl_ros-1.1.7-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

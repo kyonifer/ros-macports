@@ -30,7 +30,6 @@ worksrcdir          orocos-kdl-release-release-hydro-orocos_kdl-1.1.102-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

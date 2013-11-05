@@ -38,7 +38,6 @@ worksrcdir          navigation-release-release-hydro-move_slow_and_clear-1.11.4-
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

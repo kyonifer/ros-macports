@@ -27,7 +27,6 @@ worksrcdir          geometry_tutorials-release-release-hydro-geometry_tutorials-
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

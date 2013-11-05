@@ -42,7 +42,6 @@ worksrcdir          common_tutorials-release-release-hydro-turtle_actionlib-0.1.
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

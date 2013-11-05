@@ -34,7 +34,6 @@ worksrcdir          rosdoc_lite-release-release-hydro-rosdoc_lite-0.2.3-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

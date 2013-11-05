@@ -28,8 +28,9 @@ worksrcdir          ros_comm-release-release-hydro-xmlrpcpp-1.9.50-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
+# Doesnt compile with clang
+configure.compiler macports-gcc-4.8
 
 build {
 

@@ -31,7 +31,6 @@ worksrcdir          diagnostics-release-release-hydro-diagnostics-1.8.0-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

@@ -36,7 +36,6 @@ worksrcdir          pcl_conversions-release-release-hydro-pcl_conversions-0.1.5-
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

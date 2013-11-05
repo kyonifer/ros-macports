@@ -28,7 +28,6 @@ worksrcdir          vision_opencv-release-release-hydro-vision_opencv-1.10.9-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

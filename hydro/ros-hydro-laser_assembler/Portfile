@@ -43,7 +43,6 @@ worksrcdir          laser_assembler-release-release-hydro-laser_assembler-1.7.1-
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

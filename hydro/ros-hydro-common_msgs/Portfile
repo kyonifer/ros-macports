@@ -35,7 +35,6 @@ worksrcdir          common_msgs-release-release-hydro-common_msgs-1.10.2-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

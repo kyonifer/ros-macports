@@ -30,7 +30,6 @@ worksrcdir          visualization_tutorials-release-release-hydro-visualization_
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

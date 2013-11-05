@@ -31,7 +31,6 @@ worksrcdir          ros-release-release-hydro-roslib-1.10.7-0
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {

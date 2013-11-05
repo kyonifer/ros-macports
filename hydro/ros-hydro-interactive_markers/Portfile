@@ -46,7 +46,6 @@ worksrcdir          interactive_markers-release-release-hydro-interactive_marker
 # todo: calculate checksum
 checksum {}
 configure {}
-configure.compiler clang
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {
