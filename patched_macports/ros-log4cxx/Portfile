@@ -25,11 +25,13 @@ checksums          sha1 d79c053e8ac90f66c5e873b712bb359fd42b648d \
                    rmd160 6df384e5c746c3c6903efae6c9f0d64e4f07a5ad
 
 patchfiles         gcc43.patch \
-                   warnings.patch
+                   warnings.patch \
+                   simpledateformat.patch
+
 # override patch.pre_args since it defaults to -p0
 patch.pre_args     -p1
 
-configure.compiler macports-gcc-4.8
+configure.compiler clang
 
 depends_build      port:pkgconfig
 
@@ -38,7 +40,8 @@ depends_lib	       port:apr-util
 conflicts 		   log4cxx
 
 # generating doxygen docu doesn't work
-configure.args     --enable-doxygen=no
+
+configure.args     --enable-doxygen=no \
 
 build {
 	set env(LIBRARY_PATH) "${prefix}/lib/db46"
