@@ -31,7 +31,8 @@ configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
 build {
 
-
+# Forward declares not supported by libc++
+reinplace "s|template<typename T> class allocator;||g" ${worksrcpath}/include/ros/message_forward.h
 
      set env(LIBRARY_PATH) "${prefix}/lib"
      set env(CPATH) "${prefix}/include/collada-dom2.4:${prefix}/include/collada-dom2.4/1.5:${prefix}/include/gtk-2.0:${prefix}/include/glib-2.0:${prefix}/lib/glib-2.0/include:${prefix}/include/cairo"
