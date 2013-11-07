@@ -6,3 +6,7 @@ xmlrpcpp:
     top_level: |
         # Doesnt compile with clang
         configure.compiler macports-gcc-4.8
+roscpp_traits:
+    build_code: |
+        # Forward declares not supported by libc++
+        reinplace "s|template<typename T> class allocator;||g" ${worksrcpath}/include/ros/message_forward.h
