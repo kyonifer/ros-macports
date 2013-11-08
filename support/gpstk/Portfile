@@ -1,0 +1,33 @@
+# -*- coding: utf-8; mode: tcl; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- vim:fenc=utf-8:ft=tcl:et:sw=4:ts=4:sts=4
+# $Id$
+
+PortSystem      	1.0
+PortGroup           cmake 1.0
+
+name            	gpstk
+version         	2.2
+license				LGPL-2.1+
+categories      	science
+maintainers     	gmail.com:venabled
+platforms       	darwin
+description     	Library of Global Navigation Satellite Systems (GNSS) tools
+
+long_description \
+    Algorithms and frameworks supporting the development of processing and \
+    analysis applications in navigation and global positioning.
+
+homepage    	    http://www.gpstk.org
+master_sites    	http://sourceforge.net/projects/gpstk/files/gpstk/${version}
+
+checksums           sha256  d179bc54e566e7a045ba40a35931ad6c54a995d22794df57927e06482563bb8d \
+                    rmd160  c4c2f4157acc7a247e52e543a0ec9661d20e6839
+
+#As a heads up, this patch is a huge hack and will def break functionality 
+#in one of the 'apps', specifically gpsSim, which I've never used but should
+#be noted. There's a new version of gpstk (2.3) coming out in november, and 
+#we'll look at fixing this upstream
+patchfiles          gpsSim.patch
+
+distname        	${name}
+distfiles			${name}-${version}.src.tar.gz
+
