@@ -54,7 +54,6 @@ build {
           --source ${worksrcpath} \
           --build ${worksrcpath}/build_isolated \
           --devel ${worksrcpath}/devel_isolated \
-          -DCMAKE_CXX_FLAGS=-stdlib=libc++ \
           -DCMAKE_SKIP_RPATH:BOOL=OFF \
           -DCMAKE_INSTALL_NAME_DIR:STRING=${prefix}/lib \
           -DCMAKE_BUILD_WITH_INSTALL_RPATH:BOOL=ON \
