@@ -4,8 +4,10 @@ orocos_kdl:
         reinplace "s|/usr/local/include/eigen3|${prefix}/include/eigen3|g" ${worksrcpath}/config/FindEigen3.cmake
 xmlrpcpp:
     top_level: |
-        # Doesnt compile with clang
-        configure.compiler macports-gcc-4.8
+        configure.compiler clang
+        patchfiles          base64.h.patch
+        # override patch.pre_args since it defaults to -p0
+        patch.pre_args     -p1
 roscpp_traits:
     build_code: |
         # Forward declares not supported by libc++
