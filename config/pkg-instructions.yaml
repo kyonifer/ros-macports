@@ -20,3 +20,6 @@ rosbag:
     top_level: |
         # Needs a patch
         patchfiles      query.h.patch
+utilrb:
+   build_code: |
+        gem install factets

@@ -70,6 +70,10 @@ epydoc:
   osx:
     macports:
       packages: [py27-epydoc]
+facets:
+  osx:
+    macports:
+      packages: [rb-facets]
 ffmpeg:
   osx:
     macports:
@@ -94,6 +98,10 @@ gazebo:
   osx:
     macports:
       packages: []
+gccxml:
+  osx:
+    macports:
+      packages: [gccxml-devel]
 gfortran:
   osx:
     macports:
@@ -154,6 +162,10 @@ libmysqlclient-dev:
   osx:
     macports:
       packages: [mysql5]
+libncurses-dev:
+  osx:
+    macports:
+      packages: [ncurses]
 libogg:
   osx:
     macports:
@@ -206,6 +218,10 @@ libqt4-opengl-dev:
   osx:
     macports:
       packages: [qt4-mac]
+libreadline-dev:
+  osx:
+    macports:
+      packages: [readline]
 libtbb:
   osx:
     macports:
@@ -258,6 +274,10 @@ libxrandr:
   osx:
     macports:
       packages: [xorg-libXrandr]
+libxslt:
+  osx:
+    macports:
+      packages: [libsxlt]
 libxxf86vm:
   osx:
     macports:
@@ -266,6 +286,10 @@ log4cxx:
   osx:
     macports:
       packages: [ros-log4cxx]
+lua-dev:
+  osx:
+    macports:
+      packages: [lua51]
 mercurial:
   osx:
     macports:
@@ -278,10 +302,22 @@ netpbm:
   osx:
     macports:
       packages: [netpbm]
+netcdf:
+  osx:
+    macports:
+      packages: [netcdf, netcdf-cxx]
+nokogiri:
+  osx:
+    macports:
+      packages: [rb-nokogiri]
 nvidia-cg:
   osx:
     macports:
       packages: []
+omniorb:
+  osx:
+    macports:
+      packages: [omniORB]
 opencv2:
   osx:
     macports:
@@ -438,6 +474,14 @@ qt4-qmake:
   osx:
     macports:
       packages: [qt4-mac]
+rake:
+  osx:
+    macports:
+      packages: [rb-rake]
+ruby:
+  osx:
+    macports:
+      packages: [ruby]
 sbcl:
   osx:
     macports:
@@ -522,6 +566,10 @@ yaml-cpp:
   osx:
     macports:
       packages: [yaml-cpp]
+xpath-perl:
+  osx:
+    macports:
+      packages: [p5-xml-xpath]
 zlib:
   osx:
     macports:
