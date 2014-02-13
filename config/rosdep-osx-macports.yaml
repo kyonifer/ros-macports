@@ -277,7 +277,7 @@ libxrandr:
 libxslt:
   osx:
     macports:
-      packages: [libsxlt]
+      packages: [libxslt]
 libxxf86vm:
   osx:
     macports:
