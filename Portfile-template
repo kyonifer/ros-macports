@@ -52,6 +52,7 @@ $$pkg_specific_build_code$$
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+          $$pkg_specific_cmake_args$$ \
           --install-space=${prefix} \
           --install"
 

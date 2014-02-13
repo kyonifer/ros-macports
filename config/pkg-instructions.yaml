@@ -20,6 +20,7 @@ rosbag:
     top_level: |
         # Needs a patch
         patchfiles      query.h.patch
-utilrb:
-   build_code: |
-        gem install factets
+rtt:
+   cmake_args: |
+        -DENABLE_CORBA=TRUE -DCORBA_IMPLEMENTATION=OMNIORB
+
