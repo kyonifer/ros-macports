@@ -1,0 +1,16 @@
+# $Id$                                                                                                                                        
+PortSystem          1.0
+PortGroup           ruby 1.0
+
+ruby.setup          facets 2.9.3 gem {} rubygems ruby
+revision            1
+license             Ruby License
+maintainers         nomaintainer
+platforms           darwin
+description         Premium Ruby Extensions
+long_description \
+    Ruby Facets is the premiere collection of method extension and standard library additions for the Ruby programming language.
+
+homepage            http://rubyworks.github.io/facets/
+checksums           md5 a39e3caa30a8493d9bc865e42fd941c5 \
+		    sha256 2ccc1c0a305adf294054a8c53581dc20812b1f9feea412d0e11cd1812bfa75dd
