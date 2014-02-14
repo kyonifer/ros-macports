@@ -158,10 +158,16 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
                                         pkginstructions[pkgname]["cmake_args"])
         else:
             template = template.replace("$$pkg_specific_cmake_args$$", "")
+        if "post_catkin_build" in pkginstructions[pkgname]:
+            template = template.replace("$$pkg_specific_post_catkin_build$$",
+                                        pkginstructions[pkgname]["post_catkin_build"])
+        else:
+            template = template.replace("$$pkg_specific_post_catkin_build$$", "")
     else:
         template = template.replace("$$pkg_specific_top_level$$", "")
         template = template.replace("$$pkg_specific_build_code$$", "")
         template = template.replace("$$pkg_specific_cmake_args$$", "")
+        template = template.replace("$$pkg_specific_post_catkin_build$$", "")
 
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",

@@ -22,4 +22,7 @@ rosbag:
         patchfiles      query.h.patch
 rtt:
    cmake_args: -DENABLE_CORBA=TRUE -DCORBA_IMPLEMENTATION=OMNIORB
-
+typelib:
+   post_catkin_build: |
+        #We need to fix the rpath for the typelib_ruby.bundle
+        system "install_name_tool -change /opt/local/lib/libtypeLang_cSupport.dylib /opt/local/lib/typelib/libtypeLang_cSupport.dylib ${destroot}/opt/local/lib/ruby1.9/1.9.1/x86_64-darwin12/typelib_ruby.bundle"

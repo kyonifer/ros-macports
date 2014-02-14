@@ -56,6 +56,8 @@ $$pkg_specific_build_code$$
           --install-space=${prefix} \
           --install"
 
+$$pkg_specific_post_catkin_build$$
+
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports
      # will complain of conflicts
