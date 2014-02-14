@@ -21,6 +21,5 @@ rosbag:
         # Needs a patch
         patchfiles      query.h.patch
 rtt:
-   cmake_args: |
-        -DENABLE_CORBA=TRUE -DCORBA_IMPLEMENTATION=OMNIORB
+   cmake_args: -DENABLE_CORBA=TRUE -DCORBA_IMPLEMENTATION=OMNIORB
 
