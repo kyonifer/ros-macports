@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                $$fullname$$
-version             1.0.0
+version             $$version$$
+revision             $$revision$$
 categories          devel
 platforms           darwin
 license             bsd
