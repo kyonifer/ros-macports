@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-log4cpp
-version             1.0.0
+version             2.7.0
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -23,9 +24,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/orocos-gbp/log4cpp-release/archive/release/hydro/log4cpp/
 distfiles           2.7.0-0.tar.gz
 worksrcdir          log4cpp-release-release-hydro-log4cpp-2.7.0-0
+checksums           sha256 42312b4903167e339ebb7cc5cc6bacae52b2b8ddfecb18ad8cf40c977ac01081
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -57,6 +57,8 @@ build {
            \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-utilmm
-version             1.0.0
+version             2.7.0
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -25,9 +26,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/orocos-gbp/utilmm-release/archive/release/hydro/utilmm/
 distfiles           2.7.0-0.tar.gz
 worksrcdir          utilmm-release-release-hydro-utilmm-2.7.0-0
+checksums           sha256 43e4a5378c15c8225664be34a8f85565dfdf427b4caf79b19c235d98e9f8f10c
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -59,6 +59,8 @@ build {
            \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

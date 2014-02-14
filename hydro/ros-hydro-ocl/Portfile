@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-ocl
-version             1.0.0
+version             2.7.0
+revision             3
 categories          devel
 platforms           darwin
 license             bsd
@@ -35,9 +36,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/orocos-gbp/ocl-release/archive/release/hydro/ocl/
 distfiles           2.7.0-3.tar.gz
 worksrcdir          ocl-release-release-hydro-ocl-2.7.0-3
+checksums           sha256 0853be9cf9b4eb3ea267799e36b6b402d83f9432c76e78e5e318d5580653e246
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -69,6 +69,8 @@ build {
            \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

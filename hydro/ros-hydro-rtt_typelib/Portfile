@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-rtt_typelib
-version             1.0.0
+version             2.7.0
+revision             1
 categories          devel
 platforms           darwin
 license             bsd
@@ -27,9 +28,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/orocos-gbp/rtt_typelib-release/archive/release/hydro/rtt_typelib/
 distfiles           2.7.0-1.tar.gz
 worksrcdir          rtt_typelib-release-release-hydro-rtt_typelib-2.7.0-1
+checksums           sha256 b21fa647b01864b157259e7e5881f26dc8d7863520504618fcc64bf1a82a86ab
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -61,6 +61,8 @@ build {
            \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

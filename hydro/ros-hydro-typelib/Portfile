@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-typelib
-version             1.0.0
+version             2.7.0
+revision             4
 categories          devel
 platforms           darwin
 license             bsd
@@ -40,9 +41,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/orocos-gbp/typelib-release/archive/release/hydro/typelib/
 distfiles           2.7.0-4.tar.gz
 worksrcdir          typelib-release-release-hydro-typelib-2.7.0-4
+checksums           sha256 30364478a3d9850d2084dcc016af447015616663dfde16fe0d99fc6f4ba71e51
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -71,8 +71,13 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+#We need to fix the rpath for the typelib_ruby.bundle
+system "install_name_tool -change /opt/local/lib/libtypeLang_cSupport.dylib /opt/local/lib/typelib/libtypeLang_cSupport.dylib ${destroot}/opt/local/lib/ruby1.9/1.9.1/x86_64-darwin12/typelib_ruby.bundle"
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports
@@ -86,8 +91,7 @@ build {
      file delete -force ${destroot}/opt/local/setup.zsh
      file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make.bash
      file delete -force ${destroot}/opt/local/etc/catkin/profile.d/05.catkin_make_isolated.bash
-     
-     system "install_name_tool -change /opt/local/lib/libtypeLang_cSupport.dylib /opt/local/lib/typelib/libtypeLang_cSupport.dylib ${destroot}/opt/local/lib/ruby1.9/1.9.1/x86_64-darwin12/typelib_ruby.bundle"
+
 }
 
 destroot {}
