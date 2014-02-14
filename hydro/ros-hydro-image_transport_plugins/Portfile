@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-image_transport_plugins
-version             1.0.0
+version             1.8.21
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -25,9 +26,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/image_transport_plugins-release/archive/release/hydro/image_transport_plugins/
 distfiles           1.8.21-0.tar.gz
 worksrcdir          image_transport_plugins-release-release-hydro-image_transport_plugins-1.8.21-0
+checksums           sha256 c3657816431f1e4e3181ea825c8ba1213812bfb263362080bb65a9abffa6d622
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -56,8 +56,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

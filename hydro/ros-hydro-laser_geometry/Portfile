@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-laser_geometry
-version             1.0.0
+version             1.5.13
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -34,9 +35,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/laser_geometry-release/archive/release/hydro/laser_geometry/
 distfiles           1.5.13-0.tar.gz
 worksrcdir          laser_geometry-release-release-hydro-laser_geometry-1.5.13-0
+checksums           sha256 d5db2ed068a92f3b5317d05a02ce2c4b2239078f3a9032f1be7cece772de6bb2
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -65,8 +65,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

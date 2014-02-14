@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-pcl_ros
-version             1.0.0
+version             1.1.7
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -49,9 +50,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/perception_pcl-release/archive/release/hydro/pcl_ros/
 distfiles           1.1.7-0.tar.gz
 worksrcdir          perception_pcl-release-release-hydro-pcl_ros-1.1.7-0
+checksums           sha256 445ba60dc8130338adadde69f9eb1cb58c25ddc909f9e44eb406a5e4873d64d0
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -80,8 +80,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

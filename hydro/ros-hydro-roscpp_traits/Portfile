@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-roscpp_traits
-version             1.0.0
+version             0.3.16
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -23,9 +24,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/roscpp_core-release/archive/release/hydro/roscpp_traits/
 distfiles           0.3.16-0.tar.gz
 worksrcdir          roscpp_core-release-release-hydro-roscpp_traits-0.3.16-0
+checksums           sha256 09695bce737d66161d3bdd73d2534c2b401fb227f9bb895a34263dc1c324ecf0
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -56,8 +56,11 @@ reinplace "s|template<typename T> class allocator;||g" ${worksrcpath}/include/ro
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

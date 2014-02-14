@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-geometry_experimental
-version             1.0.0
+version             0.4.7
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -29,9 +30,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/geometry_experimental-release/archive/release/hydro/geometry_experimental/
 distfiles           0.4.7-0.tar.gz
 worksrcdir          geometry_experimental-release-release-hydro-geometry_experimental-0.4.7-0
+checksums           sha256 586eb9946641531d748b0c46869987dee8528d0faa6c09f4b7fb96b77b13f1d3
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -60,8 +60,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

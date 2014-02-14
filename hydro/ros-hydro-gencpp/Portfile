@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-gencpp
-version             1.0.0
+version             0.4.14
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -24,9 +25,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/gencpp-release/archive/release/hydro/gencpp/
 distfiles           0.4.14-0.tar.gz
 worksrcdir          gencpp-release-release-hydro-gencpp-0.4.14-0
+checksums           sha256 f0a2d6b482976909ed14bb8a4405d0e35dfdde74125c64ef235e16bbf1a215e1
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -55,8 +55,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

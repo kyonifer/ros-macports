@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-rqt_gui
-version             1.0.0
+version             0.2.12
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -25,9 +26,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/rqt-release/archive/release/hydro/rqt_gui/
 distfiles           0.2.12-0.tar.gz
 worksrcdir          rqt-release-release-hydro-rqt_gui-0.2.12-0
+checksums           sha256 7b24203be071dd60491e91ba3640bea25f52a4a523242463a996be5c39d8c476
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -56,8 +56,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

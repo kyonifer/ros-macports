@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-nodelet_topic_tools
-version             1.0.0
+version             1.8.1
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -28,9 +29,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/nodelet_core-release/archive/release/hydro/nodelet_topic_tools/
 distfiles           1.8.1-0.tar.gz
 worksrcdir          nodelet_core-release-release-hydro-nodelet_topic_tools-1.8.1-0
+checksums           sha256 d4bdee23f041d32855cf8b3f40b6a6d901d85b3cfe17996fd5302c09705b8c82
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -59,8 +59,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

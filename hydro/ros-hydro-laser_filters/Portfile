@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-laser_filters
-version             1.0.0
+version             1.6.11
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -41,9 +42,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/laser_filters-release/archive/release/hydro/laser_filters/
 distfiles           1.6.11-0.tar.gz
 worksrcdir          laser_filters-release-release-hydro-laser_filters-1.6.11-0
+checksums           sha256 caf83a18e6ab4a2064e24bd066cd55982eac21a3f1a742e1d90767891a06e0b6
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -72,8 +72,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

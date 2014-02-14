@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-rospy
-version             1.0.0
+version             1.9.50
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -30,9 +31,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/ros_comm-release/archive/release/hydro/rospy/
 distfiles           1.9.50-0.tar.gz
 worksrcdir          ros_comm-release-release-hydro-rospy-1.9.50-0
+checksums           sha256 eb2de6c6c0ea0413d7278b2e9fb5e6920b378562ea8df01ed93dfb216ef8a7ef
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -61,8 +61,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

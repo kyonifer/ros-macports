@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-urdf_tutorial
-version             1.0.0
+version             0.2.1
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -24,9 +25,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/urdf_tutorial-release/archive/release/hydro/urdf_tutorial/
 distfiles           0.2.1-0.tar.gz
 worksrcdir          urdf_tutorial-release-release-hydro-urdf_tutorial-0.2.1-0
+checksums           sha256 2f0e305f2bf5d4cc9bc98bfde467c7de2b1b365d9acdab618d78eb05a2b8ff9e
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -55,8 +55,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

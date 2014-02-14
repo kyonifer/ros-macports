@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-class_loader
-version             1.0.0
+version             0.2.3
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -26,9 +27,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/class_loader-release/archive/release/hydro/class_loader/
 distfiles           0.2.3-0.tar.gz
 worksrcdir          class_loader-release-release-hydro-class_loader-0.2.3-0
+checksums           sha256 c5525df083913d3fda83ee33cbaf6eaf59174d773d6a39503d420e4590e32470
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -57,8 +57,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

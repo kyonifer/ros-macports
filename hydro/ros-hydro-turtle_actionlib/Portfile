@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-turtle_actionlib
-version             1.0.0
+version             0.1.7
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -38,9 +39,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/common_tutorials-release/archive/release/hydro/turtle_actionlib/
 distfiles           0.1.7-0.tar.gz
 worksrcdir          common_tutorials-release-release-hydro-turtle_actionlib-0.1.7-0
+checksums           sha256 ca4a5cb32b3b304886247e7458ad60f6733a3c7708aac7cda7a02e416c60bce9
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -69,8 +69,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-laser_assembler
-version             1.0.0
+version             1.7.1
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -39,9 +40,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/laser_assembler-release/archive/release/hydro/laser_assembler/
 distfiles           1.7.1-0.tar.gz
 worksrcdir          laser_assembler-release-release-hydro-laser_assembler-1.7.1-0
+checksums           sha256 a79bc10c35b66842cdba157af89739273a0d81c876b9c328de308a52b391b40d
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -70,8 +70,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

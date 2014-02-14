@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-smclib
-version             1.0.0
+version             1.7.13
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -22,9 +23,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/bond_core-release/archive/release/hydro/smclib/
 distfiles           1.7.13-0.tar.gz
 worksrcdir          bond_core-release-release-hydro-smclib-1.7.13-0
+checksums           sha256 b6d594ad29c7c4919cd6bab453965fe3056857dff559c9ff5277e4144896c548
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -53,8 +53,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

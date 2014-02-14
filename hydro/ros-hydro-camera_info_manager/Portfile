@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-camera_info_manager
-version             1.0.0
+version             1.11.0
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -35,9 +36,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/image_common-release/archive/release/hydro/camera_info_manager/
 distfiles           1.11.0-0.tar.gz
 worksrcdir          image_common-release-release-hydro-camera_info_manager-1.11.0-0
+checksums           sha256 4bedc8b0e249bf83d798b9c3b8dd418c83f76fda34b85bcb0a4656461ec30743
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -66,8 +66,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

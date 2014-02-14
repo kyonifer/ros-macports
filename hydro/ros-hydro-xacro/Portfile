@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-xacro
-version             1.0.0
+version             1.8.4
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -23,9 +24,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/xacro-release/archive/release/hydro/xacro/
 distfiles           1.8.4-0.tar.gz
 worksrcdir          xacro-release-release-hydro-xacro-1.8.4-0
+checksums           sha256 096d1f0b8d0216e5ff6835b38a84aec35801e3d55df78ff9e28929bba5f423d6
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -54,8 +54,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

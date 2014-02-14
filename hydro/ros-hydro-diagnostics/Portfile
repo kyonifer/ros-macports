@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-diagnostics
-version             1.0.0
+version             1.8.0
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -27,9 +28,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/diagnostics-release/archive/release/hydro/diagnostics/
 distfiles           1.8.0-0.tar.gz
 worksrcdir          diagnostics-release-release-hydro-diagnostics-1.8.0-0
+checksums           sha256 b8cb6fa5cb359044df54e83c7eac8eefa29825086400476aab93517c67ded314
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -58,8 +58,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

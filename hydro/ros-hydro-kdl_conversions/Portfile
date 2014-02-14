@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-kdl_conversions
-version             1.0.0
+version             1.10.6
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -26,9 +27,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/geometry-release/archive/release/hydro/kdl_conversions/
 distfiles           1.10.6-0.tar.gz
 worksrcdir          geometry-release-release-hydro-kdl_conversions-1.10.6-0
+checksums           sha256 90b94eb5a1ff7f618953b3ce3550b74e0128d405f66d12d77cef3e4fffdc010e
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -57,8 +57,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

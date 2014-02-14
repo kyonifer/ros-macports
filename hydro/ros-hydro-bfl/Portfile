@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-bfl
-version             1.0.0
+version             0.7.0
+revision             3
 categories          devel
 platforms           darwin
 license             bsd
@@ -27,9 +28,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/bfl-release/archive/release/hydro/bfl/
 distfiles           0.7.0-3.tar.gz
 worksrcdir          bfl-release-release-hydro-bfl-0.7.0-3
+checksums           sha256 ecc97e979e47eefeade93c6e3905420b3e780ea434247cd2171a5f4d731352f9
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -58,8 +58,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

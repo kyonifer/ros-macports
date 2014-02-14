@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-rosunit
-version             1.0.0
+version             1.10.7
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -24,9 +25,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/ros-release/archive/release/hydro/rosunit/
 distfiles           1.10.7-0.tar.gz
 worksrcdir          ros-release-release-hydro-rosunit-1.10.7-0
+checksums           sha256 6bf325d532f0ab78889618b2144d15fbb6968c3760f96e32f66c9fcc67d0876f
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -55,8 +55,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

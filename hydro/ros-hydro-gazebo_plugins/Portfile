@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-gazebo_plugins
-version             1.0.0
+version             2.3.3
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -69,9 +70,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/gazebo_ros_pkgs-release/archive/release/hydro/gazebo_plugins/
 distfiles           2.3.3-0.tar.gz
 worksrcdir          gazebo_ros_pkgs-release-release-hydro-gazebo_plugins-2.3.3-0
+checksums           sha256 3c3d2e678de9ec60ae50777c47703368ce3595784df0c1ab68b9329bc335613c
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -100,8 +100,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

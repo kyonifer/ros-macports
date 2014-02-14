@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-angles
-version             1.0.0
+version             1.9.9
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -22,9 +23,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/geometry_angles_utils-release/archive/release/hydro/angles/
 distfiles           1.9.9-0.tar.gz
 worksrcdir          geometry_angles_utils-release-release-hydro-angles-1.9.9-0
+checksums           sha256 e97e0e75f262dbb8419f67620bc9dde190cca507fb4594aab65c4c854ef2fcd7
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -53,8 +53,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

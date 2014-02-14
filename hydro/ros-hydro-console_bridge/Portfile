@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-console_bridge
-version             1.0.0
+version             0.2.4
+revision             1
 categories          devel
 platforms           darwin
 license             bsd
@@ -25,9 +26,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/console_bridge-release/archive/release/hydro/console_bridge/
 distfiles           0.2.4-1.tar.gz
 worksrcdir          console_bridge-release-release-hydro-console_bridge-0.2.4-1
+checksums           sha256 fc35fac70e4d391cd842c71870cf839de72b1f329d4a7fb41d2f188ac1abf901
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -56,8 +56,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-tf
-version             1.0.0
+version             1.10.6
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -43,9 +44,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/geometry-release/archive/release/hydro/tf/
 distfiles           1.10.6-0.tar.gz
 worksrcdir          geometry-release-release-hydro-tf-1.10.6-0
+checksums           sha256 eb3cc2cf7fec02c4840cf968159db8d024a921f01d3cfda7b9b3209bcb3ec3cf
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -74,8 +74,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

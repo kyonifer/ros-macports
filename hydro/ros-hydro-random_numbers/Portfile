@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-random_numbers
-version             1.0.0
+version             0.2.0
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -24,9 +25,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/random_numbers-release/archive/release/hydro/random_numbers/
 distfiles           0.2.0-0.tar.gz
 worksrcdir          random_numbers-release-release-hydro-random_numbers-0.2.0-0
+checksums           sha256 aa4ce7dd7eea68a7b0239bdb714e389ebab82460924bc7e26ea5faaf6c91340b
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -55,8 +55,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

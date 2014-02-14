@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-image_view
-version             1.0.0
+version             1.11.3
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -42,9 +43,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/image_pipeline-release/archive/release/hydro/image_view/
 distfiles           1.11.3-0.tar.gz
 worksrcdir          image_pipeline-release-release-hydro-image_view-1.11.3-0
+checksums           sha256 b69996ea1fe808b0c2c706ec3adab96de6744e9cb0aceb4a9a076e6f7a95d263
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -73,8 +73,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

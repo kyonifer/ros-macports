@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-openslam_gmapping
-version             1.0.0
+version             0.1.0
+revision             1
 categories          devel
 platforms           darwin
 license             bsd
@@ -22,9 +23,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/openslam_gmapping-release/archive/release/hydro/openslam_gmapping/
 distfiles           0.1.0-1.tar.gz
 worksrcdir          openslam_gmapping-release-release-hydro-openslam_gmapping-0.1.0-1
+checksums           sha256 c454b50df9f190c0a9ba0a6098bd7d9927dce5539dc93bd650a782dfee69bfe3
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -53,8 +53,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-voxel_grid
-version             1.0.0
+version             1.11.4
+revision             2
 categories          devel
 platforms           darwin
 license             bsd
@@ -24,9 +25,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/navigation-release/archive/release/hydro/voxel_grid/
 distfiles           1.11.4-2.tar.gz
 worksrcdir          navigation-release-release-hydro-voxel_grid-1.11.4-2
+checksums           sha256 3e8a34214c6e88645d2f93b3550175bd2e9ddeed92cedb35da8a5f5f8c3e1506
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -55,8 +55,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

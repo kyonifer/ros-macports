@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                ros-hydro-dynamic_reconfigure
-version             1.0.0
+version             1.5.34
+revision             0
 categories          devel
 platforms           darwin
 license             bsd
@@ -33,9 +34,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        https://github.com/ros-gbp/dynamic_reconfigure-release/archive/release/hydro/dynamic_reconfigure/
 distfiles           1.5.34-0.tar.gz
 worksrcdir          dynamic_reconfigure-release-release-hydro-dynamic_reconfigure-1.5.34-0
+checksums           sha256 fa1d8928b1075555483629aac21c6d2540b991806d4c2bd375e3e11c4808b41f
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 
@@ -64,8 +64,11 @@ build {
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+           \
           --install-space=${prefix} \
           --install"
+
+
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports
