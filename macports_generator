@@ -12,6 +12,7 @@ import shutil
 import yaml
 from xml.dom import minidom as xml
 import re
+import hashlib
 
 def readfile(file):
     with open(file) as f:
@@ -126,6 +127,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     url_base = "/".join(url.split("/")[:-1]) + "/"
     url_file = url.split("/")[-1]
     revision = re.compile("\d+\.\d+\.\d+-(\d+)\.\D*").split(url_file)[1] 
+    checksum = hashlib.sha256(open(cachedir+"/"+pkgname+"-"+url_file,'rb').read()).hexdigest()
     # Add prefix
     build_deps_str = " \\\n                    port:".join(build_deps)
     if build_deps_str is not "":
@@ -144,6 +146,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     template = template.replace("$$url_file$$", url_file)
     template = template.replace("$$version$$", version)
     template = template.replace("$$revision$$", revision)
+    template = template.replace("$$checksum$$", "sha256 "+checksum)
 
     if pkgname in pkginstructions:
         if "build_code" in pkginstructions[pkgname]:

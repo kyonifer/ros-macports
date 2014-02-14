@@ -22,9 +22,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        $$url_base$$
 distfiles           $$url_file$$
 worksrcdir          $$extract_dir$$
+checksums           $$checksum$$
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 $$pkg_specific_top_level$$
