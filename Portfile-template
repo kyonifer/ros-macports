@@ -4,7 +4,8 @@
 PortSystem          1.0
 
 name                $$fullname$$
-version             1.0.0
+version             $$version$$
+revision             $$revision$$
 categories          devel
 platforms           darwin
 license             bsd
@@ -21,9 +22,8 @@ conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-d
 master_sites        $$url_base$$
 distfiles           $$url_file$$
 worksrcdir          $$extract_dir$$
+checksums           $$checksum$$
 
-# todo: calculate checksum
-checksum {}
 configure {}
 configure.cflags-append "-DBOOST_SIGNALS_NO_DEPRECATION_WARNING"
 $$pkg_specific_top_level$$
@@ -52,8 +52,11 @@ $$pkg_specific_build_code$$
           -DCMAKE_INSTALL_RPATH_USE_LINK_PATH:BOOL=ON \
           -DSETUPTOOLS_DEB_LAYOUT=OFF \
           -DPYTHON_EXECUTABLE:FILEPATH=${prefix}/bin/python2.7 \
+          $$pkg_specific_cmake_args$$ \
           --install-space=${prefix} \
           --install"
+
+$$pkg_specific_post_catkin_build$$
 
      # Remove _setup_util.py, env.sh, setup.*, .catkin, .rosinstall unless
      # this is catkin, as these files can only be installed once or macports

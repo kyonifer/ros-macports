@@ -11,7 +11,8 @@ import argparse
 import shutil
 import yaml
 from xml.dom import minidom as xml
-
+import re
+import hashlib
 
 def readfile(file):
     with open(file) as f:
@@ -85,6 +86,7 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     """
     manifest = xml.parse(cachedir + "/" + pkg + "/package.xml")
     pkgname = manifest.getElementsByTagName("name")[0].lastChild.nodeValue
+    version = manifest.getElementsByTagName("version")[0].lastChild.nodeValue
     print("==Processing package: {0}==".format(pkgname))
     build_deps = [ele.lastChild.nodeValue for ele in
                   manifest.getElementsByTagName("build_depend")]
@@ -124,7 +126,8 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     # Whats life without a little golf
     url_base = "/".join(url.split("/")[:-1]) + "/"
     url_file = url.split("/")[-1]
-
+    revision = re.compile("\d+\.\d+\.\d+-(\d+)\.\D*").split(url_file)[1] 
+    checksum = hashlib.sha256(open(cachedir+"/"+pkgname+"-"+url_file,'rb').read()).hexdigest()
     # Add prefix
     build_deps_str = " \\\n                    port:".join(build_deps)
     if build_deps_str is not "":
@@ -141,6 +144,9 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
     template = template.replace("$$build_depends$$", build_deps_str)
     template = template.replace("$$url_base$$", url_base)
     template = template.replace("$$url_file$$", url_file)
+    template = template.replace("$$version$$", version)
+    template = template.replace("$$revision$$", revision)
+    template = template.replace("$$checksum$$", "sha256 "+checksum)
 
     if pkgname in pkginstructions:
         if "build_code" in pkginstructions[pkgname]:
@@ -153,9 +159,21 @@ def process_package(cachedir, deps_map, pkg, portdir, prefix,
                                         pkginstructions[pkgname]["top_level"])
         else:
             template = template.replace("$$pkg_specific_top_level$$", "")
+        if "cmake_args" in pkginstructions[pkgname]:
+            template = template.replace("$$pkg_specific_cmake_args$$",
+                                        pkginstructions[pkgname]["cmake_args"])
+        else:
+            template = template.replace("$$pkg_specific_cmake_args$$", "")
+        if "post_catkin_build" in pkginstructions[pkgname]:
+            template = template.replace("$$pkg_specific_post_catkin_build$$",
+                                        pkginstructions[pkgname]["post_catkin_build"])
+        else:
+            template = template.replace("$$pkg_specific_post_catkin_build$$", "")
     else:
         template = template.replace("$$pkg_specific_top_level$$", "")
         template = template.replace("$$pkg_specific_build_code$$", "")
+        template = template.replace("$$pkg_specific_cmake_args$$", "")
+        template = template.replace("$$pkg_specific_post_catkin_build$$", "")
 
     if pkgname == "catkin":
         template = template.replace("$$catkin$$",
