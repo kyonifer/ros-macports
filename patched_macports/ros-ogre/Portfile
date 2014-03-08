@@ -38,7 +38,8 @@ depends_lib-append  port:libzzip port:zlib port:bzip2 port:freeimage \
                     port:freetype port:boost port:ois
 
 patch.pre_args      -p1
-patchfiles          patches.diff
+patchfiles          patches.diff \
+                    fix_tinyxml.diff
                     
 configure.args-append -DFREETYPE_INCLUDE_DIR=${prefix}/include/freetype2 \
                     -DOGRE_BUILD_PLUGIN_CG=OFF \

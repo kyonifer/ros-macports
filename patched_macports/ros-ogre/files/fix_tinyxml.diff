@@ -1,0 +1,33 @@
+--- a/Tools/XMLConverter/src/tinyxml.cpp.orig	2014-03-08 11:12:14.000000000 -0500
++++ b/Tools/XMLConverter/src/tinyxml.cpp	2014-03-08 11:13:03.000000000 -0500
+@@ -29,7 +29,7 @@
+ #include <iostream>
+ #endif
+ 
+-#include "tinyxml.h"
++#include "../include/tinyxml.h"
+ 
+ 
+ bool TiXmlBase::condenseWhiteSpace = true;
+--- a/Tools/XMLConverter/src/tinyxmlparser.cpp.orig	2014-03-08 11:12:41.000000000 -0500
++++ b/Tools/XMLConverter/src/tinyxmlparser.cpp	2014-03-08 11:12:48.000000000 -0500
+@@ -25,7 +25,7 @@
+ #include <ctype.h>
+ #include <stddef.h>
+ 
+-#include "tinyxml.h"
++#include "../include/tinyxml.h"
+ 
+ //#define DEBUG_PARSER
+ #if defined( DEBUG_PARSER )
+--- a/Tools/XMLConverter/src/tinyxmlerror.cpp.orig	2014-03-08 11:12:31.000000000 -0500
++++ b/Tools/XMLConverter/src/tinyxmlerror.cpp	2014-03-08 11:12:56.000000000 -0500
+@@ -22,7 +22,7 @@
+ distribution.
+ */
+ 
+-#include "tinyxml.h"
++#include "../include/tinyxml.h"
+ 
+ // The goal of the seperate error file is to make the first
+ // step towards localization. tinyxml (currently) only supports
