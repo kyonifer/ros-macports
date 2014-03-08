@@ -15,7 +15,7 @@ homepage            http://wiki.ros.org/rosinstall_generator
 
 fetch.type          git
 git.url             https://github.com/ros-infrastructure/rosinstall_generator.git
-git.branch          1e0851b73cd0be62487654c5daa029b33d63533e
+git.branch          80f302b23d8f578becd2dde094416dc9e8853469
 checksum {}
 
 depends_run         port:py${python.version}-rosdep

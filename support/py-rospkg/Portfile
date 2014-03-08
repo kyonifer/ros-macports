@@ -15,7 +15,7 @@ homepage            https://github.com/ros-infrastructure/rospkg
 
 fetch.type          git
 git.url             https://github.com/ros-infrastructure/rospkg.git
-git.branch          6c30945bea786ded1ff94a239eab0ce82180da42
+git.branch          8a524aeb6986201fe8a1d702b02d3904a621223e
 checksum {}
 
 python.versions 27

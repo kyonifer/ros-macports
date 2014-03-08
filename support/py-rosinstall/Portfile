@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rosinstall
-version             0.6.29
+version             0.7.3
 categories          python
 platforms           darwin
 license             bsd
@@ -13,10 +13,10 @@ maintainers         afit.edu:kyle.kauffman
 description         ROS installer
 long_description    The installer for ROS
 homepage            http://www.ros.org/wiki/rosinstall
-master_sites        http://pr.willowgarage.com/downloads/rosinstall/
+master_sites        http://download.ros.org/downloads/rosinstall/
 
-checksums           rmd160  8367399138562b67cc26df8560736fc61edc5596 \
-                    sha256  3b5b7c16dadf51dfc127347d71c67750e1b3f7a31525223198ecb4f780267e8b
+checksums           rmd160  c01aea9daeaffd40afb711a1430c0350b7163c12 \
+                    sha256  c46b2ec0635317e72b1bf0073f71d397161a700a592abbff63e59e63bef108e2 
 
 distname            rosinstall-${version}
 
