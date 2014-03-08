@@ -1,0 +1,55 @@
+# -*- mode: tcl; indent-tabs-mode: nil; tab-width: 4; c-basic-offset: 4 -*-
+# $Id: Portfile 104410 2013-03-25 07:46:16Z ryandesign@macports.org $
+
+PortSystem 1.0
+PortGroup cmake 1.0
+
+name                ros-ogre
+version             1.7.4
+revision            0
+set branch          [join [lrange [split ${version} .] 0 1] .]
+license             MIT
+categories          graphics
+maintainers         afit.edu:kyle.kauffman
+description         Object-Oriented Graphics Rendering Engine (static version)
+
+long_description    OGRE (Object-Oriented Graphics Rendering Engine) is a \
+                    scene-oriented, flexible 3D engine written in \
+                    C++ designed to make it easier and more intuitive \
+                    for developers to produce applications utilising \
+                    hardware-accelerated 3D graphics. The class \
+                    library abstracts all the details of using the \
+                    underlying system libraries like Direct3D and \
+                    OpenGL and provides an interface based on world \
+                    objects and other intuitive classes. \
+
+homepage            http://www.ogre3d.org/
+platforms           darwin
+supported_archs     x86_64
+master_sites        sourceforge:project/ogre/ogre/${branch}
+checksums           rmd160  4259b45dc4b3c4f930053e0de5e4366eaf113840 \
+                    sha1    e989b96eacc2c66f8cf8a19dae6cfd962a165207
+distname            ogre_src_v[strsed ${version} {g/\./-/}]
+use_bzip2           yes
+
+depends_build-append port:doxygen path:bin/dot:graphviz
+
+depends_lib-append  port:libzzip port:zlib port:bzip2 port:freeimage \
+                    port:freetype port:boost port:ois
+
+patch.pre_args      -p1
+patchfiles          patches.diff
+                    
+configure.args-append -DFREETYPE_INCLUDE_DIR=${prefix}/include/freetype2 \
+                    -DOGRE_BUILD_PLUGIN_CG=OFF \
+                    -DCMAKE_OSX_ARCHITECTURES='x86_64' \
+                    -DOGRE_BUILD_SAMPLES=FALSE
+
+post-destroot {
+    file delete -force ${destroot}/opt/local/include/OIS
+}
+
+
+livecheck.type      regex
+livecheck.url       ${homepage}download/source
+livecheck.regex     {>OGRE ([0-9.]+) Source}

@@ -1,0 +1,279 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index b513076..b3c1042 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -215,9 +215,9 @@ if (OGRE_BUILD_PLATFORM_IPHONE)
+ elseif (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+   # Set 10.5 as the base SDK by default
+-  set(XCODE_ATTRIBUTE_SDKROOT macosx)
+-  set(CMAKE_OSX_SYSROOT macosx)
+-  set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)
++  # set(XCODE_ATTRIBUTE_SDKROOT macosx)
++  # set(CMAKE_OSX_SYSROOT macosx)
++  # set(CMAKE_OSX_DEPLOYMENT_TARGET 10.5)
+ 
+   if (NOT CMAKE_OSX_ARCHITECTURES)
+     set(CMAKE_OSX_ARCHITECTURES $(ARCHS_STANDARD_32_64_BIT))
+
+diff --git a/OgreMain/CMakeLists.txt b/OgreMain/CMakeLists.txt
+index 52fe7de..ea1afa7 100644
+--- a/OgreMain/CMakeLists.txt
++++ b/OgreMain/CMakeLists.txt
+@@ -655,7 +655,7 @@ else()
+   set_target_properties(OgreMain PROPERTIES VERSION ${OGRE_SOVERSION})
+ endif()
+ 
+-if (APPLE)
++if (APPLE AND FALSE)
+   if (NOT OGRE_BUILD_PLATFORM_IPHONE)
+     set_target_properties(OgreMain PROPERTIES FRAMEWORK TRUE)
+     # Set the INSTALL_PATH so that Frameworks can be local
+
+diff --git a/CMake/Templates/OGRE.pc.in b/CMake/Templates/OGRE.pc.in
+index 15e827f..07ee437 100644
+--- a/CMake/Templates/OGRE.pc.in
++++ b/CMake/Templates/OGRE.pc.in
+@@ -2,7 +2,7 @@ prefix=@OGRE_PREFIX_PATH@
+ exec_prefix=${prefix}
+ libdir=${prefix}/@OGRE_LIB_DIRECTORY@
+ includedir=${prefix}/include
+-plugindir=${libdir}/OGRE
++plugindir=${libdir}
+ 
+ Name: OGRE
+ Description: Object-Oriented Graphics Rendering Engine
+
+diff --git a/CMake/Dependencies.cmake b/CMake/Dependencies.cmake
+index be5c07f..58848dd 100644
+--- a/CMake/Dependencies.cmake
++++ b/CMake/Dependencies.cmake
+@@ -123,7 +123,7 @@ if (APPLE)
+ endif()
+ set(Boost_ADDITIONAL_VERSIONS "1.46" "1.46.0" "1.46.1" "1.45" "1.45.0" "1.44" "1.44.0" "1.42" "1.42.0" "1.41.0" "1.41" "1.40.0" "1.40" "1.39.0" "1.39" "1.38.0" "1.38" "1.37.0" "1.37" )
+ # Components that need linking (NB does not include header-only components like bind)
+-set(OGRE_BOOST_COMPONENTS thread date_time)
++set(OGRE_BOOST_COMPONENTS date_time system thread)
+ find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} QUIET)
+ if (NOT Boost_FOUND)
+  # Try again with the other type of libs
+diff --git a/CMake/Packages/FindFreetype.cmake b/CMake/Packages/FindFreetype.cmake
+index 61eec3b..c999db0 100644
+--- a/CMake/Packages/FindFreetype.cmake
++++ b/CMake/Packages/FindFreetype.cmake
+@@ -36,7 +36,8 @@ get_debug_names(FREETYPE_LIBRARY_NAMES)
+ 
+ use_pkgconfig(FREETYPE_PKGC freetype2)
+ 
+-# prefer static library over framework 
++# prefer static library over framework
++set(PREVIOUS_CMAKE_FIND_FRAMEWORK ${CMAKE_FIND_FRAMEWORK})
+ set(CMAKE_FIND_FRAMEWORK "LAST")
+ 
+ findpkg_framework(FREETYPE)
+@@ -55,4 +55,4 @@ if (NOT FREETYPE_FT2BUILD_INCLUDE_DIR STREQUAL FREETYPE_INCLUDE_DIR)
+ endif ()
+ 
+ # Reset framework finding
+-set(CMAKE_FIND_FRAMEWORK "FIRST")
++set(CMAKE_FIND_FRAMEWORK ${PREVIOUS_CMAKE_FIND_FRAMEWORK})
+
+diff --git a/Components/Paging/CMakeLists.txt b/Components/Paging/CMakeLists.txt
+index 6d83f1c..7bf4450 100644
+--- a/Components/Paging/CMakeLists.txt
++++ b/Components/Paging/CMakeLists.txt
+@@ -72,7 +72,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET OgrePaging POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/Components/Property/CMakeLists.txt b/Components/Property/CMakeLists.txt
+index 9a02b60..6b31e8f 100644
+--- a/Components/Property/CMakeLists.txt
++++ b/Components/Property/CMakeLists.txt
+@@ -52,7 +52,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET OgreProperty POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/Components/RTShaderSystem/CMakeLists.txt b/Components/RTShaderSystem/CMakeLists.txt
+index bedfea7..4564838 100644
+--- a/Components/RTShaderSystem/CMakeLists.txt
++++ b/Components/RTShaderSystem/CMakeLists.txt
+@@ -95,7 +95,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET OgreRTShaderSystem POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/Components/Terrain/CMakeLists.txt b/Components/Terrain/CMakeLists.txt
+index 87dc80f..acaf1f6 100644
+--- a/Components/Terrain/CMakeLists.txt
++++ b/Components/Terrain/CMakeLists.txt
+@@ -77,7 +77,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET OgreTerrain POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/OgreMain/CMakeLists.txt b/OgreMain/CMakeLists.txt
+index a27c9fa..52fe7de 100644
+--- a/OgreMain/CMakeLists.txt
++++ b/OgreMain/CMakeLists.txt
+@@ -671,9 +671,9 @@ if (APPLE)
+     set_target_properties(OgreMain PROPERTIES XCODE_ATTRIBUTE_GCC_UNROLL_LOOPS "YES")
+     add_custom_command(TARGET OgreMain POST_BUILD
+       COMMAND mkdir ARGS -p ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/Threading
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${OGRE_SOURCE_DIR}/OgreMain/include/Threading/* ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/Threading/
++	  COMMAND ditto ${OGRE_SOURCE_DIR}/OgreMain/include/Threading/* ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/Threading/
+       COMMAND mkdir ARGS -p ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/OSX
+-      COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${OGRE_SOURCE_DIR}/OgreMain/include/OSX/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/OSX/	
++      COMMAND ditto ${OGRE_SOURCE_DIR}/OgreMain/include/OSX/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/OSX/
+ 	)
+   else ()
+     set_target_properties(OgreMain PROPERTIES INSTALL_NAME_DIR "OGRE")
+diff --git a/PlugIns/BSPSceneManager/CMakeLists.txt b/PlugIns/BSPSceneManager/CMakeLists.txt
+index 2c5b155..b43e123 100644
+--- a/PlugIns/BSPSceneManager/CMakeLists.txt
++++ b/PlugIns/BSPSceneManager/CMakeLists.txt
+@@ -56,7 +56,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_BSPSceneManager POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/PlugIns/CgProgramManager/CMakeLists.txt b/PlugIns/CgProgramManager/CMakeLists.txt
+index 90d0d52..adf1b0c 100644
+--- a/PlugIns/CgProgramManager/CMakeLists.txt
++++ b/PlugIns/CgProgramManager/CMakeLists.txt
+@@ -45,7 +45,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_CgProgramManager POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/PlugIns/OctreeSceneManager/CMakeLists.txt b/PlugIns/OctreeSceneManager/CMakeLists.txt
+index 8ace6e1..a8f5dc0 100644
+--- a/PlugIns/OctreeSceneManager/CMakeLists.txt
++++ b/PlugIns/OctreeSceneManager/CMakeLists.txt
+@@ -61,7 +61,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_OctreeSceneManager POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/PlugIns/OctreeZone/CMakeLists.txt b/PlugIns/OctreeZone/CMakeLists.txt
+index aa6a670..6e0aed7 100644
+--- a/PlugIns/OctreeZone/CMakeLists.txt
++++ b/PlugIns/OctreeZone/CMakeLists.txt
+@@ -64,7 +64,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_OctreeZone POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/PlugIns/PCZSceneManager/CMakeLists.txt b/PlugIns/PCZSceneManager/CMakeLists.txt
+index 1edc5e1..4ec98ea 100644
+--- a/PlugIns/PCZSceneManager/CMakeLists.txt
++++ b/PlugIns/PCZSceneManager/CMakeLists.txt
+@@ -69,7 +69,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_PCZSceneManager POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/PlugIns/ParticleFX/CMakeLists.txt b/PlugIns/ParticleFX/CMakeLists.txt
+index 7b700fe..1c04434 100644
+--- a/PlugIns/ParticleFX/CMakeLists.txt
++++ b/PlugIns/ParticleFX/CMakeLists.txt
+@@ -87,7 +87,7 @@ if (APPLE AND NOT OGRE_BUILD_PLATFORM_IPHONE)
+ 
+ 	# Copy headers into the main Ogre framework
+ 	add_custom_command(TARGET Plugin_ParticleFX POST_BUILD
+-	  COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp ARGS -exclude .DS_Store -exclude .hg -exclude 'CMakeLists.txt' -resolve-src-symlinks ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
++	  COMMAND ditto ${CMAKE_CURRENT_SOURCE_DIR}/include/*.h ${OGRE_BINARY_DIR}/lib/$(CONFIGURATION)/Ogre.framework/Headers/
+ 	)
+ endif()
+ 
+diff --git a/CMake/Dependencies.cmake b/CMake/Dependencies.cmake
+index 58848dd..5185b49 100644
+--- a/CMake/Dependencies.cmake
++++ b/CMake/Dependencies.cmake
+@@ -134,10 +134,11 @@ if (NOT Boost_FOUND)
+     endif()
+ 	find_package(Boost COMPONENTS ${OGRE_BOOST_COMPONENTS} QUIET)
+ endif()
+-find_package(Boost QUIET)
++# find_package(Boost QUIET)
+ # Optional Boost libs (Boost_${COMPONENT}_FOUND
+ macro_log_feature(Boost_FOUND "boost" "Boost (general)" "http://boost.org" FALSE "" "")
+ macro_log_feature(Boost_THREAD_FOUND "boost-thread" "Used for threading support" "http://boost.org" FALSE "" "")
++macro_log_feature(Boost_SYSTEM_FOUND "boost-system" "Used for threading support" "http://boost.org" FALSE "" "")
+ macro_log_feature(Boost_DATE_TIME_FOUND "boost-date_time" "Used for threading support" "http://boost.org" FALSE "" "")
+ 
+ # POCO
+
+diff --git a/RenderSystems/GL/src/OSX/OgreOSXCocoaWindow.mm b/RenderSystems/GL/src/OSX/OgreOSXCocoaWindow.mm
+index 00803e7..f55a213 100644
+--- a/RenderSystems/GL/src/OSX/OgreOSXCocoaWindow.mm
++++ b/RenderSystems/GL/src/OSX/OgreOSXCocoaWindow.mm
+@@ -100,7 +100,7 @@ namespace Ogre {
+ 		NSString *windowTitle = [NSString stringWithCString:name.c_str() encoding:NSUTF8StringEncoding];
+ 		int winx = 0, winy = 0;
+ 		int depth = 32;
+-        NameValuePairList::const_iterator opt(NULL);
++        NameValuePairList::const_iterator opt;
+ 		
+ 		if(miscParams)
+ 		{
+@@ -220,7 +220,7 @@ namespace Ogre {
+             }
+             else
+             {
+-                NameValuePairList::const_iterator param_useNSView_pair(NULL);
++                NameValuePairList::const_iterator param_useNSView_pair;
+                 param_useNSView_pair = miscParams->find("macAPICocoaUseNSView");
+                 
+                 if(param_useNSView_pair != miscParams->end())
+diff --git a/RenderSystems/GL/src/OSX/OgreOSXGLSupport.mm b/RenderSystems/GL/src/OSX/OgreOSXGLSupport.mm
+index 864d236..1693af1 100644
+--- a/RenderSystems/GL/src/OSX/OgreOSXGLSupport.mm
++++ b/RenderSystems/GL/src/OSX/OgreOSXGLSupport.mm
+@@ -311,7 +311,7 @@ RenderWindow* OSXGLSupport::newWindow( const String &name, unsigned int width, u
+ 	
+ 	if(miscParams)
+ 	{
+-        NameValuePairList::const_iterator opt(NULL);
++        NameValuePairList::const_iterator opt;
+ 
+         // First we must determine if this is a Carbon or a Cocoa window
+         // that we wish to create
