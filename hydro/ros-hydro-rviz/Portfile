@@ -40,7 +40,7 @@ depends_lib         port:python27 \
                     port:ros-hydro-interactive_markers \
                     port:qt4-mac \
                     port:qt4-mac \
-                    port:ogre \
+                    port:ros-ogre \
                     port:yaml-cpp \
                     port:assimp \
                     port:eigen3 \
@@ -71,7 +71,7 @@ depends_lib         port:python27 \
                     port:ros-hydro-interactive_markers \
                     port:qt4-mac \
                     port:qt4-mac \
-                    port:ogre \
+                    port:ros-ogre \
                     port:yaml-cpp \
                     port:assimp \
                     port:eigen3 \
