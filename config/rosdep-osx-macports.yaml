@@ -173,7 +173,7 @@ libogg:
 libogre-dev:
   osx:
     macports:
-      packages: [ogre]
+      packages: [ros-ogre]
 libpcap:
   osx:
     macports:
