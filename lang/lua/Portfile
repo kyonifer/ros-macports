@@ -1,0 +1,78 @@
+# $Id: Portfile 82708 2011-08-18 20:17:40Z ryandesign@macports.org $
+
+PortSystem          1.0
+
+name                lua51
+conflicts           lua50 lua
+set compat_version  5.1
+version             ${compat_version}.4
+revision            4
+categories          lang
+license             MIT
+platforms           darwin
+maintainers         nomaintainer
+description         powerful, lightweight programming language
+long_description    \
+    Lua is a powerful, light-weight programming language designed for \
+    extending applications. Lua is also frequently used as a general-purpose, \
+    standalone language.
+
+homepage            http://www.lua.org
+master_sites        ${homepage}/ftp/
+distname            lua-${version}
+
+checksums           sha1    2b11c8e60306efb7f0734b747588f57995493db7 \
+                    rmd160  c867c8364295d3e4fb4e4d8ebb27fa2b2312cdef
+
+depends_lib         port:readline
+build.target        macosx
+
+test.run            yes
+test.env            DYLD_LIBRARY_PATH=./lib
+
+patchfiles          patch-lua-5.1.4-3 \
+                    patch-Makefile.diff \
+                    patch-src_Makefile.diff
+
+post-patch {
+    reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/Makefile ${worksrcpath}/src/luaconf.h
+    reinplace "s|/man/man1|/share/man/man1|g" ${worksrcpath}/Makefile
+
+    # reinplace %VERSION% and %COMPAT_VERSION% after applying patch-dlopen.diff
+    reinplace "s|%VERSION%|${version}|g" ${worksrcpath}/Makefile ${worksrcpath}/src/Makefile
+    reinplace "s|%COMPAT_VERSION%|${compat_version}|g" ${worksrcpath}/Makefile ${worksrcpath}/src/Makefile
+    
+    # reinplace %PREFIX% to fix @executable_path, cf. ticket no. 28726
+    reinplace "s|%PREFIX%|${prefix}|g" ${worksrcpath}/src/Makefile
+
+    # for the pkgconfig file
+    reinplace "s|/usr/local|${prefix}|g" ${worksrcpath}/etc/lua.pc
+}
+
+configure {
+    reinplace -E "/^MYLDFLAGS=/s|\$| ${configure.ldflags} [get_canonical_archflags]|" ${worksrcpath}/src/Makefile
+    reinplace -E "/^CFLAGS=/s|\$| ${configure.cflags} ${configure.cppflags} [get_canonical_archflags]|" ${worksrcpath}/src/Makefile
+    reinplace "s|CC= .*\$|CC= ${configure.cc}|" ${worksrcpath}/src/Makefile
+}
+
+use_parallel_build  no
+
+destroot.target install INSTALL_TOP=${destroot}${prefix}
+post-destroot {
+    xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}
+    xinstall -m 0644 -W ${worksrcpath} COPYRIGHT HISTORY README ${destroot}${prefix}/share/doc/${name}
+    xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}/html
+    foreach html [glob ${worksrcpath}/doc/*.html ${worksrcpath}/doc/*.gif] {
+        xinstall -m 0644 ${html} ${destroot}${prefix}/share/doc/${name}/html
+    }
+    xinstall -d -m 0755 ${destroot}${prefix}/share/doc/${name}/test
+    foreach test [glob ${worksrcpath}/test/README ${worksrcpath}/test/*.lua] {
+        xinstall -m 0644 ${test} ${destroot}${prefix}/share/doc/${name}/test
+    }
+    xinstall -d -m 0755 ${destroot}${prefix}/lib/pkgconfig
+    xinstall -m 0644 ${worksrcpath}/etc/lua.pc ${destroot}${prefix}/lib/pkgconfig/lua.pc
+}
+
+livecheck.type  regex
+livecheck.url   ${master_sites}
+livecheck.regex {lua-(\d+(?:\.\d+)*)}
