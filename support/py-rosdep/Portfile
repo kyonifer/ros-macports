@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rosdep
-version             0.10.22
+version             0.10.27.1
 categories          python
 platforms           darwin
 license             bsd
@@ -15,7 +15,7 @@ homepage            https://github.com/ros-infrastructure/rosdep
 
 fetch.type          git
 git.url             https://github.com/ros-infrastructure/rosdep.git
-git.branch          a1d6705aad3b56a234dd13fddda7968179eae41a
+git.branch          a3d84fcfaf82bad3693a423532860b3a63ebabe1
 checksum {}
 
 depends_run         port:py${python.version}-rospkg \

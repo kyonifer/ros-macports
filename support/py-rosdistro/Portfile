@@ -5,7 +5,7 @@ PortSystem          1.0
 PortGroup           python 1.0
 
 name                py-rosdistro
-version             0.2.14
+version             0.3.4
 categories          python
 platforms           darwin
 license             bsd
