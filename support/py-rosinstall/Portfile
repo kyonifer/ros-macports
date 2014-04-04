@@ -25,7 +25,8 @@ depends_run			port:py${python.version}-yaml \
 					port:py${python.version}-dateutil \
 					port:py${python.version}-vcstools \
 					port:py${python.version}-catkin-pkg \
-					port:py${python.version}-rosdistro
+					port:py${python.version}-rosdistro \
+                    port:py${python.version}-six
 
 python.versions 27
 python.default_version 27
