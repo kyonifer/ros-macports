@@ -1,0 +1,13 @@
+--- lib/Geomatics/SatPass.hpp.orig.cpp	2014-04-21 14:01:44.000000000 -0500
++++ lib/Geomatics/SatPass.hpp	2014-04-21 13:36:05.000000000 -0500
+@@ -475,8 +475,8 @@
+                                     std::vector<std::string>& obstypes,
+                                     double dt,
+                                     std::vector<SatPass>& SPList,
+-               gpstk::CommonTime beginTime=gpstk::CommonTime::BEGINNING_OF_TIME,
+-               gpstk::CommonTime endTime=gpstk::CommonTime::END_OF_TIME)
++               gpstk::CommonTime beginTime,
++               gpstk::CommonTime endTime)
+       throw(Exception);
+ 
+    /// Iterate over the input vector of SatPass objects (sorted to be in time
