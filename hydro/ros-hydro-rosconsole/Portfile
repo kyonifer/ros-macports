@@ -19,13 +19,13 @@ depends_lib         port:python27 \
                     port:apr \
                     port:boost \
                     port:ros-hydro-cpp_common \
-                    port:ros-log4cxx \
+                    port:log4cxx \
                     port:ros-hydro-rostime \
                     port:ros-hydro-rosunit \
                     port:ros-hydro-catkin \
                     port:apr \
                     port:ros-hydro-cpp_common \
-                    port:ros-log4cxx \
+                    port:log4cxx \
                     port:ros-hydro-rostime
 
 conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full

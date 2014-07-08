@@ -16,11 +16,11 @@ homepage            http://www.ros.org/
 
 depends_lib         port:python27 \
                     port:py27-setuptools \
-                    port:ros-log4cxx \
+                    port:log4cxx \
                     port:ros-hydro-roscpp \
                     port:ros-hydro-rosgraph_msgs \
                     port:ros-hydro-catkin \
-                    port:ros-log4cxx \
+                    port:log4cxx \
                     port:ros-hydro-roscpp
 
 conflicts           ros-core ros-desktop ros-groovy-core ros-groovy ros-groovy-desktop-full
