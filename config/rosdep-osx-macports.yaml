@@ -285,7 +285,7 @@ libxxf86vm:
 log4cxx:
   osx:
     macports:
-      packages: [ros-log4cxx]
+      packages: [log4cxx]
 lua-dev:
   osx:
     macports:
